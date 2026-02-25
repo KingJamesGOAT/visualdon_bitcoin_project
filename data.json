@@ -1,41 +1,32 @@
 {
-  "nodes": [
-    { "id": "corp1", "type": "corporate", "value": 150000 },
-    { "id": "corp2", "type": "corporate", "value": 120000 },
-    { "id": "corp3", "type": "corporate", "value": 90000 },
-    { "id": "corp4", "type": "corporate", "value": 75000 },
-    { "id": "corp5", "type": "corporate", "value": 60000 }
-  ],
-  "mapData": [
-    {
-      "country": "United States",
-      "lat": 37.0902,
-      "lon": -95.7129,
-      "btc": 207189
-    },
-    { "country": "China", "lat": 35.8617, "lon": 104.1954, "btc": 194000 },
-    {
-      "country": "United Kingdom",
-      "lat": 55.3781,
-      "lon": -3.436,
-      "btc": 61245
-    },
-    { "country": "Ukraine", "lat": 48.3794, "lon": 31.1656, "btc": 46351 },
-    { "country": "El Salvador", "lat": 13.7942, "lon": -88.8965, "btc": 5690 },
-    {
-      "country": "Germany (Sold)",
-      "lat": 51.1657,
-      "lon": 10.4515,
-      "btc": 50000
-    }
-  ],
-  "areaData": [
-    { "year": 2012, "retail": 95, "institutional": 5 },
-    { "year": 2014, "retail": 85, "institutional": 15 },
-    { "year": 2016, "retail": 70, "institutional": 30 },
-    { "year": 2018, "retail": 55, "institutional": 45 },
-    { "year": 2020, "retail": 40, "institutional": 60 },
-    { "year": 2022, "retail": 25, "institutional": 75 },
-    { "year": 2024, "retail": 15, "institutional": 85 }
-  ]
+    "timeline": [
+        { "year": 2012, "retail": 98, "institutional": 2 },
+        { "year": 2014, "retail": 90, "institutional": 10 },
+        { "year": 2016, "retail": 75, "institutional": 25 },
+        { "year": 2018, "retail": 60, "institutional": 40 },
+        { "year": 2020, "retail": 42, "institutional": 58 },
+        { "year": 2022, "retail": 28, "institutional": 72 },
+        { "year": 2024, "retail": 12, "institutional": 88 }
+    ],
+    "entities": [
+        { "id": "corp1", "name": "MicroStrategy", "type": "Public Company", "value": 214246 },
+        { "id": "corp2", "name": "Grayscale Trust", "type": "ETF / Fund", "value": 450123 },
+        { "id": "corp3", "name": "BlackRock iShares", "type": "ETF / Fund", "value": 252011 },
+        { "id": "corp4", "name": "Fidelity Wise Origin", "type": "ETF / Fund", "value": 142050 },
+        { "id": "corp5", "name": "Marathon Digital", "type": "Mining Company", "value": 16930 }
+    ],
+    "geoMap": [
+        { "country": "United States", "lat": 37.0902, "lon": -95.7129, "btc": 207189, "details": "Mostly acquired via Dept of Justice seizures of dark web marketplaces." },
+        { "country": "China", "lat": 35.8617, "lon": 104.1954, "btc": 194000, "details": "Seized from massive domestic Ponzi schemes." },
+        { "country": "United Kingdom", "lat": 55.3781, "lon": -3.4360, "btc": 61245, "details": "Seized from international money laundering operations." },
+        { "country": "El Salvador", "lat": 13.7942, "lon": -88.8965, "btc": 5690, "details": "Acquired directly through state treasury purchases." },
+        { "country": "Ukraine", "lat": 48.3794, "lon": 31.1656, "btc": 46351, "details": "Acquired via international structural donations and state seizures." }
+    ],
+    "snapshot": [
+        { "category": "Retail Wallets (<10 BTC)", "holdings": 2150000 },
+        { "category": "Exchange Cold Wallets", "holdings": 4500000 },
+        { "category": "Corporate ETFs / Trusts", "holdings": 2850000 },
+        { "category": "Miners / Infrastructure", "holdings": 1300000 },
+        { "category": "Sovereign States", "holdings": 650000 }
+    ]
 }

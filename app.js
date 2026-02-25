@@ -115,6 +115,17 @@ class AppManager {
                 this.distributionChart.transformToBar();
             });
         }
+        
+        // Setup TOC clicks
+        document.querySelectorAll('.tocItem').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const targetStep = e.currentTarget.getAttribute('data-target');
+                const targetElement = document.querySelector(`.stepBlock[data-step="${targetStep}"]`);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     }
 
     setupScrollObserver() {
@@ -138,6 +149,11 @@ class AppManager {
                     if (stepIndex !== this.currentStep) {
                         this.currentStep = stepIndex;
                         this.handleStepActivation(stepIndex);
+                        
+                        // Update TOC Highlight
+                        document.querySelectorAll('.tocItem').forEach(item => item.classList.remove('isActive'));
+                        const activeToc = document.querySelector(`.tocItem[data-target="${stepIndex}"]`);
+                        if (activeToc) activeToc.classList.add('isActive');
                     }
                 }
             });

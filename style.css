@@ -1,3 +1,8 @@
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
 /* Base and Typography */
 body {
     margin: 0;
@@ -53,12 +58,16 @@ blockquote {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #06080d; /* Solid background prevents SVG superposing artifacts */
+    z-index: 0;
+    transition: opacity 0.5s ease-out; /* Slightly faster fade out of inactive */
 }
 
 .vizLayer.isActive {
     opacity: 1;
+    z-index: 5; /* Active layer asserts top hierarchy */
     pointer-events: auto;
+    transition: opacity 0.8s ease-in; /* Slower fade in */
 }
 
 /* Global Glass Tooltip */
@@ -142,13 +151,82 @@ blockquote {
     pointer-events: none; 
 }
 
+/* Floating TOC */
+.floatingToc {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    pointer-events: auto;
+}
+
+.tocList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tocItem {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    position: relative;
+    padding-right: 1.5rem;
+    text-align: right;
+    transition: all 0.3s ease;
+}
+
+.tocItem::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #334155;
+    transition: all 0.3s ease;
+}
+
+.tocItem:hover {
+    color: #38bdf8;
+}
+.tocItem:hover::after {
+    background: #38bdf8;
+    box-shadow: 0 0 10px #38bdf8;
+}
+
+.tocItem.isActive {
+    color: #ffffff;
+    font-weight: 600;
+}
+.tocItem.isActive::after {
+    background: #f59e0b; /* highlight dot */
+    box-shadow: 0 0 10px #f59e0b;
+    width: 12px;
+    height: 12px;
+}
+
 /* Narrative Text Blocks */
 .stepBlock {
-    min-height: 150vh; /* FORCES DEEP DELIBERATE SCROLLING pacing */
+    height: 100vh; /* Pacing and perfect snap */
     display: flex;
     align-items: center;
-    padding: 4rem 2rem;
+    padding: 0 2rem;
     pointer-events: none; 
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
 }
 
 .stepContent {
@@ -174,10 +252,7 @@ blockquote {
     border-color: rgba(56, 189, 248, 0.4);
 }
 
-.stepSpacer {
-    min-height: 80vh; 
-    pointer-events: none;
-}
+
 
 /* D3 General Styling */
 .axisText {

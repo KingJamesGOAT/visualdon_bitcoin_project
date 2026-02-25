@@ -146,8 +146,9 @@ blockquote {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+    /* Use 100% max-width instead of 1400px centralized to push to very left edge */
+    max-width: 100%;
+    margin: 0;
     pointer-events: none; 
 }
 
@@ -223,7 +224,7 @@ blockquote {
     height: 100vh; /* Pacing and perfect snap */
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1vw; /* Minimizing padding to stick to left border */
     pointer-events: none; 
     scroll-snap-align: center;
     scroll-snap-stop: always;
@@ -235,10 +236,10 @@ blockquote {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(148, 163, 184, 0.15);
     border-radius: 12px;
-    padding: 3.5rem;
-    max-width: 500px;
+    padding: 2.5rem; /* Slightly smaller padding */
+    max-width: 380px; /* Reducing width so it takes less horizontal space */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    margin-left: 6vw; 
+    margin-left: 2vw; /* Anchoring further left */
     
     opacity: 0.15;
     transform: translateY(40px) scale(0.98);

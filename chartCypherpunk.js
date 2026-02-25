@@ -39,27 +39,33 @@ class ChartCypherpunk {
         return new Date(start + Math.random() * (end - start)).toLocaleDateString();
     }
 
-    init() {
-        this.svg = this.container.append('svg')
-            .attr('width', this.width)
-            .attr('height', this.height);
-
-        // Dense network: At least 300
+    generateRetailNodes() {
         const numRetailNodes = 350;
+        const generated = [];
         for (let i = 0; i < numRetailNodes; i++) {
-            this.nodes.push({
+            generated.push({
                 id: `node-${i}`,
                 type: 'retail',
                 value: Math.random() * 50 + 1,
                 radius: Math.random() * 3 + 2, 
                 address: this.generateMockWallet(),
                 firstSeen: this.randomDate(),
-                x: Math.random() * this.width,
-                y: Math.random() * this.height,
+                x: this.width / 2 + (Math.random() - 0.5) * 200,
+                y: this.height / 2 + (Math.random() - 0.5) * 200,
                 vx: 0,
                 vy: 0
             });
         }
+        return generated;
+    }
+
+    init() {
+        this.svg = this.container.append('svg')
+            .attr('width', this.width)
+            .attr('height', this.height);
+
+        // Dense network: At least 300
+        this.nodes = this.generateRetailNodes();
         
         this.simulation = d3.forceSimulation(this.nodes)
             .force('charge', d3.forceManyBody().strength(-4))
@@ -78,8 +84,19 @@ class ChartCypherpunk {
 
     renderScattered() {
         if (this.isConsolidated) {
-            this.nodes = this.nodes.filter(n => n.type === 'retail');
+            // Remove corporate nodes
+            this.nodes = this.nodes.filter(n => n.type !== 'corporate');
+            
+            // Re-generate retail nodes if they were completely destroyed by Institutional timeout
+            if (this.nodes.length === 0) {
+                this.nodes = this.generateRetailNodes();
+            }
+
             this.updateNodes();
+            
+            // Reset opacities just in case
+            this.svg.selectAll('.nodeRetail').style('opacity', 0.7);
+
             this.simulation.nodes(this.nodes)
                 .force('x', d3.forceX(this.width / 2).strength(0.06))
                 .force('y', d3.forceY(this.height / 2).strength(0.06))

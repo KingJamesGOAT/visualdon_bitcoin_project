@@ -148,10 +148,14 @@ class AppManager {
 
     toggleLayer(layerId) {
         document.querySelectorAll('.vizLayer').forEach(layer => {
-            layer.classList.remove('isActive');
+            if (layer.id !== layerId) {
+                layer.classList.remove('isActive');
+            }
         });
         const activeLayer = document.getElementById(layerId);
-        if (activeLayer) activeLayer.classList.add('isActive');
+        if (activeLayer && !activeLayer.classList.contains('isActive')) {
+            activeLayer.classList.add('isActive');
+        }
     }
 
     handleStepActivation(stepIndex) {

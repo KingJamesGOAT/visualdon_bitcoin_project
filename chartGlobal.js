@@ -48,7 +48,7 @@ class ChartGlobal {
 
         const enterCircles = circles.enter()
             .append("circle")
-            .attr("class", "geoCircle")
+            .attr("class", "geoCircle leaflet-interactive")
             .attr("cx", d => projectPoint(d.lat, d.lon).x)
             .attr("cy", d => projectPoint(d.lat, d.lon).y)
             .attr("r", 0)

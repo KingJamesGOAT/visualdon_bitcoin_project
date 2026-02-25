@@ -61,7 +61,7 @@ class ChartModernDistribution {
             
         // Setup Donut Generators
         this.pie = d3.pie().value(d => d.holdings).sort(null);
-        this.arc = d3.arc().innerRadius(this.radius * 0.5).outerRadius(this.radius);
+        this.arc = d3.arc().innerRadius(this.radius * 0.65).outerRadius(this.radius).cornerRadius(4);
     }
 
     render(instant = false) {

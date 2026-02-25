@@ -85,7 +85,7 @@ class ChartTimeline {
         this.overlay = this.svg.append('rect')
             .attr('width', this.innerWidth)
             .attr('height', this.innerHeight)
-            .style('fill', 'none')
+            .style('fill', 'transparent')
             .style('pointer-events', 'all');
     }
 

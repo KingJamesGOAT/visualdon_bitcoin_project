@@ -36,6 +36,19 @@ class ChartInstitutional {
                     y: this.base.height / 2 + (Math.random() - 0.5) * 400,
                     targetGroup: i 
                 });
+                
+                // Add text label directly over circle
+                this.base.svg.append('text')
+                    .attr('class', 'corpLabel')
+                    .attr('text-anchor', 'middle')
+                    .attr('dominant-baseline', 'middle')
+                    .style('fill', '#0f172a')
+                    .style('font-weight', '900')
+                    .style('font-size', Math.max(10, r/4) + 'px')
+                    .style('pointer-events', 'none')
+                    .style('opacity', 0)
+                    .datum(this.base.nodes[this.base.nodes.length-1])
+                    .text(cn.name);
             }
         });
 
@@ -64,16 +77,30 @@ class ChartInstitutional {
             }
         };
 
-        // Aggressive physics transition
+        // Override tick to move labels
+        this.base.simulation.on('tick', () => {
+            this.base.ticked(); // original tick function positions circles
+            
+            this.base.svg.selectAll('.corpLabel')
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
+        });
+
+        // Aggressive physics transition - Tighter pack this time 
         this.base.simulation
             .nodes(this.base.nodes)
-            .force('charge', d3.forceManyBody().strength(d => d.type === 'corporate' ? -400 : -1))
-            .force('collide', d3.forceCollide().radius(d => d.radius + 3).iterations(5))
-            .force('x', d3.forceX(this.base.width / 2).strength(d => d.type === 'corporate' ? 0.08 : 0))
-            .force('y', d3.forceY(this.base.height / 2).strength(d => d.type === 'corporate' ? 0.08 : 0))
+            .force('charge', d3.forceManyBody().strength(d => d.type === 'corporate' ? 4 : -1))
+            .force('collide', d3.forceCollide().radius(d => d.radius + 2).iterations(5))
+            .force('x', d3.forceX(this.base.width / 2).strength(0.1))
+            .force('y', d3.forceY(this.base.height / 2).strength(0.1))
             .force('cluster', isolate)
             .alpha(1)
             .restart();
+            
+        // Fade in labels
+        this.base.svg.selectAll('.corpLabel')
+            .transition().delay(1000).duration(2000)
+            .style('opacity', 0.85);
             
         // Visual transition: Fade out retail nodes slowly over >800ms
         this.base.nodeElements.filter(d => d.type === 'retail')
@@ -87,8 +114,8 @@ class ChartInstitutional {
             if (this.base.isConsolidated) {
                 this.base.nodes = this.base.nodes.filter(n => n.type === 'corporate');
                 this.base.updateNodes();
-                // Settle phase
-                this.base.simulation.force('charge', d3.forceManyBody().strength(-100)).alpha(0.2).restart();
+                // Settle phase with slight expansion 
+                this.base.simulation.force('charge', d3.forceManyBody().strength(-15)).alpha(0.2).restart();
             }
         }, 3000);
     }

@@ -47,7 +47,7 @@ class ChartCypherpunk {
                 id: `node-${i}`,
                 type: 'retail',
                 value: Math.random() * 50 + 1,
-                radius: Math.random() * 3 + 2, 
+                radius: Math.random() * 5 + 4, 
                 address: this.generateMockWallet(),
                 firstSeen: this.randomDate(),
                 x: this.width / 2 + (Math.random() - 0.5) * 200,
@@ -63,6 +63,20 @@ class ChartCypherpunk {
         this.svg = this.container.append('svg')
             .attr('width', this.width)
             .attr('height', this.height);
+            
+        this.svg.append('text')
+            .attr('class', 'watermarkTitle')
+            .attr('x', this.width / 2)
+            .attr('y', this.height / 2)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .style('fill', '#e2e8f0') 
+            .style('opacity', 0.05) 
+            .style('font-size', '6vw')
+            .style('font-weight', '900')
+            .style('pointer-events', 'none')
+            .style('letter-spacing', '0.05em')
+            .text('2009 - 2012');
 
         // Dense network: At least 300
         this.nodes = this.generateRetailNodes();
@@ -86,6 +100,7 @@ class ChartCypherpunk {
         if (this.isConsolidated) {
             // Remove corporate nodes
             this.nodes = this.nodes.filter(n => n.type !== 'corporate');
+            this.svg.selectAll('.corpLabel').remove();
             
             // Re-generate retail nodes if they were completely destroyed by Institutional timeout
             if (this.nodes.length === 0) {

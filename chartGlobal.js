@@ -1,17 +1,17 @@
 class ChartGlobal {
-    constructor(containerId, data) {
+    constructor(containerId, geoData, tooltipElement) {
         this.containerId = containerId;
-        this.geoData = data.geoMap;
+        this.geoData = geoData;
         this.map = null;
+        this.tooltip = tooltipElement;
         this.isRendered = false;
         
-        // Ensure container is empty before init (in case of re-runs)
         document.getElementById(this.containerId).innerHTML = '';
     }
 
     init() {
         this.map = L.map(this.containerId, {
-            center: [25, -10], // View showing US and Europe well
+            center: [30, -10],
             zoom: 2,
             zoomControl: false,
             scrollWheelZoom: false,
@@ -19,7 +19,6 @@ class ChartGlobal {
             doubleClickZoom: false
         });
 
-        // Dark financial theme base map
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; CARTO',
             subdomains: 'abcd',
@@ -33,53 +32,57 @@ class ChartGlobal {
         if (this.isRendered) return;
         
         const svg = d3.select(`#${this.containerId}`).select("svg");
-        // Leaflet svg pane creates a <g> automatically sometimes, but let's be safe
         let g = svg.select("g.leaflet-zoom-hide");
         if (g.empty()) g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
         const maxBtc = d3.max(this.geoData, d => d.btc);
         const radiusScale = d3.scaleSqrt()
             .domain([0, maxBtc])
-            .range([0, 45]); 
+            .range([0, 50]); 
 
         const projectPoint = (lat, lon) => {
             return this.map.latLngToLayerPoint(new L.LatLng(lat, lon));
         };
 
-        const circles = g.selectAll(".geoCircle")
-            .data(this.geoData, d => d.country);
+        const circles = g.selectAll(".geoCircle").data(this.geoData, d => d.id);
 
-        // We use D3 for the rendering and transition, Leaflet for the map
         const enterCircles = circles.enter()
             .append("circle")
             .attr("class", "geoCircle")
-            // Apply cursor pointer since we will have Leaflet popups effectively through click
-            .style("cursor", "pointer")
             .attr("cx", d => projectPoint(d.lat, d.lon).x)
             .attr("cy", d => projectPoint(d.lat, d.lon).y)
-            .attr("r", 0);
-            
-        // We use Leaflet popups attached to invisible circle markers for easier interaction handling
-        // over the SVG layer
-        this.geoData.forEach(d => {
-            const popupContent = `<strong>${d.country}</strong><br/>Reserves: ${d.btc.toLocaleString()} BTC<br/><br/><em>${d.details}</em>`;
-            const marker = L.circleMarker([d.lat, d.lon], {
-                radius: radiusScale(d.btc),
-                color: 'transparent',
-                fillColor: 'transparent',
-                interactive: true
-            }).addTo(this.map);
-            marker.bindPopup(popupContent);
-        });
+            .attr("r", 0)
+            .on("mouseover", (event, d) => {
+                const html = `
+                    <div class="tooltipHeader">Sovereign State: ${d.country}</div>
+                    <div class="tooltipRow"><span class="tooltipLabel">Est. Reserves:</span> <span style="color:#ef4444">${d.btc.toLocaleString()} BTC</span></div>
+                    <div style="margin-top:8px; font-size:12px; color:#cbd5e1; max-width:260px">${d.details}</div>
+                    <div style="margin-top:8px; font-size:11px; color:#38bdf8; font-style:italic">Click marker to zoom location.</div>
+                `;
+                this.tooltip.html(html).style('opacity', 1);
+            })
+            .on("mousemove", (event) => {
+                this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY - 20) + 'px');
+            })
+            .on("mouseout", () => {
+                this.tooltip.style('opacity', 0);
+            })
+            .on("click", (event, d) => {
+                // Feature: Click to zoom to country
+                this.map.flyTo([d.lat, d.lon], 5, {
+                    animate: true,
+                    duration: 1.5 // Fluid 1.5s zoom transition
+                });
+            });
 
         enterCircles.merge(circles)
             .attr("cx", d => projectPoint(d.lat, d.lon).x)
             .attr("cy", d => projectPoint(d.lat, d.lon).y)
-            .transition()
-            .duration(1200) // Minimum 800ms
+            .transition().duration(1200) // Minimum 800ms
             .attr("r", d => radiusScale(d.btc));
 
-        this.map.on("viewreset moveend", () => {
+        // When map moves/zooms via our click handler, SVG needs updating
+        this.map.on("move", () => {
             g.selectAll(".geoCircle")
                 .attr("cx", d => projectPoint(d.lat, d.lon).x)
                 .attr("cy", d => projectPoint(d.lat, d.lon).y);

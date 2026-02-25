@@ -2,17 +2,36 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0b0c10; /* Deep financial slate */
-    color: #c5c6c7;
-    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
+    background-color: #06080d; /* Elite financial slate */
+    color: #e2e8f0;
+    font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+    line-height: 1.7;
     overflow-x: hidden;
 }
 
 h1, h2, h3 {
-    font-weight: 600;
-    color: #ffffff; /* High contrast */
+    font-weight: 700;
+    color: #ffffff;
     margin-top: 0;
+    letter-spacing: -0.02em;
+}
+
+blockquote {
+    border-left: 4px solid #38bdf8;
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #94a3b8;
+}
+
+.metricHighlight {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 /* Fixed Background Graphic Container */
@@ -23,7 +42,7 @@ h1, h2, h3 {
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    pointer-events: none; /* Let clicks pass to map/charts conditionally */
+    pointer-events: none;
 }
 
 /* Visualization Layers */
@@ -34,154 +53,206 @@ h1, h2, h3 {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1.5s ease-in-out;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .vizLayer.isActive {
     opacity: 1;
-    pointer-events: auto; /* Enable interaction only when visible */
+    pointer-events: auto;
 }
 
-/* Tooltip shared across graphics */
-.interactionTooltip {
+/* Global Glass Tooltip */
+.globalTooltip {
     position: absolute;
-    background: rgba(11, 12, 16, 0.95);
-    border: 1px solid #45a29e;
-    color: #ffffff;
-    padding: 12px;
-    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.85); /* Slate 900 */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    color: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s ease-out;
-    z-index: 1000;
+    transition: opacity 0.25s ease-out;
+    z-index: 9999;
     font-size: 14px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    font-family: monospace;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    min-width: 250px;
+}
+.tooltipHeader {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #38bdf8;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 4px;
+}
+.tooltipRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+.tooltipLabel {
+    color: #94a3b8;
 }
 
-/* Leaflet Map Specific Adjustments */
+/* Buttons */
+.interactiveControls {
+    margin-top: 2rem;
+}
+
+.primaryBtn {
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Leaflet Overrides */
 #mapContainer {
     background: transparent;
 }
 .leaflet-container {
-    background: #0b0c10 !important;
+    background: #06080d !important;
 }
 .leaflet-control-zoom {
     display: none;
 }
-.leaflet-popup-content-wrapper {
-    background: rgba(11, 12, 16, 0.95);
-    color: #fff;
-    border: 1px solid #45a29e;
-    border-radius: 4px;
-}
-.leaflet-popup-tip {
-    background: rgba(11, 12, 16, 0.95);
-    border: 1px solid #45a29e;
-}
-.leaflet-popup-content {
-    font-family: monospace;
-    font-size: 13px;
-    margin: 10px;
-}
 
-/* Scrolling Foreground Narrative Container */
+/* Foreground Narrative Container */
 .scrollContainer {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     pointer-events: none; 
 }
 
 /* Narrative Text Blocks */
 .stepBlock {
-    min-height: 100vh;
+    min-height: 150vh; /* FORCES DEEP DELIBERATE SCROLLING pacing */
     display: flex;
     align-items: center;
-    padding: 2rem;
-    pointer-events: auto; 
+    padding: 4rem 2rem;
+    pointer-events: none; 
 }
 
 .stepContent {
-    background-color: rgba(31, 40, 51, 0.9);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(197, 198, 199, 0.2);
-    border-radius: 8px;
-    padding: 2.5rem;
-    max-width: 450px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    margin-left: 5vw; 
+    background-color: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 12px;
+    padding: 3.5rem;
+    max-width: 500px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    margin-left: 6vw; 
     
-    opacity: 0.2;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
+    opacity: 0.15;
+    transform: translateY(40px) scale(0.98);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: auto;
 }
 
-/* Active State for the text block */
 .stepBlock.isActive .stepContent {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    border-color: rgba(56, 189, 248, 0.4);
 }
 
 .stepSpacer {
-    min-height: 50vh; 
+    min-height: 80vh; 
     pointer-events: none;
 }
 
 /* D3 General Styling */
 .axisText {
-    fill: #c5c6c7;
+    fill: #94a3b8;
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
 }
 .axisLine {
-    stroke: #454545;
+    stroke: #334155;
+    stroke-width: 1px;
+}
+.domain {
+    stroke: #334155;
 }
 
-/* Graph 1 & 2 Styles */
+/* Graphic 1 & 2 Styles */
 .nodeRetail {
-    fill: #66fcf1;
-    opacity: 0.6;
+    fill: #38bdf8;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    cursor: pointer;
 }
 .nodeCorporate {
     fill: #f59e0b;
     stroke: #ffffff;
     stroke-width: 1.5px;
     opacity: 0.85;
+    transition: opacity 0.4s;
+    cursor: pointer;
 }
 
-/* Graph 3 Map Styles */
+/* Graphic 3 Geo Map */
 .geoCircle {
     fill: #ef4444; 
-    fill-opacity: 0.6;
+    fill-opacity: 0.7;
     stroke: #ffffff;
-    stroke-width: 1px;
+    stroke-width: 1.5px;
+    cursor: pointer;
+    transition: stroke-width 0.2s, fill-opacity 0.2s;
+}
+.geoCircle:hover {
+    stroke-width: 3px;
+    fill-opacity: 0.9;
 }
 
-/* Graph 4 Area Chart Styles */
+/* Graphic 4 Area Chart */
 .areaRetail {
-    fill: #66fcf1;
-    opacity: 0.7;
+    fill: url(#gradientRetail);
+    opacity: 0.9;
 }
 .areaInst {
-    fill: #f59e0b;
-    opacity: 0.7;
+    fill: url(#gradientInst);
+    opacity: 0.9;
 }
-.guidelineLine {
-    stroke: #ffffff;
-    stroke-width: 1px;
+.timelineLine {
+    fill: none;
+    stroke-width: 2px;
+}
+.strokeRetail { stroke: #38bdf8; }
+.strokeInst { stroke: #f59e0b; }
+
+.bisectorLine {
+    stroke: #f8fafc;
+    stroke-width: 1.5px;
     stroke-dasharray: 4,4;
     pointer-events: none;
 }
 
-/* Graph 5 Bar Chart Styles */
-.barChartRect {
-    fill: #45a29e;
-    transition: opacity 0.3s;
+/* Graphic 5 Distribution */
+.distributionElement {
+    opacity: 0.9;
+    cursor: pointer;
+    transition: opacity 0.3s, filter 0.3s;
 }
-.barChartRect:hover {
-    fill: #66fcf1;
+.distributionElement:hover {
+    opacity: 1 !important;
+    filter: brightness(1.2);
 }

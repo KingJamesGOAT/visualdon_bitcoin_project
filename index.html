@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Centralization: A Structural Analysis</title>
+    <title>Bitcoin: A Structural Analysis of Institutional Centralization</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -15,15 +15,14 @@
 
     <!-- Fixed Graphic Container for all visual elements -->
     <div id="graphicContainer" class="graphicContainer">
-        <!-- Containers for individual graphics -->
         <div id="cypherpunkContainer" class="vizLayer"></div>
         <div id="mapContainer" class="vizLayer"></div>
         <div id="timelineContainer" class="vizLayer"></div>
         <div id="distributionContainer" class="vizLayer"></div>
     </div>
 
-    <!-- Tooltip for hover interactions -->
-    <div id="interactionTooltip" class="interactionTooltip"></div>
+    <!-- Mandatory Global Glass Tooltip -->
+    <div id="globalTooltip" class="globalTooltip"></div>
 
     <!-- Scrolling Narrative Container -->
     <div id="scrollContainer" class="scrollContainer">
@@ -32,35 +31,57 @@
         <section class="stepBlock" data-step="0">
             <div class="stepContent">
                 <h2>1. The Cypherpunk Network</h2>
-                <p>In 2009, the Bitcoin network was highly decentralized. It was maintained by thousands of individual "cypherpunks" and early computing enthusiasts.</p>
-                <p>Wealth was spread incredibly thin. Hover over the nodes in the visualizer to see the tiny fragment of the total supply each individual held during the genesis era.</p>
+                
+                <blockquote>
+                    <p>"I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party." <br>— Satoshi Nakamoto, 2008</p>
+                </blockquote>
+                
+                <p>The genesis era of the Bitcoin protocol was characterized by extreme decentralization. The network was secured by an anarchic collective of early cryptography enthusiasts, gamers, and libertarians mining from personal computers.</p>
+                
+                <p class="metricHighlight">Hover over the nodes to explore simulated early wallet addresses from 2009-2012.</p>
+                
+                <p>During this period, no single entity held enough absolute supply to unilaterally influence market dynamics. It was a true peer-to-peer lattice.</p>
             </div>
         </section>
 
         <!-- Step 2: Institutional Takeover -->
         <section class="stepBlock" data-step="1">
             <div class="stepContent">
-                <h2>2. Institutional Takeover</h2>
-                <p>As the asset matured and liquidity deepened, major financial players entered the arena. Publicly traded companies and dedicated investment trusts began sweeping up massive portions of the available supply.</p>
-                <p>The network fragments merged. Notice how the vast ocean of retail users is overshadowed by massive corporate entities.</p>
+                <h2>2. Institutional Accumulation (Live Data)</h2>
+                
+                <p>As the asset matured into a recognized absolute store of value, the dynamic shattered. Major financial players and publicly traded corporations entered.</p>
+                
+                <p class="metricHighlight">The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.</p>
+                
+                <p>Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.</p>
             </div>
         </section>
 
-        <!-- Step 3: Global State Accumulation -->
+        <!-- Step 3: The Map of Power -->
         <section class="stepBlock" data-step="2">
             <div class="stepContent">
-                <h2>3. Global State Accumulation</h2>
-                <p>The arms race eventually escalated to the sovereign level. Entire nation-states began integrating the asset into their central bank reserves.</p>
-                <p>Click on the designated countries on the map to view the precise absolute holdings of various national treasuries gathered via seizures and strategic acquisitions.</p>
+                <h2>3. The Map of Power</h2>
+                
+                <p>The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.</p>
+                
+                <blockquote>
+                    <p>Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.</p>
+                </blockquote>
+                
+                <p class="metricHighlight">Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.</p>
             </div>
         </section>
 
-        <!-- Step 4: The Wealth Gap Timeline -->
+        <!-- Step 4: The Wealth Timeline -->
         <section class="stepBlock" data-step="3">
             <div class="stepContent">
-                <h2>4. The Historical Wealth Gap</h2>
-                <p>Viewing this phenomenon historically reveals a distinct trend. Over the past decade, the relative percentage of the supply held by early retail participants has plummeted.</p>
-                <p>Simultaneously, institutional custody solutions ballooned. Track your cursor across the timeline to view exact yearly proportions.</p>
+                <h2>4. The Wealth Gap Timeline</h2>
+                
+                <p>To truly understand the structural shift, we must view the long-term historical trend. This dense dataset tracks the percentage of supply owned by the original "Retail" cohorts versus "Institutional/Whale" entities over time.</p>
+                
+                <p class="metricHighlight">Move your cursor across the chart. The interactive bisector will follow your movement, extracting precise chronological volume metrics.</p>
+                
+                <p>The rapid narrowing of the blue retail volume showcases the inescapable trajectory of capital concentration in finite-supply systems.</p>
             </div>
         </section>
 
@@ -68,12 +89,21 @@
         <section class="stepBlock" data-step="4">
             <div class="stepContent">
                 <h2>5. The Modern Distribution</h2>
-                <p>Today, the vision of a purely decentralized peer-to-peer cash network has transitioned into a highly structured institutional settlement layer.</p>
-                <p>This exact current market snapshot breaks down ownership categories. Hover over the bars to isolate each demographic and expose the true magnitude of accumulation.</p>
+                
+                <p>Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.</p>
+                
+                <p>To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.</p>
+                
+                <div class="interactiveControls">
+                    <button id="btnTransformDonut" class="primaryBtn">Transform to Donut Chart</button>
+                    <button id="btnTransformBar" class="primaryBtn" style="display:none;">Revert to Bar Chart</button>
+                </div>
+                
+                <p class="metricHighlight">Interact with the charts directly. Use the button above to observe a smooth structural transformation from bars to arc vectors. All elements maintain hover state interactivity.</p>
             </div>
         </section>
         
-        <!-- Extra padding at the bottom -->
+        <!-- Pacer block at bottom to ensure scrolling all the way through Step 5 -->
         <div class="stepBlock stepSpacer"></div>
 
     </div>
@@ -84,7 +114,7 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     
-    <!-- Application Logic Modules -->
+    <!-- Modular Application Logic -->
     <script src="chartCypherpunk.js"></script>
     <script src="chartInstitutional.js"></script>
     <script src="chartGlobal.js"></script>

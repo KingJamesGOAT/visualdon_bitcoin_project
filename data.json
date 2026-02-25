@@ -1,32 +1,20 @@
+
+
 {
-    "timeline": [
-        { "year": 2012, "retail": 98, "institutional": 2 },
-        { "year": 2014, "retail": 90, "institutional": 10 },
-        { "year": 2016, "retail": 75, "institutional": 25 },
-        { "year": 2018, "retail": 60, "institutional": 40 },
-        { "year": 2020, "retail": 42, "institutional": 58 },
-        { "year": 2022, "retail": 28, "institutional": 72 },
-        { "year": 2024, "retail": 12, "institutional": 88 }
-    ],
-    "entities": [
-        { "id": "corp1", "name": "MicroStrategy", "type": "Public Company", "value": 214246 },
-        { "id": "corp2", "name": "Grayscale Trust", "type": "ETF / Fund", "value": 450123 },
-        { "id": "corp3", "name": "BlackRock iShares", "type": "ETF / Fund", "value": 252011 },
-        { "id": "corp4", "name": "Fidelity Wise Origin", "type": "ETF / Fund", "value": 142050 },
-        { "id": "corp5", "name": "Marathon Digital", "type": "Mining Company", "value": 16930 }
-    ],
     "geoMap": [
-        { "country": "United States", "lat": 37.0902, "lon": -95.7129, "btc": 207189, "details": "Mostly acquired via Dept of Justice seizures of dark web marketplaces." },
-        { "country": "China", "lat": 35.8617, "lon": 104.1954, "btc": 194000, "details": "Seized from massive domestic Ponzi schemes." },
-        { "country": "United Kingdom", "lat": 55.3781, "lon": -3.4360, "btc": 61245, "details": "Seized from international money laundering operations." },
-        { "country": "El Salvador", "lat": 13.7942, "lon": -88.8965, "btc": 5690, "details": "Acquired directly through state treasury purchases." },
-        { "country": "Ukraine", "lat": 48.3794, "lon": 31.1656, "btc": 46351, "details": "Acquired via international structural donations and state seizures." }
+        { "id": "US", "country": "United States", "lat": 39.0902, "lon": -95.7129, "btc": 210000, "details": "Government holdings predominantly acquired via seizures (e.g., Silk Road, Bitfinex hack). Held in heavily guarded institutional custody solutions." },
+        { "id": "CN", "country": "China", "lat": 35.8617, "lon": 104.1954, "btc": 190000, "details": "Vast reserves confiscated from the PlusToken Ponzi scheme and massive illicit mining operations." },
+        { "id": "UK", "country": "United Kingdom", "lat": 55.3781, "lon": -3.4360, "btc": 61245, "details": "Seized from Jian Wen and Zhimin Qian international money laundering network." },
+        { "id": "SV", "country": "El Salvador", "lat": 13.7942, "lon": -88.8965, "btc": 5700, "details": "First nation-state to adopt BTC as legal tender. Actively purchasing 1 BTC per day explicitly for sovereign treasury reserves." },
+        { "id": "UA", "country": "Ukraine", "lat": 48.3794, "lon": 31.1656, "btc": 46351, "details": "Accumulated through international cryptocurrency wartime donations and asset seizures." },
+        { "id": "BT", "country": "Bhutan", "lat": 27.5142, "lon": 90.4336, "btc": 13000, "details": "Secretly mining Bitcoin using sovereign hydro-electric power for years through Druk Holding & Investments." }
     ],
     "snapshot": [
-        { "category": "Retail Wallets (<10 BTC)", "holdings": 2150000 },
-        { "category": "Exchange Cold Wallets", "holdings": 4500000 },
-        { "category": "Corporate ETFs / Trusts", "holdings": 2850000 },
-        { "category": "Miners / Infrastructure", "holdings": 1300000 },
-        { "category": "Sovereign States", "holdings": 650000 }
+        { "id": "retail", "category": "Retail (< 10 BTC)", "holdings": 2150000, "color": "#38bdf8" },
+        { "id": "exchanges", "category": "Centralized Exchanges", "holdings": 2350000, "color": "#818cf8" },
+        { "id": "etfs", "category": "Corporate ETFs & Trusts", "holdings": 2850000, "color": "#f59e0b" },
+        { "id": "miners", "category": "Mining Infrastructure", "holdings": 1300000, "color": "#10b981" },
+        { "id": "states", "category": "Sovereign States", "holdings": 550000, "color": "#ef4444" },
+        { "id": "lost", "category": "Lost / Unmoved (>10yr)", "holdings": 3800000, "color": "#475569" }
     ]
 }

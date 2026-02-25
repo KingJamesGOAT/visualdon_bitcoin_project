@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitcoin Centralization</title>
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Fixed Graphic Container for all visual elements -->
+    <div id="graphicContainer" class="graphicContainer">
+      <div id="bubblesContainer" class="vizLayer"></div>
+      <div id="mapContainer" class="vizLayer"></div>
+      <div id="areaContainer" class="vizLayer"></div>
+    </div>
+
+    <!-- Scrolling Narrative Container -->
+    <div id="scrollContainer" class="scrollContainer">
+      <!-- Step 1: Cypherpunks -->
+      <section class="stepBlock" data-step="0">
+        <div class="stepContent">
+          <h2>The Cypherpunk Era</h2>
+          <p>
+            In the beginning, Bitcoin was a highly decentralized network.
+            Thousands of independent retail users, cypherpunks, and early
+            adopters collectively ran the network and mined blocks from their
+            personal computers.
+          </p>
+          <p>
+            The network value was distributed broadly among many tiny nodes,
+            each acting as an equal peer in the system.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 2: Institutions -->
+      <section class="stepBlock" data-step="1">
+        <div class="stepContent">
+          <h2>Institutional Entry</h2>
+          <p>
+            As the asset matured, large financial institutions, public
+            companies, and dedicated mining pools entered the space.
+          </p>
+          <p>
+            Capital began to consolidate. The fragmented retail hashpower and
+            holdings were dwarfed by massive corporate entities, centralizing
+            control and influence into a few major players.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 3: Nation States -->
+      <section class="stepBlock" data-step="2">
+        <div class="stepContent">
+          <h2>Global Accumulation</h2>
+          <p>
+            The accumulation didn't stop at the corporate level. Soon, sovereign
+            nation states began aggressively acquiring the asset to bolster
+            their reserves or for strategic geopolitical positioning.
+          </p>
+          <p>
+            Huge swathes of the available supply are now geographically
+            concentrated in select regulatory jurisdictions and state
+            treasuries.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 4: Final Reality -->
+      <section class="stepBlock" data-step="3">
+        <div class="stepContent">
+          <h2>The Modern Reality</h2>
+          <p>
+            Today's Bitcoin market looks vastly different from its origins.
+            While the protocol remains open, the actual distribution of wealth
+            and infrastructure has become definitively centralized.
+          </p>
+          <p>
+            Institutional and concentrated capital vastly outweighs the original
+            cypherpunk retail base in both volume and market influence.
+          </p>
+        </div>
+      </section>
+
+      <!-- Extra padding at the bottom -->
+      <div class="stepBlock stepSpacer"></div>
+    </div>
+
+    <!-- D3.js v7 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <!-- Application Logic -->
+    <script src="chartBubbles.js"></script>
+    <script src="chartMap.js"></script>
+    <script src="chartArea.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

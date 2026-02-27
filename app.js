@@ -218,17 +218,10 @@ class AppManager {
 
         switch (stepIndex) {
             case 0:
-                // When 0 is active: Reverse transition from Treemap back to Cypherpunk (Explode)
+                // When 0 is active: Instantly clear Treemap, show Cypherpunk
                 if (this.institutionalChart) {
-                    // Fade out and shrink Treemap
-                    d3.select('#institutionalContainer').select('svg')
-                        .transition().duration(1000)
-                        .style('opacity', 0)
-                        .style('transform', 'scale(0.8)')
-                        .on('end', () => {
-                            d3.select('#institutionalContainer').selectAll('svg').remove(); 
-                            this.institutionalChart.isRendered = false;
-                        });
+                    d3.select('#institutionalContainer').selectAll('svg').remove(); 
+                    this.institutionalChart.isRendered = false;
                 }
                 
                 this.toggleLayer('cypherpunkContainer');
@@ -241,35 +234,28 @@ class AppManager {
                 const lb0 = document.getElementById('countryLeaderboard');
                 if (lb0) lb0.classList.remove('isVisible');
                 
-                // Explode cypherpunk bubbles outward
+                // Reanimate cypherpunk bubbles implicitly
                 if (this.cypherpunkChart) {
-                    // Ensure the layer is fully visible and interactive again
                     const cypherLayer = document.getElementById('cypherpunkContainer');
                     if (cypherLayer) {
                         cypherLayer.style.opacity = "1";
                         cypherLayer.style.pointerEvents = "auto";
                     }
-                    this.cypherpunkChart.cinematicExplode();
+                    if (this.cypherpunkChart.simulation) {
+                         this.cypherpunkChart.simulation.alpha(0.3).restart();
+                    }
                 }
                 break;
                 
             case 1:
-                // When 1 is active: Morph Cypherpunk into Treemap (Collapse)
-                if (this.cypherpunkChart) {
-                    this.cypherpunkChart.cinematicCollapse();
-                }
-                
-                // Do NOT immediately hide the cypherpunk layer, let the 1000ms collapse finish visually 
+                // When 1 is active: Immediately hide Cypherpunk layer, show Treemap
                 const cypherLayerHide = document.getElementById('cypherpunkContainer');
                 if (cypherLayerHide) {
                     cypherLayerHide.style.pointerEvents = "none";
-                    // Delayed hide to let the collapse finish
-                    setTimeout(() => {
-                        if (this.currentStep === 1) { // Check if we are still on step 1
-                             cypherLayerHide.style.opacity = "0";
-                             if (this.cypherpunkChart.simulation) this.cypherpunkChart.simulation.stop();
-                        }
-                    }, 1000);
+                    cypherLayerHide.style.opacity = "0";
+                    if (this.cypherpunkChart && this.cypherpunkChart.simulation) {
+                         this.cypherpunkChart.simulation.stop();
+                    }
                 }
                 
                 // Hide floating date
@@ -285,12 +271,6 @@ class AppManager {
                 if (this.institutionalChart && !this.institutionalChart.isRendered) {
                     this.institutionalChart.init();
                     this.institutionalChart.render();
-                    
-                    // Treemap scales up and fades in, synchronizing with the Cypherpunk collapse
-                    d3.select('#institutionalContainer').select('svg')
-                        .transition().duration(1000).ease(d3.easeCubicOut)
-                        .style('opacity', 1)
-                        .style('transform', 'scale(1)');
                 }
                 break;
             case 2:

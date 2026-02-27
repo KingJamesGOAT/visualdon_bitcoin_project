@@ -29,8 +29,8 @@ class ChartInstitutional {
         this.svg = this.container.append('svg')
             .attr('width', this.width)
             .attr('height', this.height)
-            .style('opacity', 0) // Hide initially for animation from app.js
-            .style('transform', 'scale(0.8)'); // Initial scale for morph illusion
+            .style('opacity', 1)
+            .style('transform', 'scale(1)');
             
         this.isRendered = true;
     }

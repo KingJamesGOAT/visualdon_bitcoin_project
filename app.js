@@ -36,6 +36,7 @@ class AppManager {
             this.setupScrollObserver();
             this.setupLanguageSwitcher();
             this.setupProgressBar();
+            this.setupWindingPath();
             this.setupKnowledgeCheck();
             
             // Trigger first step
@@ -178,6 +179,26 @@ class AppManager {
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPercent = (scrollTop / scrollHeight) * 100;
             progressBar.style.width = scrollPercent + '%';
+        });
+    }
+
+    setupWindingPath() {
+        const path = document.getElementById('windingPathLine');
+        if (!path) return;
+        
+        const pathLength = path.getTotalLength();
+        
+        path.style.strokeDasharray = pathLength + ' ' + pathLength;
+        path.style.strokeDashoffset = pathLength;
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            const scrollPercent = scrollTop / scrollHeight;
+            const drawLength = pathLength * scrollPercent;
+            
+            path.style.strokeDashoffset = pathLength - drawLength;
         });
     }
 

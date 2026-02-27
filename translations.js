@@ -11,16 +11,16 @@ const i18n = {
         // Section 1: Cypherpunk
         floatingDate: "2009 - 2012",
         zoomHint: "Hold Ctrl & Scroll to Zoom",
-        titleCypherpunk: "1. The Cypherpunk Network",
-        quoteCypherpunk: "\"I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party.\" <br>— Satoshi Nakamoto, 2008",
-        descCypherpunk1: "The genesis era of the Bitcoin protocol was characterized by extreme decentralization. The network was secured by an anarchic collective of early cryptography enthusiasts, gamers, and libertarians mining from personal computers.",
-        metricCypherpunk: "Hover over the nodes to explore simulated early wallet addresses from 2009-2012.",
-        descCypherpunk2: "During this period, no single entity held enough absolute supply to unilaterally influence market dynamics. It was a true peer-to-peer lattice.",
+        titleCypherpunk: "1. The Cypherpunk Genesis",
+        quoteCypherpunk: "\"I've been working on a new electronic cash system that's fully peer to peer, with no trusted third party.\" <br> Satoshi Nakamoto, 2008",
+        descCypherpunk1: "The genesis of the decentralized revolution began in the shadow of the 2008 financial collapse. Early cryptographers and cypherpunks sought to forge a peer to peer electronic cash system fundamentally resistant to state censorship and central banking corruption. This initial network was sustained by an anarchic collective of ideological purists and visionary coders.",
+        metricCypherpunk: "Hover over the nodes to explore simulated early wallet addresses from 2009 to 2012.",
+        descCypherpunk2: "In this primordial era, no single entity commanded enough absolute supply to unilaterally dictate market dynamics. The distribution represented a true lattice of independent nodes, each driven by a profound conviction in mathematical truth over fiat authority.",
 
         // Section 2: Institutional
         chapterCard1: "The Corporate Awakening",
         titleInstitutional: "2. Institutional Accumulation (Live Data)",
-        descInstitutional1: "As the asset matured into a recognized absolute store of value, the dynamic shattered. Major financial players and publicly traded corporations entered.",
+        descInstitutional1: "As the protocol matured and proved its resilience, the inescapable gravity of traditional finance began to exert its pull. Multinational corporations and publicly traded entities recognized the asset not merely as an experiment, but as an apex store of value and a robust hedge against systemic macroeconomic instability. The pure peer to peer network fragmented.",
         metricInstitutional1: "The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.",
         metricInstitutional2: "Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.",
 
@@ -48,8 +48,8 @@ const i18n = {
 
         // Section 3: Map of Power
         titleMap: "3. The Map of Power",
-        descMap1: "The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.",
-        quoteMap: "\"Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.\"",
+        descMap1: "The financial arms race has now escalated to the geopolitical stage. Sovereign states, recognizing the absolute strategic imperative of digital scarcity, have quietly begun accumulating massive reserves. This sovereign accumulation occurs through both aggressive law enforcement seizures and structural national adoption mandates, creating a new coordinate system of economic power.",
+        quoteMap: "\"Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, transforming digital assets into state instruments.\"",
         metricMap: "Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.",
 
         // Tooltips (Dynamic)
@@ -66,9 +66,9 @@ const i18n = {
 
         // Section 4: Wealth Timeline
         titleTimeline: "4. The Wealth Gap Timeline",
-        descTimeline1: "To truly understand the structural shift, we must view the long-term historical trend. This dense dataset tracks the percentage of supply owned by the original \"Retail\" cohorts versus \"Institutional/Whale\" entities over time.",
+        descTimeline1: "To fully comprehend this paradigm shift, one must analyze the prolonged historical trajectory. The data reveals a dramatic transition as capital consolidated. The once scattered wealth of the retail pioneers progressively migrated into the treasuries of institutional whales and corporate conglomerates.",
         metricTimeline1: "Move your cursor across the chart. The interactive bisector will follow your movement, extracting precise chronological volume metrics.",
-        descTimeline2: "The rapid narrowing of the blue retail volume showcases the inescapable trajectory of capital concentration in finite-supply systems.",
+        descTimeline2: "This relentless compression demonstrates the inevitable concentration of capital within strictly finite supply systems. The foundational ideology of decentralization now contends with the overwhelming financial firepower of institutional accumulation.",
 
         // Section 5: Distribution
         titleDistribution: "5. The Modern Distribution",
@@ -98,16 +98,16 @@ const i18n = {
         // Section 1: Cypherpunk
         floatingDate: "2009 - 2012",
         zoomHint: "Maintenez Ctrl & Molette pour Zoomer",
-        titleCypherpunk: "1. Le Reseau Cypherpunk",
-        quoteCypherpunk: "\"J'ai travaille sur un nouveau systeme de paiement electronique entierement pair-a-pair, sans tiers de confiance.\" <br>— Satoshi Nakamoto, 2008",
-        descCypherpunk1: "L'ere de la genese du protocole Bitcoin etait caracterisee par une decentralisation extreme. Le reseau etait securise par un collectif anarchique compose des premiers enthousiastes de la cryptographie, de joueurs et de libertariens minant depuis leurs ordinateurs personnels.",
-        metricCypherpunk: "Survolez les noeuds pour explorer des adresses de portefeuilles simulees de la periode 2009-2012.",
-        descCypherpunk2: "Au cours de cette periode, aucune entite unique ne detenait une offre absolue suffisante pour influencer unilateralement les dynamiques du marche. Il s'agissait d'un veritable maillage pair-a-pair.",
+        titleCypherpunk: "1. La Genese Cypherpunk",
+        quoteCypherpunk: "\"J'ai travaille sur un nouveau systeme de paiement electronique entierement pair a pair, sans tiers de confiance.\" <br> Satoshi Nakamoto, 2008",
+        descCypherpunk1: "La genese de la revolution decentralisee a debute dans l'ombre de l'effondrement financier de 2008. Les premiers cryptographes et cypherpunks ont cherche a forger un systeme d'argent electronique pair a pair, fondamentalement resistant a la censure d'Etat et a la corruption des banques centrales. Ce reseau initial etait soutenu par un collectif anarchique de puristes ideologiques et de codeurs visionnaires.",
+        metricCypherpunk: "Survolez les noeuds pour explorer des adresses de portefeuilles simulees de la periode 2009 a 2012.",
+        descCypherpunk2: "A cette epoque primordiale, aucune entite ne commandait suffisamment d'offre absolue pour dicter unilateralement la dynamique du marche. La distribution representait un veritable maillage de noeuds independants, chacun guide par une conviction profonde envers la verite mathematique plutot qu'envers l'autorite fiduciaire.",
 
         // Section 2: Institutional
         chapterCard1: "L'Eveil Corporatif",
         titleInstitutional: "2. Accumulation Institutionnelle (Donnees en Direct)",
-        descInstitutional1: "A mesure que l'actif a muri pour devenir une reserve de valeur absolue reconnue, la dynamique a ete bouleversee. Les acteurs financiers majeurs et les entreprises cotees en bourse y ont fait leur entree.",
+        descInstitutional1: "Alors que le protocole a muri et prouve sa resilience, la gravite ineluctable de la finance traditionnelle a commence a exercer son attraction. Les multinationales et les entites cotees en bourse ont reconnu cet actif non plus seulement comme une experience, mais comme une reserve de valeur supreme et une protection robuste contre l'instabilite macroeconomique systemique. Le pur reseau pair a pair s'est fragmente.",
         metricInstitutional1: "Les noeuds ci-dessous visualisent des donnees en direct directement importees de l'API CoinGecko Public Treasury.",
         metricInstitutional2: "Survolez les bulles massives pour reveler les reserves institutionnelles exactes d'entites telles que MicroStrategy et Tesla. Observez comment le reseau chaotique de detail (retail) est englouti par d'immenses pools gravitationnels d'entreprises dont la surface symbolise strictement leurs reserves totales.",
 
@@ -135,8 +135,8 @@ const i18n = {
 
         // Section 3: Map of Power
         titleMap: "3. La Carte du Pouvoir",
-        descMap1: "La course aux armements financiers s'est inevitablement etendue a l'echelle souveraine. Bien que le Bitcoin ne respecte aucune frontiere, son accumulation favorise lourdement certaines coordonnees geopolitiques specifiques.",
-        quoteMap: "\"Les tresoreries souveraines utilisent desormais des strategies sophistiquees pour acquerir des reserves massives, souvent par le biais de saisies agressives ou de lois structurelles d'adoption nationale.\"",
+        descMap1: "La course aux armements financiers a desormais atteint le theatre geopolitique. Les Etats souverains, reconnaissant l'imperatif strategique absolu de la rarete numerique, ont discretement commence a accumuler des reserves massives. Cette accumulation souveraine se produit a la fois via des saisies agressives ordonnees par la justice et des mandats d'adoption nationale structurelle, creant ainsi un nouveau systeme de coordonnees de la puissance economique.",
+        quoteMap: "\"Les tresoreries souveraines utilisent desormais des strategies sophistiquees pour acquerir des reserves massives, transformant cet actif en instrument d'Etat.\"",
         metricMap: "Survolez les marqueurs pour voir les avoirs gouvernementaux estimes. Cliquez sur un marqueur pour zoomer sur ce territoire souverain.",
 
         // Tooltips (Dynamic)
@@ -151,9 +151,9 @@ const i18n = {
 
         // Section 4: Wealth Timeline
         titleTimeline: "4. L'Evolution de l'Ecart de Richesse",
-        descTimeline1: "Pour reellement comprendre ce changement structurel, nous devons analyser la tendance historique sur le long terme. Ce jeu de donnees dense retrace, au fil du temps, le pourcentage de l'offre detenu par les cohortes de details d'origine face aux entites institutionnelles ou 'Baleines'.",
+        descTimeline1: "Pour reellement comprendre ce changement paradigmatique, il faut analyser la trajectoire historique prolongee. Les donnees revelent une transition dramatique au fur et a mesure que le capital s'est consolide. La richesse autrefois eparpillee des pionniers s'est progressivement deplacee vers les tresoreries des baleines institutionnelles et des conglomerats d'entreprises.",
         metricTimeline1: "Deplacez votre curseur a travers le graphique. La ligne intersecante interactive suivra votre mouvement, extrayant avec precision les metriques chronologiques de volume.",
-        descTimeline2: "Le retrecissement rapide du volume bleu alloue aux particuliers illustre de facon indeniable la trajectoire implacable de la concentration du capital au sein des systemes a offre finie.",
+        descTimeline2: "Cette compression implacable demontre la concentration inevitable du capital au sein des systemes a offre strictement limitee. L'ideologie fondatrice de la decentralisation doit desormais composer avec la puissance de feu ecrasante de l'accumulation institutionnelle.",
 
         // Section 5: Distribution
         titleDistribution: "5. La Distribution Moderne",

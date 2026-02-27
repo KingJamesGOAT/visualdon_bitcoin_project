@@ -19,6 +19,11 @@
     <!-- Translation Switcher -->
     <button id="langSwitchBtn" class="langSwitchBtn">FR</button>
 
+    <!-- Winding Narrative Path -->
+    <svg id="windingPathContainer" class="windingPathContainer" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <path id="windingPathLine" class="windingPathLine" d="M 50 0 C 90 15, 10 30, 50 45 C 90 60, 10 75, 50 90 C 90 100, 50 100, 50 100" vector-effect="non-scaling-stroke"></path>
+    </svg>
+
     <!-- Fixed Graphic Container for all visual elements -->
     <div id="graphicContainer" class="graphicContainer">
         <!-- New Floating Timeline Date UI -->
@@ -84,18 +89,6 @@
                 <p class="metricHighlight" data-i18n="metricInstitutional1">The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.</p>
                 
                 <p data-i18n="metricInstitutional2">Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.</p>
-                
-                <!-- Knowledge Check Quiz -->
-                <div class="knowledgeCheckContainer">
-                    <h3 data-i18n="quizQuestion">Which sovereign nation holds the most known Bitcoin reserves?</h3>
-                    <div class="quizOptions">
-                        <button class="quizButton" data-answer="elSalvador" data-i18n="quizElSalvador">El Salvador</button>
-                        <button class="quizButton" data-answer="china" data-i18n="quizChina">China</button>
-                        <button class="quizButton" data-answer="unitedStates" data-i18n="quizUnitedStates">United States</button>
-                        <button class="quizButton" data-answer="unitedKingdom" data-i18n="quizUnitedKingdom">United Kingdom</button>
-                    </div>
-                    <div id="quizFeedback" class="quizFeedback"></div>
-                </div>
             </div>
         </section>
 
@@ -103,6 +96,21 @@
         <div class="chapterCard">
             <h2 data-i18n="chapterCard2">The Sovereign Escalation</h2>
         </div>
+
+        <!-- Interactive Gate -->
+        <section id="interactiveGate" class="interactiveGate">
+            <!-- Knowledge Check Quiz -->
+            <div class="knowledgeCheckContainer">
+                <h3 data-i18n="quizQuestion">Which sovereign nation holds the most known Bitcoin reserves?</h3>
+                <div class="quizOptions">
+                    <button class="quizButton" data-answer="elSalvador" data-i18n="quizElSalvador">El Salvador</button>
+                    <button class="quizButton" data-answer="china" data-i18n="quizChina">China</button>
+                    <button class="quizButton" data-answer="unitedStates" data-i18n="quizUnitedStates">United States</button>
+                    <button class="quizButton" data-answer="unitedKingdom" data-i18n="quizUnitedKingdom">United Kingdom</button>
+                </div>
+                <div id="quizFeedback" class="quizFeedback"></div>
+            </div>
+        </section>
 
         <!-- Step 3: The Map of Power -->
         <section class="stepBlock" data-step="2">

@@ -461,6 +461,11 @@ blockquote {
   pointer-events: auto;
 }
 
+.stepBlock:nth-of-type(even) .stepContent {
+  margin-left: auto;
+  margin-right: 2vw;
+}
+
 .stepBlock.isActive .stepContent {
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -663,4 +668,38 @@ blockquote {
 
 .shake {
   animation: shakeAnimation 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Winding Narrative Path */
+.windingPathContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 8; /* Behind text but above charts */
+  pointer-events: none;
+}
+
+.windingPathLine {
+  fill: none;
+  stroke: #facc15;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.6));
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* Interactive Gate Fullscreen */
+.interactiveGate {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #06080d;
+  position: relative;
+  z-index: 25; /* Above charts and path to block view */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }

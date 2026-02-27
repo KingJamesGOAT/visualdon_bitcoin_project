@@ -15,6 +15,10 @@ class MapChart {
         this.map = L.map(this.containerId, {
             center: [30, 0],
             zoom: 2,
+            minZoom: 2,
+            maxBounds: [[-90, -180], [90, 180]],
+            maxBoundsViscosity: 1.0,
+            worldCopyJump: false,
             zoomControl: false,
             scrollWheelZoom: false,
             dragging: false,
@@ -82,23 +86,29 @@ class MapChart {
                 
                 if (countryData && countryData.btc > 0) {
                     const exactVolumeText = countryData.btc.toLocaleString();
-                    const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
-                    const t = i18n[lang];
                     
-                    const popupContent = `
-                        <div class="tooltipHeader">${t.tooltipSovereignState}: ${countryData.country}</div>
-                        <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipReserves}:</span> <span style="color:#ef4444">${exactVolumeText} BTC</span></div>
-                        <div style="color:#cbd5e1; padding: 5px 0 0 0; font-size: 12px;">${countryData.details}</div>
-                    `;
-                    layer.bindPopup(popupContent, { closeButton: false });
-                    
-                    layer.on('mouseover', function () {
-                        this.openPopup();
-                        this.setStyle({ fillOpacity: 1, weight: 2, color: '#ef4444' });
+                    layer.on('mouseover', (event) => {
+                        const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+                        const t = window.i18n[lang];
+                        
+                        const popupContent = `
+                            <div class="tooltipHeader">${t.tooltipSovereignState}: ${countryData.country}</div>
+                            <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipReserves}:</span> <span style="font-weight:700; color:#ef4444">${exactVolumeText} BTC</span></div>
+                            <div style="color:#cbd5e1; padding: 5px 0 0 0; font-size: 12px; line-height: 1.3;">${countryData.details}</div>
+                        `;
+                        
+                        this.tooltip.html(popupContent).style('opacity', 1);
+                        layer.setStyle({ fillOpacity: 1, weight: 2, color: '#ef4444' });
                     });
-                    layer.on('mouseout', function () {
-                        this.closePopup();
-                        this.setStyle({ fillOpacity: 0.8, weight: 1, color: '#333333' });
+                    
+                    layer.on('mousemove', (event) => {
+                        this.tooltip.style('left', (event.originalEvent.pageX + 15) + 'px')
+                                    .style('top', (event.originalEvent.pageY - 15) + 'px');
+                    });
+                    
+                    layer.on('mouseout', (event) => {
+                        this.tooltip.style('opacity', 0);
+                        layer.setStyle({ fillOpacity: 0.8, weight: 1, color: '#333333' });
                     });
                 }
             };
@@ -109,9 +119,64 @@ class MapChart {
                 onEachFeature: onEachFeatureInteraction
             }).addTo(this.map);
             
+            this.generateLeaderboard();
+            
             this.isRendered = true;
         } catch (error) {
             console.error('Erreur lors du chargement du fichier externe :', error);
         }
+    }
+    
+    generateLeaderboard() {
+        const container = document.getElementById('countryLeaderboard');
+        if (!container) return;
+        
+        // Clear previous content
+        container.innerHTML = '';
+        
+        const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+        const t = window.i18n[lang];
+        
+        // Header
+        const headerHtml = `
+            <div class="leaderboardHeader">
+                <span class="leaderboardTitle" data-i18n="leaderboardTitle">${t.leaderboardTitle || "Sovereign Holdings"}</span>
+            </div>
+            <div class="leaderboardColumns">
+                <span data-i18n="leaderboardRank">Rank</span>
+                <span data-i18n="leaderboardCountry">Country</span>
+                <span data-i18n="leaderboardHoldings">Holdings (BTC)</span>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', headerHtml);
+        
+        // Sort data descending by absolute BTC size
+        const sortedData = [...this.geoData].sort((a, b) => b.btc - a.btc);
+        
+        // Rows
+        sortedData.forEach((d, index) => {
+            if (d.btc > 0) {
+                const row = document.createElement('div');
+                row.className = 'leaderboardRow';
+                
+                row.innerHTML = `
+                    <span class="leaderboardRank">#${index + 1}</span>
+                    <span class="leaderboardName">${d.country}</span>
+                    <span class="leaderboardBtc">${d.btc.toLocaleString()}</span>
+                `;
+                
+                // Click interaction: fly map
+                row.addEventListener('click', () => {
+                   if (this.map) {
+                       this.map.flyTo([d.lat, d.lon], 4, {
+                           duration: 1.5,
+                           easeLinearity: 0.25
+                       });
+                   }
+                });
+                
+                container.appendChild(row);
+            }
+        });
     }
 }

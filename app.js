@@ -116,6 +116,11 @@ class AppManager {
         if (this.currentStep === 4 && this.distributionChart) {
             this.distributionChart.render();
         }
+        
+        // Re-render map leaderboard text
+        if (this.globalMap && this.globalMap.isRendered) {
+             this.globalMap.generateLeaderboard();
+        }
     }
 
     initializeCharts() {
@@ -232,6 +237,10 @@ class AppManager {
                 const dateEl = document.getElementById('floatingDate');
                 if (dateEl) dateEl.classList.add('isVisible');
                 
+                // Hide Map Leaderboard
+                const lb0 = document.getElementById('countryLeaderboard');
+                if (lb0) lb0.classList.remove('isVisible');
+                
                 // Explode cypherpunk bubbles outward
                 if (this.cypherpunkChart) {
                     // Ensure the layer is fully visible and interactive again
@@ -267,6 +276,10 @@ class AppManager {
                 const dateEl2 = document.getElementById('floatingDate');
                 if (dateEl2) dateEl2.classList.remove('isVisible');
                 
+                // Hide Map Leaderboard
+                const lb1 = document.getElementById('countryLeaderboard');
+                if (lb1) lb1.classList.remove('isVisible');
+                
                 this.toggleLayer('institutionalContainer');
                 
                 if (this.institutionalChart && !this.institutionalChart.isRendered) {
@@ -286,14 +299,24 @@ class AppManager {
                     setTimeout(() => this.globalMap.map.invalidateSize(), 800);
                     this.globalMap.render();
                 }
+                const lb2 = document.getElementById('countryLeaderboard');
+                if (lb2) lb2.classList.add('isVisible');
                 break;
             case 3:
                 this.toggleLayer('timelineContainer');
                 if (this.timelineChart) this.timelineChart.render();
+                
+                // Hide Map Leaderboard
+                const lb3 = document.getElementById('countryLeaderboard');
+                if (lb3) lb3.classList.remove('isVisible');
                 break;
             case 4:
                 this.toggleLayer('distributionContainer');
                 if (this.distributionChart) this.distributionChart.render();
+                
+                // Hide Map Leaderboard
+                const lb4 = document.getElementById('countryLeaderboard');
+                if (lb4) lb4.classList.remove('isVisible');
                 break;
         }
     }

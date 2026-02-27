@@ -36,8 +36,20 @@ const i18n = {
         // Section 3: Map of Power
         titleMap: "3. The Map of Power",
         descMap1: "The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.",
-        quoteMap: "Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.",
+        quoteMap: "\"Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.\"",
         metricMap: "Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.",
+
+        // Tooltips (Dynamic)
+        tooltipClickMarker: "Click marker to zoom location.",
+        tooltipSovereignState: "Sovereign State",
+        tooltipReserves: "Total Confirmed Reserves",
+        tooltipEstReserves: "Est. Reserves",
+        leaderboardTitle: "Sovereign Holdings",
+        leaderboardRank: "Rank",
+        leaderboardCountry: "Country",
+        leaderboardHoldings: "Holdings (BTC)",
+        // Distributions Categories
+        catRetail: "Retail (< 10 BTC)",
 
         // Section 4: Wealth Timeline
         titleTimeline: "4. The Wealth Gap Timeline",
@@ -53,13 +65,7 @@ const i18n = {
         btnTransformBar: "Revert to Bar Chart",
         metricDistribution: "Interact with the charts directly. Use the button above to observe a smooth structural transformation from bars to arc vectors. All elements maintain hover state interactivity.",
 
-        // Tooltips (Dynamic)
-        tooltipClickMarker: "Click marker to zoom location.",
-        tooltipSovereignState: "Sovereign State",
-        tooltipReserves: "Reserves",
-        tooltipEstReserves: "Est. Reserves",
         // Distributions Categories
-        catRetail: "Retail (< 10 BTC)",
         catExchanges: "Centralized Exchanges",
         catETFs: "Corporate ETFs & Trusts",
         catMiners: "Mining Infrastructure",
@@ -103,8 +109,18 @@ const i18n = {
         // Section 3: Map of Power
         titleMap: "3. La Carte du Pouvoir",
         descMap1: "La course aux armements financiers s'est inevitablement etendue a l'echelle souveraine. Bien que le Bitcoin ne respecte aucune frontiere, son accumulation favorise lourdement certaines coordonnees geopolitiques specifiques.",
-        quoteMap: "Les tresoreries souveraines utilisent desormais des strategies sophistiquees pour acquerir des reserves massives, souvent par le biais de saisies agressives ou d'adoptions structurelles par l'Etat.",
-        metricMap: "Survolez les marqueurs pour consulter les estimations des avoirs gouvernementaux. Cliquez sur un marqueur pour zoomer en profondeur sur le territoire souverain correspondant.",
+        quoteMap: "\"Les tresoreries souveraines utilisent desormais des strategies sophistiquees pour acquerir des reserves massives, souvent par le biais de saisies agressives ou de lois structurelles d'adoption nationale.\"",
+        metricMap: "Survolez les marqueurs pour voir les avoirs gouvernementaux estimes. Cliquez sur un marqueur pour zoomer sur ce territoire souverain.",
+
+        // Tooltips (Dynamic)
+        tooltipClickMarker: "Cliquez sur le marqueur pour zoomer.",
+        tooltipSovereignState: "Etat Souverain",
+        tooltipReserves: "Reserves Totales Confirmees",
+        tooltipEstReserves: "Reserves est.",
+        leaderboardTitle: "Reserves Souveraines",
+        leaderboardRank: "Rang",
+        leaderboardCountry: "Pays",
+        leaderboardHoldings: "Fonds (BTC)",
 
         // Section 4: Wealth Timeline
         titleTimeline: "4. L'Evolution de l'Ecart de Richesse",

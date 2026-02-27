@@ -129,37 +129,77 @@ class ChartInstitutional {
             .attr('class', 'label-name')
             .attr('text-anchor', 'middle')
             .style('fill', '#0f172a')
-            .style('font-weight', '900')
-            .text(d => d.data.name);
+            .style('font-weight', '900');
 
         // Add Value text
         enterLabels.append('text')
             .attr('class', 'label-value')
             .attr('text-anchor', 'middle')
             .style('fill', '#334155')
-            .style('font-weight', '600')
-            .text(d => `${d.data.value.toLocaleString()} BTC`);
+            .style('font-weight', '600');
 
         // Update positions and handle visibility based on available space
         const allLabels = enterLabels.merge(labels);
         
-        allLabels.transition().duration(800).ease(d3.easeCubicOut)
-            .attr('transform', d => `translate(${d.x0 + (d.x1 - d.x0) / 2},${d.y0 + (d.y1 - d.y0) / 2})`)
-            .style('opacity', function(d) {
-                // Only show label if the rectangle is reasonably large
+        // Check fit to enforce strictly no overflow
+        allLabels.select('.label-name')
+            .text(d => {
                 const width = d.x1 - d.x0;
                 const height = d.y1 - d.y0;
-                return (width > 80 && height > 40) ? 1 : 0;
+                // If box is too short for both fields, omit the title entirely
+                if (height < 35) return ''; 
+                
+                const fontSize = Math.min(16, height / 4);
+                const approxCharW = fontSize * 0.65;
+                const maxChars = Math.floor((width - 8) / approxCharW);
+                
+                // If width is tiny, omit title completely (leave space for value)
+                if (maxChars < 4) return ''; 
+                if (d.data.name.length > maxChars) {
+                    return d.data.name.substring(0, maxChars - 1) + '…';
+                }
+                return d.data.name;
             });
+            
+        allLabels.select('.label-value')
+            .text(d => {
+                const width = d.x1 - d.x0;
+                const height = d.y1 - d.y0;
+                if (height < 15 || width < 20) return ''; // Completely invisible
+                
+                const fontSize = Math.min(12, height / 6);
+                const approxCharW = fontSize * 0.65;
+                const fullText = `${d.data.value.toLocaleString()} BTC`;
+                const numText = d.data.value.toLocaleString();
+                const shortVal = (d.data.value / 1000).toFixed(0) + 'k';
+                
+                const maxChars = Math.floor((width - 8) / approxCharW);
+                
+                if (fullText.length <= maxChars) return fullText;
+                if (numText.length <= maxChars) return numText;
+                if (shortVal.length <= maxChars) return shortVal;
+                return ''; // Not enough space for even abbreviated value
+            });
+
+        // Trigger animations
+        allLabels.transition().duration(800).ease(d3.easeCubicOut)
+            .attr('transform', d => `translate(${d.x0 + (d.x1 - d.x0) / 2},${d.y0 + (d.y1 - d.y0) / 2})`)
+            .style('opacity', 1);
             
         // Adjust font sizes based on rectangle height dynamically
         allLabels.select('.label-name')
+            .transition().duration(800).ease(d3.easeCubicOut)
             .style('font-size', d => Math.min(16, (d.y1 - d.y0) / 4) + 'px')
             .attr('dy', d => Math.min(16, (d.y1 - d.y0) / 4) * -0.2); // Shift up slightly
             
         allLabels.select('.label-value')
+            .transition().duration(800).ease(d3.easeCubicOut)
             .style('font-size', d => Math.min(12, (d.y1 - d.y0) / 6) + 'px')
-            .attr('dy', d => Math.min(16, (d.y1 - d.y0) / 4) * 1.2); // Position below name
+            .attr('dy', d => {
+                const height = d.y1 - d.y0;
+                if (height < 35) return 4; // Shift up since name is absent
+                return Math.min(16, height / 4) * 1.2; // Position below name
+            });
 
     }
 

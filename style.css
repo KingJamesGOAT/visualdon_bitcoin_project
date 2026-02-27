@@ -227,6 +227,103 @@ blockquote {
   display: none;
 }
 
+/* Map of Power Leaderboard (Glassmorphism) */
+.glassLeaderboard {
+    position: absolute;
+    top: 5rem; /* Below zoom hint */
+    left: 2rem;
+    z-index: 50;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 320px;
+    max-height: 60vh;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.glassLeaderboard.isVisible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.leaderboardHeader {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.leaderboardTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.leaderboardColumns {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+}
+.leaderboardRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+.leaderboardRow:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateX(5px);
+}
+.leaderboardRank {
+    font-family: inherit;
+    font-weight: 900;
+    color: #cbd5e1;
+    width: 30px;
+}
+.leaderboardName {
+    flex-grow: 1;
+    font-weight: 600;
+    color: #f8fafc;
+    padding: 0 10px;
+}
+.leaderboardBtc {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    color: #ef4444; /* Sovereign red theme */
+}
+
+/* Custom Scrollbar for Leaderboard */
+.glassLeaderboard::-webkit-scrollbar {
+    width: 6px;
+}
+.glassLeaderboard::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+.glassLeaderboard::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 6px;
+}
+.glassLeaderboard::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.6);
+}
+
 /* Foreground Narrative Container */
 .scrollContainer {
   position: relative;

@@ -42,22 +42,41 @@ class ChartCypherpunk {
     }
 
     generateRetailNodes() {
-        const numRetailNodes = 350;
+        // Reduced node count slightly to allow for larger maximum sizes without totally choking physics
+        const numRetailNodes = 300; 
         const generated = [];
+        
+        // Generate realistic-ish pareto distribution for bitcoin holdings
+        // Many small wallets, a few whales
         for (let i = 0; i < numRetailNodes; i++) {
+            // Give them a random value biased heavily towards 0-10, but allowing up to ~5000 occasionally
+            const randVal = Math.pow(Math.random(), 4) * 1000 + (Math.random() * 5); 
+            
             generated.push({
                 id: `node-${i}`,
                 type: 'retail',
-                value: Math.random() * 50 + 1,
-                radius: Math.random() * 5 + 4, 
+                value: randVal,
                 address: this.generateMockWallet(),
                 firstSeen: this.randomDate(),
-                x: this.width / 2 + (Math.random() - 0.5) * 200,
-                y: this.height / 2 + (Math.random() - 0.5) * 200,
+                x: this.width / 2 + (Math.random() - 0.5) * 500, // Spread out start position
+                y: this.height / 2 + (Math.random() - 0.5) * 500,
                 vx: 0,
                 vy: 0
             });
         }
+        
+        // Find max to create a dynamic square root scale
+        const maxVal = d3.max(generated, d => d.value);
+        // Map [0, maxVal] to a visual radius range [3px, 50px]
+        const radiusScale = d3.scaleSqrt()
+            .domain([0, maxVal])
+            .range([3, 50]);
+            
+        // Apply the scale
+        generated.forEach(d => {
+            d.radius = radiusScale(d.value);
+        });
+        
         return generated;
     }
 

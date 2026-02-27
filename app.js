@@ -125,9 +125,9 @@ class AppManager {
             this.cypherpunkChart = new ChartCypherpunk('#cypherpunkContainer', tooltip);
             this.cypherpunkChart.init();
         }
-        if (typeof ChartInstitutional !== 'undefined' && this.cypherpunkChart) {
-            // Institutional uses live data!
-            this.institutionalChart = new ChartInstitutional(this.cypherpunkChart, this.liveApiData, tooltip);
+        if (typeof ChartInstitutional !== 'undefined') {
+            // Institutional stands alone now
+            this.institutionalChart = new ChartInstitutional('#institutionalContainer', this.liveApiData, tooltip);
         }
         if (typeof MapChart !== 'undefined') {
             this.globalMap = new MapChart('mapContainer', this.data.geoMap, tooltip);
@@ -213,12 +213,48 @@ class AppManager {
 
         switch (stepIndex) {
             case 0:
+                // When 0 is active: Settle cypherpunk
+                if (this.institutionalChart) {
+                    if (this.institutionalChart.simulation) this.institutionalChart.simulation.stop();
+                    d3.select('#institutionalContainer').selectAll('svg').remove(); // Wipe canvas clean
+                    this.institutionalChart.isRendered = false;
+                }
+                
                 this.toggleLayer('cypherpunkContainer');
-                if (this.cypherpunkChart) this.cypherpunkChart.renderScattered();
+                
+                // Show floating date
+                const dateEl = document.getElementById('floatingDate');
+                if (dateEl) dateEl.classList.add('isVisible');
+                
+                // Restart cypherpunk softly
+                if (this.cypherpunkChart) {
+                    this.cypherpunkChart.renderScattered();
+                }
                 break;
+                
             case 1:
-                this.toggleLayer('cypherpunkContainer');
-                if (this.institutionalChart) this.institutionalChart.renderConsolidated();
+                // When 1 is active: Freeze Cypherpunk, Fade it out, Start Institutional
+                if (this.cypherpunkChart && this.cypherpunkChart.simulation) {
+                    this.cypherpunkChart.simulation.stop();
+                }
+                
+                // Keep cypherpunk conceptually "underneath" but fade it
+                const cypherLayer = document.getElementById('cypherpunkContainer');
+                if (cypherLayer) {
+                    cypherLayer.style.opacity = "0";
+                    cypherLayer.style.pointerEvents = "none";
+                }
+                
+                // Hide floating date
+                const dateEl2 = document.getElementById('floatingDate');
+                if (dateEl2) dateEl2.classList.remove('isVisible');
+                
+                this.toggleLayer('institutionalContainer');
+                
+                if (this.institutionalChart && !this.institutionalChart.isRendered) {
+                    this.institutionalChart.init();
+                    this.institutionalChart.render();
+                }
                 break;
             case 2:
                 this.toggleLayer('mapContainer');

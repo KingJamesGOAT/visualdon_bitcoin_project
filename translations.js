@@ -9,6 +9,8 @@ const i18n = {
         tocDistribution: "5. Distribution",
 
         // Section 1: Cypherpunk
+        floatingDate: "2009 - 2012",
+        zoomHint: "Hold Ctrl & Scroll to Zoom",
         titleCypherpunk: "1. The Cypherpunk Network",
         quoteCypherpunk: "\"I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party.\" <br>— Satoshi Nakamoto, 2008",
         descCypherpunk1: "The genesis era of the Bitcoin protocol was characterized by extreme decentralization. The network was secured by an anarchic collective of early cryptography enthusiasts, gamers, and libertarians mining from personal computers.",
@@ -64,6 +66,8 @@ const i18n = {
         tocDistribution: "5. Distribution",
 
         // Section 1: Cypherpunk
+        floatingDate: "2009 - 2012",
+        zoomHint: "Maintenez Ctrl & Molette pour Zoomer",
         titleCypherpunk: "1. Le Reseau Cypherpunk",
         quoteCypherpunk: "\"J'ai travaille sur un nouveau systeme de paiement electronique entierement pair-a-pair, sans tiers de confiance.\" <br>— Satoshi Nakamoto, 2008",
         descCypherpunk1: "L'ere de la genese du protocole Bitcoin etait caracterisee par une decentralisation extreme. Le reseau etait securise par un collectif anarchique compose des premiers enthousiastes de la cryptographie, de joueurs et de libertariens minant depuis leurs ordinateurs personnels.",

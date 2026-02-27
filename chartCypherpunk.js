@@ -18,6 +18,8 @@ class ChartCypherpunk {
             this.height = window.innerHeight;
             if (this.svg) {
                 this.svg.attr('width', this.width).attr('height', this.height);
+                // Also update the zoom rect
+                this.svg.select('.zoom-overlay').attr('width', this.width).attr('height', this.height);
                 if (this.simulation && !this.isConsolidated) {
                     this.simulation.force('center', d3.forceCenter(this.width / 2, this.height / 2));
                     this.simulation.alpha(0.3).restart();
@@ -64,26 +66,54 @@ class ChartCypherpunk {
             .attr('width', this.width)
             .attr('height', this.height);
             
-        this.svg.append('text')
-            .attr('class', 'watermarkTitle')
-            .attr('x', this.width / 2)
-            .attr('y', this.height / 2)
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', '#e2e8f0') 
-            .style('opacity', 0.05) 
-            .style('font-size', '6vw')
-            .style('font-weight', '900')
-            .style('pointer-events', 'none')
-            .style('letter-spacing', '0.05em')
-            .text('2009 - 2012');
+        // Task 3: Setup strict Ctrl-driven zoom
+        this.zoom = d3.zoom()
+            .scaleExtent([0.5, 5])
+            .filter((event) => {
+                // Return true if it's not a wheel event, meaning panning is always allowed
+                if (event.type !== 'wheel') return true;
+                // If it IS a wheel event, strictly require Ctrl or Cmd key
+                return event.ctrlKey || event.metaKey;
+            })
+            .on('zoom', (event) => {
+                // Apply transform to inner group
+                this.zoomGroup.attr('transform', event.transform);
+            });
+
+        // Overlay to catch zoom events
+        this.svg.append('rect')
+            .attr('class', 'zoom-overlay')
+            .attr('width', this.width)
+            .attr('height', this.height)
+            .style('fill', 'none')
+            .style('pointer-events', 'all')
+            .on('mouseover', () => {
+                // Show hint on hover
+                const hint = document.getElementById('zoomHint');
+                if (hint) {
+                    const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+                    hint.textContent = i18n[lang].zoomHint;
+                    hint.style.opacity = '1';
+                }
+            })
+            .on('mouseout', () => {
+                // Hide hint
+                const hint = document.getElementById('zoomHint');
+                if(hint) hint.style.opacity = '0';
+            });
+            
+        this.svg.call(this.zoom);
+
+        // Task 1: Inner group holds nodes (replaces direct svg append)
+        this.zoomGroup = this.svg.append('g').attr('class', 'cypherpunk-zoom-group');
 
         // Dense network: At least 300
         this.nodes = this.generateRetailNodes();
         
+        // Task 2: Adjust forces to spread nodes apart significantly
         this.simulation = d3.forceSimulation(this.nodes)
-            .force('charge', d3.forceManyBody().strength(-4))
-            .force('collide', d3.forceCollide().radius(d => d.radius + 1.5).iterations(3))
+            .force('charge', d3.forceManyBody().strength(-15))
+            .force('collide', d3.forceCollide().radius(d => d.radius + 10).iterations(4))
             .force('x', d3.forceX(this.width / 2).strength(0.06))
             .force('y', d3.forceY(this.height / 2).strength(0.06))
             .on('tick', () => this.ticked());
@@ -100,7 +130,7 @@ class ChartCypherpunk {
         if (this.isConsolidated) {
             // Remove corporate nodes
             this.nodes = this.nodes.filter(n => n.type !== 'corporate');
-            this.svg.selectAll('.corpLabel').remove();
+            this.zoomGroup.selectAll('.corpLabel').remove();
             
             // Re-generate retail nodes if they were completely destroyed by Institutional timeout
             if (this.nodes.length === 0) {
@@ -110,13 +140,13 @@ class ChartCypherpunk {
             this.updateNodes();
             
             // Reset opacities just in case
-            this.svg.selectAll('.nodeRetail').style('opacity', 0.7);
+            this.zoomGroup.selectAll('.nodeRetail').style('opacity', 0.7);
 
             this.simulation.nodes(this.nodes)
                 .force('x', d3.forceX(this.width / 2).strength(0.06))
                 .force('y', d3.forceY(this.height / 2).strength(0.06))
-                .force('charge', d3.forceManyBody().strength(-4))
-                .force('collide', d3.forceCollide().radius(d => d.radius + 1.5).iterations(3))
+                .force('charge', d3.forceManyBody().strength(-15))
+                .force('collide', d3.forceCollide().radius(d => d.radius + 10).iterations(4))
                 .force('cluster', null)
                 .alpha(1).restart();
             this.isConsolidated = false;
@@ -126,7 +156,7 @@ class ChartCypherpunk {
     }
 
     updateNodes() {
-        this.nodeElements = this.svg.selectAll('.node')
+        this.nodeElements = this.zoomGroup.selectAll('.node')
             .data(this.nodes, d => d.id);
             
         this.nodeElements.exit()
@@ -171,8 +201,8 @@ class ChartCypherpunk {
             // Corporate handled in Institutional chart overrides or here
             d3.select(event.currentTarget).transition().duration(300).style('stroke-width', '4px').style('fill', '#fde68a');
             // Dim others
-            this.svg.selectAll('.nodeCorporate').filter(n => n.id !== d.id).style('opacity', 0.2);
-            this.svg.selectAll('.nodeRetail').style('opacity', 0.1);
+            this.zoomGroup.selectAll('.nodeCorporate').filter(n => n.id !== d.id).style('opacity', 0.2);
+            this.zoomGroup.selectAll('.nodeRetail').style('opacity', 0.1);
             
             const html = `
                 <div class="tooltipHeader">${d.name}</div>
@@ -193,8 +223,8 @@ class ChartCypherpunk {
             d3.select(event.currentTarget).transition().duration(500).attr('r', d.radius).style('fill', '#38bdf8');
         } else {
             d3.select(event.currentTarget).transition().duration(500).style('stroke-width', '1.5px').style('fill', '#f59e0b');
-            this.svg.selectAll('.nodeCorporate').style('opacity', 0.85);
-            this.svg.selectAll('.nodeRetail').style('opacity', 0.7);
+            this.zoomGroup.selectAll('.nodeCorporate').style('opacity', 0.85);
+            this.zoomGroup.selectAll('.nodeRetail').style('opacity', 0.7);
         }
         this.tooltip.style('opacity', 0);
     }

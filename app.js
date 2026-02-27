@@ -146,9 +146,9 @@ class AppManager {
             this.distributionChart = new ChartModernDistribution('#distributionContainer', this.data.snapshot, tooltip);
             this.distributionChart.init();
             
-            // Set up transformation triggers
-            document.getElementById('btnTransformDonut').addEventListener('click', () => {
-                this.distributionChart.transformToDonut();
+            // Transform handlers for final chart
+            document.getElementById('btnTransformStacked').addEventListener('click', () => {
+                if (this.distributionChart) this.distributionChart.transformToStacked();
             });
             document.getElementById('btnTransformBar').addEventListener('click', () => {
                 this.distributionChart.transformToBar();

@@ -166,22 +166,53 @@ blockquote {
   margin-top: 2rem;
 }
 
-.primaryBtn {
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid #38bdf8;
-  color: #38bdf8;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-family: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.transformBtn {
+    padding: 0.9rem 2.2rem;
+    background: linear-gradient(135deg, rgba(8, 14, 26, 0.8), rgba(15, 23, 42, 0.8));
+    color: #e2e8f0;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 30px; /* Pill shape */
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(56, 189, 248, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
 }
 
-.primaryBtn:hover {
-  background: #38bdf8;
-  color: #0f172a;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+.transformBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-20deg);
+    transition: all 0.6s ease;
+}
+
+.transformBtn:hover::before {
+    left: 150%;
+}
+
+.transformBtn:hover {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+    border-color: rgba(56, 189, 248, 0.8);
+    color: #ffffff;
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3), inset 0 0 15px rgba(56, 189, 248, 0.2);
+    transform: translateY(-2px);
+}
+
+.transformBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(56, 189, 248, 0.2);
 }
 
 /* Language Switcher Button */

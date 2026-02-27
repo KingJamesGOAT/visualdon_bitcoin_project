@@ -1,14 +1,17 @@
 class MapChart {
-    constructor(containerId, data) {
+    constructor(containerId, geoData, tooltipElement) {
         this.containerId = containerId;
-        this.mapData = data.mapData;
+        this.geoData = geoData; // Donnees contenant les reserves exactes
         this.map = null;
+        this.tooltip = tooltipElement;
         this.isRendered = false;
+        this.geoJsonLayer = null;
+        
+        // Suppression du contenu precedent
+        document.getElementById(this.containerId).innerHTML = '';
     }
 
     init() {
-        // Initialize Leaflet map
-        // Centered roughly on the Atlantic to show US/Europe/El Salvador easily
         this.map = L.map(this.containerId, {
             center: [30, 0],
             zoom: 2,
@@ -18,67 +21,94 @@ class MapChart {
             doubleClickZoom: false
         });
 
-        // Use a dark theme tile layer (CartoDB Dark Matter)
+        // Tuile de base sombre
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(this.map);
-
-        // SVG overlay for D3 to draw on map
-        // Leaflet handles adding an SVG pane
-        L.svg().addTo(this.map);
     }
 
-    render() {
-        // Select the SVG inside Leaflet pane
-        const svg = d3.select(`#${this.containerId}`).select("svg");
-        const g = svg.select("g");
+    async render() {
+        if (this.isRendered) return;
         
-        // Define scale for map bubbles based on BTC holdings
-        const maxBtc = d3.max(this.mapData, d => d.btc);
-        const radiusScale = d3.scaleSqrt()
-            .domain([0, maxBtc])
-            .range([0, 40]); // Max radius 40px
-
-        // Function to project lat/lon to pixel coordinates
-        const projectPoint = (lat, lon) => {
-            const point = this.map.latLngToLayerPoint(new L.LatLng(lat, lon));
-            return point;
-        };
-
-        // Bind data
-        const circles = g.selectAll(".mapCircle")
-            .data(this.mapData, d => d.country);
-
-        // Enter
-        circles.enter()
-            .append("circle")
-            .attr("class", "mapCircle")
-            .attr("cx", d => projectPoint(d.lat, d.lon).x)
-            .attr("cy", d => projectPoint(d.lat, d.lon).y)
-            .attr("r", 0) // Start at 0 for animation
-            .merge(circles)
-            // Update positioning if map moved/resized, though it's static
-            .attr("cx", d => projectPoint(d.lat, d.lon).x)
-            .attr("cy", d => projectPoint(d.lat, d.lon).y)
-            .transition()
-            .duration(1200) // At least 800ms
-            .attr("r", d => radiusScale(d.btc));
+        try {
+            // Requete fetch vers CDN public pour les frontieres mondiales au format GeoJSON
+            const response = await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson');
+            const worldGeoJson = await response.json();
             
-        circles.exit()
-            .transition()
-            .duration(800)
-            .attr("r", 0)
-            .remove();
+            // Echelle de couleurs proportionnelle aux reserves exactes
+            const maxBtc = d3.max(this.geoData, d => d.btc);
+            const colorScale = d3.scaleSequential(d3.interpolateReds)
+                .domain([0, maxBtc]);
 
-        // Ensure update on map move (if we later enable it)
-        this.map.on("viewreset moveend", () => {
-            g.selectAll(".mapCircle")
-                .attr("cx", d => projectPoint(d.lat, d.lon).x)
-                .attr("cy", d => projectPoint(d.lat, d.lon).y);
-        });
-        
-        this.isRendered = true;
+            // Fonction de style dynamique
+            const getCountryStyle = (feature) => {
+                // Correspondance avec les donnees
+                const countryName = feature.properties.ADMIN || feature.properties.name || feature.properties.name_en;
+                // Ajustement specifique pour USA et UK car les noms GeoJSON peuvent varier
+                let dataMatchName = countryName;
+                if (countryName === "United States of America") dataMatchName = "United States";
+                
+                const countryData = this.geoData.find(d => d.country === dataMatchName || d.id === feature.id);
+                
+                if (countryData && countryData.btc > 0) {
+                    return {
+                        fillColor: colorScale(countryData.btc),
+                        weight: 1,
+                        opacity: 1,
+                        color: '#333333',
+                        fillOpacity: 0.8
+                    };
+                }
+                
+                // Style neutre et discret pour les autres pays sans reserves
+                return {
+                    fillColor: '#1a1a1a',
+                    weight: 1,
+                    opacity: 0.5,
+                    color: '#333333',
+                    fillOpacity: 0.2
+                };
+            };
+            
+            // Interaction native par feature
+            const onEachFeatureInteraction = (feature, layer) => {
+                const countryName = feature.properties.ADMIN || feature.properties.name || feature.properties.name_en;
+                let dataMatchName = countryName;
+                if (countryName === "United States of America") dataMatchName = "United States";
+                
+                const countryData = this.geoData.find(d => d.country === dataMatchName || d.id === feature.id);
+                
+                if (countryData && countryData.btc > 0) {
+                    const exactVolumeText = countryData.btc.toLocaleString();
+                    const popupContent = `
+                        <div class="tooltipHeader">Sovereign State: ${countryData.country}</div>
+                        <div class="tooltipRow"><span class="tooltipLabel">Reserves:</span> <span style="color:#ef4444">${exactVolumeText} BTC</span></div>
+                        <div style="color:#cbd5e1; padding: 5px 0 0 0; font-size: 12px;">${countryData.details}</div>
+                    `;
+                    layer.bindPopup(popupContent, { closeButton: false });
+                    
+                    layer.on('mouseover', function () {
+                        this.openPopup();
+                        this.setStyle({ fillOpacity: 1, weight: 2, color: '#ef4444' });
+                    });
+                    layer.on('mouseout', function () {
+                        this.closePopup();
+                        this.setStyle({ fillOpacity: 0.8, weight: 1, color: '#333333' });
+                    });
+                }
+            };
+
+            // Utilisation native de L geoJSON() pour afficher la carte choroplethe
+            this.geoJsonLayer = L.geoJSON(worldGeoJson, {
+                style: getCountryStyle,
+                onEachFeature: onEachFeatureInteraction
+            }).addTo(this.map);
+            
+            this.isRendered = true;
+        } catch (error) {
+            console.error('Erreur lors du chargement du fichier externe :', error);
+        }
     }
 }

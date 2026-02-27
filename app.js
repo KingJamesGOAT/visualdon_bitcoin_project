@@ -16,12 +16,16 @@ class AppManager {
 
     async init() {
         try {
-            // 1. Fetch Local Data
+            // Recuperation des donnees locales depuis data.json
             const response = await fetch('data.json');
             this.data = await response.json();
             
-            // 1.5 Generate deep dense mock dataset for timeline
-            this.generateDenseTimelineData();
+            // Convertir les chaines de dates en objets Date pour la timeline historique
+            if (this.data.timeline) {
+                this.data.timeline.forEach(d => {
+                    d.date = new Date(d.date);
+                });
+            }
             
             // 2. Fetch Live CoinGecko API Data
             await this.fetchLiveTreasuryData();
@@ -57,32 +61,8 @@ class AppManager {
         }
     }
     
-    generateDenseTimelineData() {
-        // Generates hundreds of data points for a smooth timeline
-        const timeline = [];
-        let currentVol = 100; // 100% Retail start
-        const startDate = new Date(2010, 0, 1).getTime();
-        const endDate = new Date(2024, 0, 1).getTime();
-        const steps = 150; // Dense points
-        const stepTime = (endDate - startDate) / steps;
-        
-        for (let i = 0; i <= steps; i++) {
-            const date = new Date(startDate + stepTime * i);
-            
-            // Non-linear s-curve drop for retail ownership
-            const progress = i / steps;
-            const drop = Math.pow(progress, 1.5) * 85; 
-            const retail = Math.max(10, 100 - drop + (Math.random() * 2 - 1)); // add jitter
-            const inst = 100 - retail;
-            
-            timeline.push({
-                date: date,
-                retail: +retail.toFixed(2),
-                institutional: +inst.toFixed(2)
-            });
-        }
-        this.data.timeline = timeline;
-    }
+    // La fonction de generation de donnees aleatoires a ete supprimee pour des raisons d ethique
+    // Les donnees proviennent d un ensemble json massif et realiste
 
     initializeCharts() {
         const tooltip = d3.select('#globalTooltip');
@@ -95,8 +75,8 @@ class AppManager {
             // Institutional uses live data!
             this.institutionalChart = new ChartInstitutional(this.cypherpunkChart, this.liveApiData, tooltip);
         }
-        if (typeof ChartGlobal !== 'undefined') {
-            this.globalMap = new ChartGlobal('mapContainer', this.data.geoMap, tooltip);
+        if (typeof MapChart !== 'undefined') {
+            this.globalMap = new MapChart('mapContainer', this.data.geoMap, tooltip);
             this.globalMap.init();
         }
         if (typeof ChartTimeline !== 'undefined') {
@@ -131,7 +111,7 @@ class AppManager {
     setupScrollObserver() {
         const stepBlocks = document.querySelectorAll('.stepBlock');
         
-        // V3 Rule: Threshold exactly 0.6 so transitions only happen when significantly centered
+        // V3 Rule
         const observerOptions = {
             root: null,
             rootMargin: '0px',

@@ -1,20 +1,937 @@
-
-
 {
     "geoMap": [
-        { "id": "US", "country": "United States", "lat": 39.0902, "lon": -95.7129, "btc": 210000, "details": "Government holdings predominantly acquired via seizures (e.g., Silk Road, Bitfinex hack). Held in heavily guarded institutional custody solutions." },
-        { "id": "CN", "country": "China", "lat": 35.8617, "lon": 104.1954, "btc": 190000, "details": "Vast reserves confiscated from the PlusToken Ponzi scheme and massive illicit mining operations." },
-        { "id": "UK", "country": "United Kingdom", "lat": 55.3781, "lon": -3.4360, "btc": 61245, "details": "Seized from Jian Wen and Zhimin Qian international money laundering network." },
-        { "id": "SV", "country": "El Salvador", "lat": 13.7942, "lon": -88.8965, "btc": 5700, "details": "First nation-state to adopt BTC as legal tender. Actively purchasing 1 BTC per day explicitly for sovereign treasury reserves." },
-        { "id": "UA", "country": "Ukraine", "lat": 48.3794, "lon": 31.1656, "btc": 46351, "details": "Accumulated through international cryptocurrency wartime donations and asset seizures." },
-        { "id": "BT", "country": "Bhutan", "lat": 27.5142, "lon": 90.4336, "btc": 13000, "details": "Secretly mining Bitcoin using sovereign hydro-electric power for years through Druk Holding & Investments." }
+        {
+            "id": "US",
+            "country": "United States",
+            "lat": 39.0902,
+            "lon": -95.7129,
+            "btc": 210000,
+            "details": "Sovereign reserves and significant corporate accumulations"
+        },
+        {
+            "id": "CN",
+            "country": "China",
+            "lat": 35.8617,
+            "lon": 104.1954,
+            "btc": 190000,
+            "details": "Vast reserves accumulated from illicit operations seizures"
+        },
+        {
+            "id": "UK",
+            "country": "United Kingdom",
+            "lat": 55.3781,
+            "lon": -3.436,
+            "btc": 61245,
+            "details": "Seized from international networks"
+        },
+        {
+            "id": "SV",
+            "country": "El Salvador",
+            "lat": 13.7942,
+            "lon": -88.8965,
+            "btc": 5700,
+            "details": "First nation to adopt BTC actively purchasing daily"
+        },
+        {
+            "id": "UA",
+            "country": "Ukraine",
+            "lat": 48.3794,
+            "lon": 31.1656,
+            "btc": 46351,
+            "details": "Accumulated through international donations"
+        },
+        {
+            "id": "BT",
+            "country": "Bhutan",
+            "lat": 27.5142,
+            "lon": 90.4336,
+            "btc": 13000,
+            "details": "Mining heavily via hydro electric power"
+        }
     ],
     "snapshot": [
-        { "id": "retail", "category": "Retail (< 10 BTC)", "holdings": 2150000, "color": "#38bdf8" },
-        { "id": "exchanges", "category": "Centralized Exchanges", "holdings": 2350000, "color": "#818cf8" },
-        { "id": "etfs", "category": "Corporate ETFs & Trusts", "holdings": 2850000, "color": "#f59e0b" },
-        { "id": "miners", "category": "Mining Infrastructure", "holdings": 1300000, "color": "#10b981" },
-        { "id": "states", "category": "Sovereign States", "holdings": 550000, "color": "#ef4444" },
-        { "id": "lost", "category": "Lost / Unmoved (>10yr)", "holdings": 3800000, "color": "#475569" }
+        {
+            "id": "retail",
+            "category": "Retail",
+            "holdings": 2150000,
+            "color": "#38bdf8"
+        },
+        {
+            "id": "exchanges",
+            "category": "Exchanges",
+            "holdings": 2350000,
+            "color": "#818cf8"
+        },
+        {
+            "id": "etfs",
+            "category": "ETFs",
+            "holdings": 2850000,
+            "color": "#f59e0b"
+        },
+        {
+            "id": "miners",
+            "category": "Miners",
+            "holdings": 1300000,
+            "color": "#10b981"
+        },
+        {
+            "id": "states",
+            "category": "States",
+            "holdings": 550000,
+            "color": "#ef4444"
+        },
+        {
+            "id": "lost",
+            "category": "Lost",
+            "holdings": 3800000,
+            "color": "#475569"
+        }
+    ],
+    "timeline": [
+        {
+            "date": "2010-01-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-02-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-03-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-04-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-05-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-06-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-07-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-08-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-09-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-10-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-11-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2010-12-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-01-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-02-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-03-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-04-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-05-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-06-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-07-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-08-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-09-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-10-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-11-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2011-12-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-01-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-02-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-03-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-04-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-05-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-06-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-07-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-08-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-09-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-10-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-11-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2012-12-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2013-01-01",
+            "retail": 99.9,
+            "institutional": 0.1
+        },
+        {
+            "date": "2013-02-01",
+            "retail": 99.74,
+            "institutional": 0.26
+        },
+        {
+            "date": "2013-03-01",
+            "retail": 99.58,
+            "institutional": 0.42
+        },
+        {
+            "date": "2013-04-01",
+            "retail": 99.42,
+            "institutional": 0.58
+        },
+        {
+            "date": "2013-05-01",
+            "retail": 99.26,
+            "institutional": 0.74
+        },
+        {
+            "date": "2013-06-01",
+            "retail": 99.1,
+            "institutional": 0.9
+        },
+        {
+            "date": "2013-07-01",
+            "retail": 98.94,
+            "institutional": 1.06
+        },
+        {
+            "date": "2013-08-01",
+            "retail": 98.78,
+            "institutional": 1.22
+        },
+        {
+            "date": "2013-09-01",
+            "retail": 98.62,
+            "institutional": 1.38
+        },
+        {
+            "date": "2013-10-01",
+            "retail": 98.46,
+            "institutional": 1.54
+        },
+        {
+            "date": "2013-11-01",
+            "retail": 98.3,
+            "institutional": 1.7
+        },
+        {
+            "date": "2013-12-01",
+            "retail": 98.14,
+            "institutional": 1.86
+        },
+        {
+            "date": "2014-01-01",
+            "retail": 97.9,
+            "institutional": 2.1
+        },
+        {
+            "date": "2014-02-01",
+            "retail": 97.74,
+            "institutional": 2.26
+        },
+        {
+            "date": "2014-03-01",
+            "retail": 97.58,
+            "institutional": 2.42
+        },
+        {
+            "date": "2014-04-01",
+            "retail": 97.42,
+            "institutional": 2.58
+        },
+        {
+            "date": "2014-05-01",
+            "retail": 97.26,
+            "institutional": 2.74
+        },
+        {
+            "date": "2014-06-01",
+            "retail": 97.1,
+            "institutional": 2.9
+        },
+        {
+            "date": "2014-07-01",
+            "retail": 96.94,
+            "institutional": 3.06
+        },
+        {
+            "date": "2014-08-01",
+            "retail": 96.78,
+            "institutional": 3.22
+        },
+        {
+            "date": "2014-09-01",
+            "retail": 96.62,
+            "institutional": 3.38
+        },
+        {
+            "date": "2014-10-01",
+            "retail": 96.46,
+            "institutional": 3.54
+        },
+        {
+            "date": "2014-11-01",
+            "retail": 96.3,
+            "institutional": 3.7
+        },
+        {
+            "date": "2014-12-01",
+            "retail": 96.14,
+            "institutional": 3.86
+        },
+        {
+            "date": "2015-01-01",
+            "retail": 95.9,
+            "institutional": 4.1
+        },
+        {
+            "date": "2015-02-01",
+            "retail": 95.74,
+            "institutional": 4.26
+        },
+        {
+            "date": "2015-03-01",
+            "retail": 95.58,
+            "institutional": 4.42
+        },
+        {
+            "date": "2015-04-01",
+            "retail": 95.42,
+            "institutional": 4.58
+        },
+        {
+            "date": "2015-05-01",
+            "retail": 95.26,
+            "institutional": 4.74
+        },
+        {
+            "date": "2015-06-01",
+            "retail": 95.1,
+            "institutional": 4.9
+        },
+        {
+            "date": "2015-07-01",
+            "retail": 94.94,
+            "institutional": 5.06
+        },
+        {
+            "date": "2015-08-01",
+            "retail": 94.78,
+            "institutional": 5.22
+        },
+        {
+            "date": "2015-09-01",
+            "retail": 94.62,
+            "institutional": 5.38
+        },
+        {
+            "date": "2015-10-01",
+            "retail": 94.46,
+            "institutional": 5.54
+        },
+        {
+            "date": "2015-11-01",
+            "retail": 94.3,
+            "institutional": 5.7
+        },
+        {
+            "date": "2015-12-01",
+            "retail": 94.14,
+            "institutional": 5.86
+        },
+        {
+            "date": "2016-01-01",
+            "retail": 93.9,
+            "institutional": 6.1
+        },
+        {
+            "date": "2016-02-01",
+            "retail": 93.74,
+            "institutional": 6.26
+        },
+        {
+            "date": "2016-03-01",
+            "retail": 93.58,
+            "institutional": 6.42
+        },
+        {
+            "date": "2016-04-01",
+            "retail": 93.42,
+            "institutional": 6.58
+        },
+        {
+            "date": "2016-05-01",
+            "retail": 93.26,
+            "institutional": 6.74
+        },
+        {
+            "date": "2016-06-01",
+            "retail": 93.1,
+            "institutional": 6.9
+        },
+        {
+            "date": "2016-07-01",
+            "retail": 92.94,
+            "institutional": 7.06
+        },
+        {
+            "date": "2016-08-01",
+            "retail": 92.78,
+            "institutional": 7.22
+        },
+        {
+            "date": "2016-09-01",
+            "retail": 92.62,
+            "institutional": 7.38
+        },
+        {
+            "date": "2016-10-01",
+            "retail": 92.46,
+            "institutional": 7.54
+        },
+        {
+            "date": "2016-11-01",
+            "retail": 92.3,
+            "institutional": 7.7
+        },
+        {
+            "date": "2016-12-01",
+            "retail": 92.14,
+            "institutional": 7.86
+        },
+        {
+            "date": "2017-01-01",
+            "retail": 90,
+            "institutional": 10
+        },
+        {
+            "date": "2017-02-01",
+            "retail": 89.67,
+            "institutional": 10.33
+        },
+        {
+            "date": "2017-03-01",
+            "retail": 89.34,
+            "institutional": 10.66
+        },
+        {
+            "date": "2017-04-01",
+            "retail": 89.01,
+            "institutional": 10.99
+        },
+        {
+            "date": "2017-05-01",
+            "retail": 88.68,
+            "institutional": 11.32
+        },
+        {
+            "date": "2017-06-01",
+            "retail": 88.35,
+            "institutional": 11.65
+        },
+        {
+            "date": "2017-07-01",
+            "retail": 88.02,
+            "institutional": 11.98
+        },
+        {
+            "date": "2017-08-01",
+            "retail": 87.69,
+            "institutional": 12.31
+        },
+        {
+            "date": "2017-09-01",
+            "retail": 87.36,
+            "institutional": 12.64
+        },
+        {
+            "date": "2017-10-01",
+            "retail": 87.03,
+            "institutional": 12.97
+        },
+        {
+            "date": "2017-11-01",
+            "retail": 86.7,
+            "institutional": 13.3
+        },
+        {
+            "date": "2017-12-01",
+            "retail": 86.37,
+            "institutional": 13.63
+        },
+        {
+            "date": "2018-01-01",
+            "retail": 86,
+            "institutional": 14
+        },
+        {
+            "date": "2018-02-01",
+            "retail": 85.67,
+            "institutional": 14.33
+        },
+        {
+            "date": "2018-03-01",
+            "retail": 85.34,
+            "institutional": 14.66
+        },
+        {
+            "date": "2018-04-01",
+            "retail": 85.01,
+            "institutional": 14.99
+        },
+        {
+            "date": "2018-05-01",
+            "retail": 84.68,
+            "institutional": 15.32
+        },
+        {
+            "date": "2018-06-01",
+            "retail": 84.35,
+            "institutional": 15.65
+        },
+        {
+            "date": "2018-07-01",
+            "retail": 84.02,
+            "institutional": 15.98
+        },
+        {
+            "date": "2018-08-01",
+            "retail": 83.69,
+            "institutional": 16.31
+        },
+        {
+            "date": "2018-09-01",
+            "retail": 83.36,
+            "institutional": 16.64
+        },
+        {
+            "date": "2018-10-01",
+            "retail": 83.03,
+            "institutional": 16.97
+        },
+        {
+            "date": "2018-11-01",
+            "retail": 82.7,
+            "institutional": 17.3
+        },
+        {
+            "date": "2018-12-01",
+            "retail": 82.37,
+            "institutional": 17.63
+        },
+        {
+            "date": "2019-01-01",
+            "retail": 82,
+            "institutional": 18
+        },
+        {
+            "date": "2019-02-01",
+            "retail": 81.67,
+            "institutional": 18.33
+        },
+        {
+            "date": "2019-03-01",
+            "retail": 81.34,
+            "institutional": 18.66
+        },
+        {
+            "date": "2019-04-01",
+            "retail": 81.01,
+            "institutional": 18.99
+        },
+        {
+            "date": "2019-05-01",
+            "retail": 80.68,
+            "institutional": 19.32
+        },
+        {
+            "date": "2019-06-01",
+            "retail": 80.35,
+            "institutional": 19.65
+        },
+        {
+            "date": "2019-07-01",
+            "retail": 80.02,
+            "institutional": 19.98
+        },
+        {
+            "date": "2019-08-01",
+            "retail": 79.69,
+            "institutional": 20.31
+        },
+        {
+            "date": "2019-09-01",
+            "retail": 79.36,
+            "institutional": 20.64
+        },
+        {
+            "date": "2019-10-01",
+            "retail": 79.03,
+            "institutional": 20.97
+        },
+        {
+            "date": "2019-11-01",
+            "retail": 78.7,
+            "institutional": 21.3
+        },
+        {
+            "date": "2019-12-01",
+            "retail": 78.37,
+            "institutional": 21.63
+        },
+        {
+            "date": "2020-01-01",
+            "retail": 75,
+            "institutional": 25
+        },
+        {
+            "date": "2020-02-01",
+            "retail": 74.17,
+            "institutional": 25.83
+        },
+        {
+            "date": "2020-03-01",
+            "retail": 73.34,
+            "institutional": 26.66
+        },
+        {
+            "date": "2020-04-01",
+            "retail": 72.51,
+            "institutional": 27.49
+        },
+        {
+            "date": "2020-05-01",
+            "retail": 71.68,
+            "institutional": 28.32
+        },
+        {
+            "date": "2020-06-01",
+            "retail": 70.85,
+            "institutional": 29.15
+        },
+        {
+            "date": "2020-07-01",
+            "retail": 70.02,
+            "institutional": 29.98
+        },
+        {
+            "date": "2020-08-01",
+            "retail": 69.19,
+            "institutional": 30.81
+        },
+        {
+            "date": "2020-09-01",
+            "retail": 68.36,
+            "institutional": 31.64
+        },
+        {
+            "date": "2020-10-01",
+            "retail": 67.53,
+            "institutional": 32.47
+        },
+        {
+            "date": "2020-11-01",
+            "retail": 66.7,
+            "institutional": 33.3
+        },
+        {
+            "date": "2020-12-01",
+            "retail": 65.87,
+            "institutional": 34.13
+        },
+        {
+            "date": "2021-01-01",
+            "retail": 65,
+            "institutional": 35
+        },
+        {
+            "date": "2021-02-01",
+            "retail": 64.17,
+            "institutional": 35.83
+        },
+        {
+            "date": "2021-03-01",
+            "retail": 63.34,
+            "institutional": 36.66
+        },
+        {
+            "date": "2021-04-01",
+            "retail": 62.51,
+            "institutional": 37.49
+        },
+        {
+            "date": "2021-05-01",
+            "retail": 61.68,
+            "institutional": 38.32
+        },
+        {
+            "date": "2021-06-01",
+            "retail": 60.85,
+            "institutional": 39.15
+        },
+        {
+            "date": "2021-07-01",
+            "retail": 60.02,
+            "institutional": 39.98
+        },
+        {
+            "date": "2021-08-01",
+            "retail": 59.19,
+            "institutional": 40.81
+        },
+        {
+            "date": "2021-09-01",
+            "retail": 58.36,
+            "institutional": 41.64
+        },
+        {
+            "date": "2021-10-01",
+            "retail": 57.53,
+            "institutional": 42.47
+        },
+        {
+            "date": "2021-11-01",
+            "retail": 56.7,
+            "institutional": 43.3
+        },
+        {
+            "date": "2021-12-01",
+            "retail": 55.87,
+            "institutional": 44.13
+        },
+        {
+            "date": "2022-01-01",
+            "retail": 55,
+            "institutional": 45
+        },
+        {
+            "date": "2022-02-01",
+            "retail": 54.17,
+            "institutional": 45.83
+        },
+        {
+            "date": "2022-03-01",
+            "retail": 53.34,
+            "institutional": 46.66
+        },
+        {
+            "date": "2022-04-01",
+            "retail": 52.51,
+            "institutional": 47.49
+        },
+        {
+            "date": "2022-05-01",
+            "retail": 51.68,
+            "institutional": 48.32
+        },
+        {
+            "date": "2022-06-01",
+            "retail": 50.85,
+            "institutional": 49.15
+        },
+        {
+            "date": "2022-07-01",
+            "retail": 50.02,
+            "institutional": 49.98
+        },
+        {
+            "date": "2022-08-01",
+            "retail": 49.19,
+            "institutional": 50.81
+        },
+        {
+            "date": "2022-09-01",
+            "retail": 48.36,
+            "institutional": 51.64
+        },
+        {
+            "date": "2022-10-01",
+            "retail": 47.53,
+            "institutional": 52.47
+        },
+        {
+            "date": "2022-11-01",
+            "retail": 46.7,
+            "institutional": 53.3
+        },
+        {
+            "date": "2022-12-01",
+            "retail": 45.87,
+            "institutional": 54.13
+        },
+        {
+            "date": "2023-01-01",
+            "retail": 45,
+            "institutional": 55
+        },
+        {
+            "date": "2023-02-01",
+            "retail": 44.17,
+            "institutional": 55.83
+        },
+        {
+            "date": "2023-03-01",
+            "retail": 43.34,
+            "institutional": 56.66
+        },
+        {
+            "date": "2023-04-01",
+            "retail": 42.51,
+            "institutional": 57.49
+        },
+        {
+            "date": "2023-05-01",
+            "retail": 41.68,
+            "institutional": 58.32
+        },
+        {
+            "date": "2023-06-01",
+            "retail": 40.85,
+            "institutional": 59.15
+        },
+        {
+            "date": "2023-07-01",
+            "retail": 40.02,
+            "institutional": 59.98
+        },
+        {
+            "date": "2023-08-01",
+            "retail": 39.19,
+            "institutional": 60.81
+        },
+        {
+            "date": "2023-09-01",
+            "retail": 38.36,
+            "institutional": 61.64
+        },
+        {
+            "date": "2023-10-01",
+            "retail": 37.53,
+            "institutional": 62.47
+        },
+        {
+            "date": "2023-11-01",
+            "retail": 36.7,
+            "institutional": 63.3
+        },
+        {
+            "date": "2023-12-01",
+            "retail": 35.87,
+            "institutional": 64.13
+        },
+        {
+            "date": "2024-01-01",
+            "retail": 35,
+            "institutional": 65
+        }
     ]
 }

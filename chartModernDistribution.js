@@ -8,7 +8,7 @@ class ChartModernDistribution {
         this.margin = {top: 50, right: 50, bottom: 80, left: 100};
         this.svg = null;
         this.isRendered = false;
-        this.currentMode = 'bar'; // 'bar' or 'donut'
+        this.currentMode = 'bar'; // 'bar' or 'stacked'
 
         this.updateDimensions();
         
@@ -20,7 +20,7 @@ class ChartModernDistribution {
                 if (document.querySelector(this.containerSelector).classList.contains('isActive')) {
                     this.init();
                     if(this.currentMode === 'bar') this.render(true);
-                    else this.transformToDonut(true);
+                    else this.transformToStacked(true);
                 }
             }
         });
@@ -31,7 +31,6 @@ class ChartModernDistribution {
         this.height = window.innerHeight * 0.6;
         this.innerWidth = this.width - this.margin.left - this.margin.right;
         this.innerHeight = this.height - this.margin.top - this.margin.bottom;
-        this.radius = Math.min(this.innerWidth, this.innerHeight) / 2;
     }
 
     init() {
@@ -39,7 +38,7 @@ class ChartModernDistribution {
             .style('display', 'flex').style('justify-content', 'center').style('align-items', 'center')
             .style('height', '100%').style('width', '100%');
 
-        // Main SVG grouped to allow easy translation for donut chart center vs bar chart top-left
+        // Main SVG grouped to allow easy translation
         this.svg = this.wrapper.append('svg').attr('width', this.width).attr('height', this.height);
         this.chartGroup = this.svg.append('g').attr('transform', `translate(${this.margin.left},${this.margin.top})`);
             
@@ -59,9 +58,18 @@ class ChartModernDistribution {
         this.yAxisLabel = this.chartGroup.append('text').attr('transform', 'rotate(-90)').attr('x', -this.innerHeight / 2)
             .attr('y', -70).attr('text-anchor', 'middle').attr('class', 'axisText').style('font-weight', 'bold').text('Total Holdings (BTC)');
             
-        // Setup Donut Generators
-        this.pie = d3.pie().value(d => d.holdings).sort(null);
-        this.arc = d3.arc().innerRadius(this.radius * 0.65).outerRadius(this.radius).cornerRadius(4);
+        // Calculate data for horizontal stacked bar immediately
+        const totalHoldings = d3.sum(this.snapshotData, d => d.holdings);
+        let cumulativeAccumulator = 0;
+        
+        this.snapshotData.forEach(d => {
+            const ratio = d.holdings / totalHoldings;
+            // The precise width in pixels when horizontally stacked
+            d.stackedWidth = ratio * this.innerWidth;
+            // The starting X position when horizontally stacked
+            d.cumulativeX = cumulativeAccumulator;
+            cumulativeAccumulator += d.stackedWidth;
+        });
     }
 
     render(instant = false) {
@@ -74,102 +82,92 @@ class ChartModernDistribution {
         this.yAxisGroup.transition().duration(800).style('opacity', 1);
         this.yAxisLabel.transition().duration(800).style('opacity', 1);
         
-        // Reset transform
-        this.chartGroup.transition().duration(1000).attr('transform', `translate(${this.margin.left},${this.margin.top})`);
-
         const duration = instant ? 0 : 1200; 
         
-        const paths = this.chartGroup.selectAll('.distributionElement').data(this.snapshotData, d => d.id);
+        const rects = this.chartGroup.selectAll('.distributionElement').data(this.snapshotData, d => d.id);
             
-        const enterPaths = paths.enter().append('path').attr('class', 'distributionElement')
+        // Task 2: No more d3.pie or paths, reverting to pure standard rects
+        const enterRects = rects.enter().append('rect').attr('class', 'distributionElement')
             .style('fill', d => d.color)
             .on('mouseover', (event, d) => this.handleHover(event, d))
             .on('mousemove', (event) => this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY - 20) + 'px'))
             .on('mouseout', () => this.handleOut());
             
-        // Calculate rectangular path data
-        const rectPath = (d) => {
-            const x = this.xScale(d.category);
-            const w = this.xScale.bandwidth();
-            const y = this.yScale(d.holdings);
-            const h = this.innerHeight - y;
-            // Draw a rectangle as a path: M x,y L x+w,y L x+w,y+h L x,y+h Z
-            return `M ${x},${y} L ${x+w},${y} L ${x+w},${y+h} L ${x},${y+h} Z`;
-        };
-        
-        // Flattened bottom rect for initial entrance
-        const flatPath = (d) => {
-            const x = this.xScale(d.category);
-            const w = this.xScale.bandwidth();
-            return `M ${x},${this.innerHeight} L ${x+w},${this.innerHeight} L ${x+w},${this.innerHeight} L ${x},${this.innerHeight} Z`;
-        };
+        // Starting positioned flat on X axis
+        enterRects
+            .attr('x', d => this.xScale(d.category))
+            .attr('y', this.innerHeight)
+            .attr('width', this.xScale.bandwidth())
+            .attr('height', 0);
 
-        enterPaths.attr('d', flatPath)
-            .merge(paths)
+        // Task 4: The Reverse Transition. Or just animating standard initial state
+        enterRects.merge(rects)
             .transition()
             .duration(duration)
             .ease(d3.easeCubicInOut)
-            .attr('d', rectPath);
+            .attr('x', d => this.xScale(d.category))
+            .attr('y', d => this.yScale(d.holdings))
+            .attr('width', this.xScale.bandwidth())
+            .attr('height', d => this.innerHeight - this.yScale(d.holdings));
 
         this.isRendered = true;
     }
 
-    transformToDonut(instant = false) {
-        this.currentMode = 'donut';
+    transformToStacked(instant = false) {
+        this.currentMode = 'stacked';
         
-        document.getElementById('btnTransformDonut').style.display = 'none';
-        document.getElementById('btnTransformBar').style.display = 'inline-block';
+        const btnStacked = document.getElementById('btnTransformStacked');
+        if(btnStacked) btnStacked.style.display = 'none';
+        
+        const btnBar = document.getElementById('btnTransformBar');
+        if(btnBar) btnBar.style.display = 'inline-block';
+        
+        const duration = instant ? 0 : 1200;
         
         // Hide Bar axes
         this.xAxisGroup.transition().duration(800).style('opacity', 0);
         this.yAxisGroup.transition().duration(800).style('opacity', 0);
         this.yAxisLabel.transition().duration(800).style('opacity', 0);
-        
-        // Center the group for pie chart coordinates
-        this.chartGroup.transition().duration(1200)
-            .attr('transform', `translate(${this.width/2},${this.height/2})`);
             
-        const pieData = this.pie(this.snapshotData);
+        const rects = this.chartGroup.selectAll('.distributionElement').data(this.snapshotData, d => d.id);
         
-        // Re-bind to pie data format
-        const paths = this.chartGroup.selectAll('.distributionElement').data(pieData, d => d.data.id);
+        // Task 3: 100% Horizontal Stacked Bar animation
+        const stackedHeight = 60; // 60px thick visually pleasing bar
+        const centerY = (this.innerHeight / 2) - (stackedHeight / 2);
         
-        paths.transition()
-            .duration(1500) // Complex morph
+        rects.transition()
+            .duration(duration)
             .ease(d3.easeCubicInOut)
-            .attrTween("d", d => {
-                const i = d3.interpolate(
-                    // Current path state (bar) approximated or let it morph messily.
-                    // A true rigorous path morph between rect and arc requires flubber, 
-                    // but d3 can tween numeric path commands reasonably if we just transition straight to arc
-                    d.path || this.arc(d),
-                    this.arc(d)
-                );
-                return function(t) { return i(t); };
-            });
+            .attr('x', d => d.cumulativeX)
+            .attr('y', centerY)
+            .attr('width', d => d.stackedWidth)
+            .attr('height', stackedHeight);
     }
 
     transformToBar() {
-        document.getElementById('btnTransformDonut').style.display = 'inline-block';
-        document.getElementById('btnTransformBar').style.display = 'none';
-        this.render(); // Let render logic handle morph back to Rect Paths
+        const btnStacked = document.getElementById('btnTransformStacked');
+        if(btnStacked) btnStacked.style.display = 'inline-block';
+        
+        const btnBar = document.getElementById('btnTransformBar');
+        if(btnBar) btnBar.style.display = 'none';
+        
+        this.render(); // This triggers the reverse transition back to standard Y-axis bars
     }
 
-    handleHover(event, d) {
-        const item = d.data || d; // Handle both direct data (bar) and pie wrapper (donut)
-        
+    handleHover(event, item) {
+        // Task 5: Tooltip Persistence using exact data objects regardless of current mode
         this.chartGroup.selectAll('.distributionElement').style('opacity', 0.2);
         d3.select(event.currentTarget).style('opacity', 1);
 
         const pct = ((item.holdings / 21000000) * 100).toFixed(2);
 
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
-        const t = i18n[lang];
+        const t = window.i18n[lang];
 
         const html = `
             <div class="tooltipHeader" style="color:${item.color}">${item.category}</div>
-            <div class="tooltipRow"><span class="tooltipLabel">Holdings:</span> <span>${item.holdings.toLocaleString()} BTC</span></div>
-            <div class="tooltipRow"><span class="tooltipLabel">Max Supply %:</span> <span>${pct}%</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">Holdings:</span> <span style="font-weight:700">${item.holdings.toLocaleString()} BTC</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">Max Supply %:</span> <span style="font-weight:700">${pct}%</span></div>
             <div style="margin-top:8px; font-size:11px; color:#cbd5e1; font-style:italic">Live Snapshot Verification</div>
         `;
         this.tooltip.html(html).style('opacity', 1);

@@ -32,6 +32,15 @@ class ChartTimeline {
     }
 
     init() {
+        // Task 2: Formatage des dates JSON
+        if (this.timelineData) {
+            this.timelineData.forEach(d => {
+                if (typeof d.date === 'string') {
+                    d.date = new Date(d.date);
+                }
+            });
+        }
+
         this.wrapper = this.container.append('div')
             .style('display', 'flex')
             .style('justify-content', 'center')
@@ -80,6 +89,9 @@ class ChartTimeline {
             .attr('class', 'bisectorLine')
             .attr('y1', 0)
             .attr('y2', this.innerHeight)
+            .style('stroke', 'rgba(255, 255, 255, 0.4)')
+            .style('stroke-width', '1px')
+            .style('pointer-events', 'none')
             .style('opacity', 0);
             
         this.overlay = this.svg.append('rect')
@@ -112,11 +124,18 @@ class ChartTimeline {
                 .curve(d3.curveMonotoneX)
             );
             
+        // Task 3: Esthetique des degrades
         enterAreas.merge(areas)
+            .style('fill', (d, i) => i === 0 ? 'url(#gradientRetail)' : 'url(#gradientInst)')
             .transition()
             .duration(duration)
             .ease(d3.easeCubicOut)
             .attr('d', areaGenerator);
+            
+        // Task 1: Superposition de la zone interactive
+        if (this.overlay) {
+            this.overlay.raise();
+        }
             
         // Setup Interactions
         const bisectDate = d3.bisector(d => d.date).left;
@@ -137,6 +156,7 @@ class ChartTimeline {
             
             const px = this.xScale(d.date);
             
+            // Task 4: Fluidite et ligne de repere
             this.bisectorLine
                 .attr('x1', px)
                 .attr('x2', px)
@@ -144,24 +164,22 @@ class ChartTimeline {
                 
             const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
             
-            // Format labels directly since this graphic doesn't have explicit categories in i18n, but we could use generic "Retail" and "Institutional" words if we want.
             const retailWord = lang === 'fr' ? 'Volume Particuliers' : 'Retail Volume';
             const instWord = lang === 'fr' ? 'Volume Institutionnel' : 'Institutional Volume';
             const dataExtractedWord = lang === 'fr' ? 'Point de donnee extrait' : 'Data Point Extracted';
             
-            // For the date we can format it according to the selected language
             const locale = lang === 'fr' ? 'fr-FR' : 'en-US';
 
             const html = `
                 <div class="tooltipHeader">${d.date.toLocaleDateString(locale, {year: 'numeric', month: 'short'})}</div>
-                <div class="tooltipRow"><span class="tooltipLabel" style="color:#38bdf8">${retailWord}:</span> <span>${d.retail}%</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel" style="color:#f59e0b">${instWord}:</span> <span>${d.institutional}%</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel" style="color:#38bdf8">${retailWord}:</span> <span style="font-weight:700">${d.retail}%</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel" style="color:#f59e0b">${instWord}:</span> <span style="font-weight:700">${d.institutional}%</span></div>
                 <div class="tooltipRow"><span class="tooltipLabel" style="font-size:10px; padding-top:4px">${dataExtractedWord}</span></div>
             `;
                 
             this.tooltip.html(html).style('opacity', 1)
-                .style('left', (event.pageX + 20) + 'px')
-                .style('top', (event.pageY - 20) + 'px');
+                .style('left', (event.pageX + 15) + 'px')
+                .style('top', (event.pageY - 15) + 'px');
         });
         
         this.overlay.on('mouseout', () => {

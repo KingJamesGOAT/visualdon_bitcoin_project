@@ -61,9 +61,10 @@ const i18n = {
         titleDistribution: "5. The Modern Distribution",
         descDistribution1: "Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.",
         descDistribution2: "To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.",
-        btnTransformDonut: "Transform to Donut Chart",
+        // Controls
+        btnTransformStacked: "View as Stacked Distribution",
         btnTransformBar: "Revert to Bar Chart",
-        metricDistribution: "Interact with the charts directly. Use the button above to observe a smooth structural transformation from bars to arc vectors. All elements maintain hover state interactivity.",
+        metricDistribution: "Interact with the charts directly. Use the button above to observe a smooth structural transformation from vertical bars to a single horizontal stacked vector. All elements maintain hover state interactivity.",
 
         // Distributions Categories
         catExchanges: "Centralized Exchanges",
@@ -132,9 +133,10 @@ const i18n = {
         titleDistribution: "5. La Distribution Moderne",
         descDistribution1: "Aujourd'hui, le paysage a ete definitivement altere. Le marche s'apparente desormais a une pyramide financiere traditionnelle, subdivisee en multiples niveaux d'immense richesse.",
         descDistribution2: "Conformement a une stricte ethique en matiere de visualisation des donnees, l'axe vertical debute explicitement a zero pour garantir une perception exacte des disproportions de volume.",
-        btnTransformDonut: "Transformer en graphique en anneau",
-        btnTransformBar: "Revenir au diagramme en barres",
-        metricDistribution: "Interagissez directement avec les graphiques. Utilisez le bouton ci-dessus pour observer une transformation structurelle fluide, passant des barres a des vecteurs en arc. Tous les elements conservent leur interactivite au survol.",
+        // Controls
+        btnTransformStacked: "Voir en Distribution Cumulee",
+        btnTransformBar: "Revenir au Diagramme a Barres",
+        metricDistribution: "Interagissez directement avec les graphiques. Utilisez le bouton ci-dessus pour observer une transformation structurelle fluide des barres verticales vers un vecteur horizontal unique et cumule. Tous les elements conservent leur interactivite au survol.",
 
         // Tooltips (Dynamic)
         tooltipClickMarker: "Cliquez sur le marqueur pour zoomer.",

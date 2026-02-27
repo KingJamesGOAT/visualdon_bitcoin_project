@@ -178,5 +178,13 @@ class MapChart {
                 container.appendChild(row);
             }
         });
+        
+        // Prevent scroll propagation to isolate scrolling within the leaderboard
+        container.addEventListener('wheel', (e) => {
+            e.stopPropagation(); // Stops the event from reaching the document body.
+            // Also need to manually scroll the container so it doesn't freeze
+            container.scrollTop += e.deltaY;
+            e.preventDefault(); // Stop standard behavior which causes page snap scrolling
+        }, { passive: false });
     }
 }

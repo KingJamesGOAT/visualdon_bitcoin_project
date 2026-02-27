@@ -94,13 +94,73 @@ class ChartInstitutional {
             .on('mousemove', (event) => this.handleMouseMove(event))
             .on('mouseout', (event, d) => this.handleMouseOut(event));
 
-        // Update positions (both enter and update)
+        // Update positions for tiles
         enterTiles.merge(tiles)
             .transition().duration(800).ease(d3.easeCubicOut)
             .attr('x', d => d.x0)
             .attr('y', d => d.y0)
-            .attr('width', d => d.x1 - d.x0)
-            .attr('height', d => d.y1 - d.y0);
+            .attr('width', d => Math.max(0, d.x1 - d.x0))
+            .attr('height', d => Math.max(0, d.y1 - d.y0));
+
+        // Create a central group for labels to ensure they are drawn on top of rects
+        let labelGroup = this.svg.select('.treemap-label-group');
+        if (labelGroup.empty()) {
+            labelGroup = this.svg.append('g')
+                .attr('class', 'treemap-label-group')
+                .attr('transform', `translate(${padX}, ${padY})`)
+                .style('pointer-events', 'none'); // Allow clicks/hovers to pass through to rects
+        } else {
+            labelGroup.attr('transform', `translate(${padX}, ${padY})`);
+        }
+
+        // Bind data to labels
+        const labels = labelGroup.selectAll('.treemap-label')
+            .data(root.leaves(), d => d.data.name);
+
+        labels.exit().remove();
+        
+        const enterLabels = labels.enter()
+            .append('g')
+            .attr('class', 'treemap-label')
+            .style('opacity', 0); // Start hidden for animation
+
+        // Add Name text
+        enterLabels.append('text')
+            .attr('class', 'label-name')
+            .attr('text-anchor', 'middle')
+            .style('fill', '#0f172a')
+            .style('font-weight', '900')
+            .text(d => d.data.name);
+
+        // Add Value text
+        enterLabels.append('text')
+            .attr('class', 'label-value')
+            .attr('text-anchor', 'middle')
+            .style('fill', '#334155')
+            .style('font-weight', '600')
+            .text(d => `${d.data.value.toLocaleString()} BTC`);
+
+        // Update positions and handle visibility based on available space
+        const allLabels = enterLabels.merge(labels);
+        
+        allLabels.transition().duration(800).ease(d3.easeCubicOut)
+            .attr('transform', d => `translate(${d.x0 + (d.x1 - d.x0) / 2},${d.y0 + (d.y1 - d.y0) / 2})`)
+            .style('opacity', function(d) {
+                // Only show label if the rectangle is reasonably large
+                const width = d.x1 - d.x0;
+                const height = d.y1 - d.y0;
+                return (width > 80 && height > 40) ? 1 : 0;
+            });
+            
+        // Adjust font sizes based on rectangle height dynamically
+        allLabels.select('.label-name')
+            .style('font-size', d => Math.min(16, (d.y1 - d.y0) / 4) + 'px')
+            .attr('dy', d => Math.min(16, (d.y1 - d.y0) / 4) * -0.2); // Shift up slightly
+            
+        allLabels.select('.label-value')
+            .style('font-size', d => Math.min(12, (d.y1 - d.y0) / 6) + 'px')
+            .attr('dy', d => Math.min(16, (d.y1 - d.y0) / 4) * 1.2); // Position below name
+
     }
 
     handleMouseOver(event, d) {
@@ -110,21 +170,30 @@ class ChartInstitutional {
         this.svg.selectAll('.treemap-tile').filter(function() { return this !== event.currentTarget; }).style('opacity', 0.4);
         
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+        const t = window.i18n[lang];
+        
         const typeStr = lang === 'fr' ? 'Tresorerie Publique' : 'Public Treasury';
         const holdingsStr = lang === 'fr' ? 'Reserves Totales:' : 'Total Holdings:';
         const shareStr = lang === 'fr' ? 'Part de l\'Offre:' : 'Supply Share:';
 
+        // Try to find a specific description, fallback to generic
+        // Replacing spaces with nothing to match keys like corp_MicroStrategy or corp_Hut8
+        const cleanName = d.name.replace(/\s+/g, '');
+        const descKey = `corp_${cleanName}`;
+        const description = t[descKey] || t['corp_Generic'];
+
         const html = `
             <div class="tooltipHeader">${d.name}</div>
-            <div class="tooltipRow"><span class="tooltipLabel">Type:</span> <span>${typeStr}</span></div>
-            <div class="tooltipRow"><span class="tooltipLabel">${holdingsStr}</span> <span>${d.value.toLocaleString()} BTC</span></div>
+            <p style="font-size: 0.85rem; margin: 8px 0; color: #94a3b8; line-height: 1.3;">${description}</p>
+            <div class="tooltipRow" style="margin-top: 10px;"><span class="tooltipLabel">Type:</span> <span>${typeStr}</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">${holdingsStr}</span> <span style="font-weight:700; color:#f59e0b;">${d.value.toLocaleString()} BTC</span></div>
             <div class="tooltipRow"><span class="tooltipLabel">${shareStr}</span> <span>${d.percentOfTotal}%</span></div>
         `;
         this.tooltip.html(html).style('opacity', 1);
     }
 
     handleMouseMove(event) {
-        this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY - 20) + 'px');
+        this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY + 20) + 'px'); // Moved tooltip slightly below cursor to not overlap label
     }
 
     handleMouseOut(event) {

@@ -23,6 +23,16 @@ const i18n = {
         metricInstitutional1: "The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.",
         metricInstitutional2: "Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.",
 
+        // Corporate Descriptions (Treemap Tooltips)
+        corp_MicroStrategy: "A pioneer in corporate adoption, aggressively accumulating Bitcoin as a primary treasury reserve asset.",
+        corp_Tesla: "Major electric vehicle manufacturer that allocated a portion of its cash reserves to Bitcoin in 2021.",
+        corp_Coinbase: "One of the largest cryptocurrency exchanges, holding significant reserves for operational and investment purposes.",
+        corp_Marathon: "A leading Bitcoin mining company holding its mined assets rather than selling immediately.",
+        corp_Block: "Financial services and mobile payment company (formerly Square) focused on democratizing Bitcoin access.",
+        corp_Hut8: "North American digital asset mining pioneer with a long-term 'HODL' strategy on its mined reserves.",
+        corp_Riot: "Large-scale Bitcoin mining infrastructure company holding significant portions of its production.",
+        corp_Generic: "A publicly traded company allocating a portion of its treasury to Bitcoin as a hedge against fiat debasement.",
+
         // Section 3: Map of Power
         titleMap: "3. The Map of Power",
         descMap1: "The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.",
@@ -79,6 +89,16 @@ const i18n = {
         descInstitutional1: "A mesure que l'actif a muri pour devenir une reserve de valeur absolue reconnue, la dynamique a ete bouleversee. Les acteurs financiers majeurs et les entreprises cotees en bourse y ont fait leur entree.",
         metricInstitutional1: "Les noeuds ci-dessous visualisent des donnees en direct directement importees de l'API CoinGecko Public Treasury.",
         metricInstitutional2: "Survolez les bulles massives pour reveler les reserves institutionnelles exactes d'entites telles que MicroStrategy et Tesla. Observez comment le reseau chaotique de detail (retail) est englouti par d'immenses pools gravitationnels d'entreprises dont la surface symbolise strictement leurs reserves totales.",
+
+        // Corporate Descriptions (Treemap Tooltips)
+        corp_MicroStrategy: "Pionnier de l'adoption corporative, accumulant agressivement du Bitcoin comme actif de reserve de tresorerie principal.",
+        corp_Tesla: "Fabricant majeur de vehicules electriques ayant alloue une part de ses liquidites au Bitcoin en 2021.",
+        corp_Coinbase: "L'une des plus grandes plateformes d'echange, detenant d'importantes reserves a des fins operationnelles et d'investissement.",
+        corp_Marathon: "Leader du minage de Bitcoin conservant ses actifs mines plutot que de les vendre immediatement.",
+        corp_Block: "Societe de services financiers et paiements mobiles (ex-Square) focalisee sur la democratisation de l'acces au Bitcoin.",
+        corp_Hut8: "Pionnier nord-americain du minage d'actifs numeriques avec une strategie long terme de conservation ('HODL').",
+        corp_Riot: "Entreprise d'infrastructure de minage a grande echelle conservant des parts significatives de sa production.",
+        corp_Generic: "Entreprise cotee en bourse allouant une part de sa tresorerie au Bitcoin pour se couvrir contre l'inflation.",
 
         // Section 3: Map of Power
         titleMap: "3. La Carte du Pouvoir",

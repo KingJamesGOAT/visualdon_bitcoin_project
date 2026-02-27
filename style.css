@@ -552,3 +552,115 @@ blockquote {
   opacity: 1 !important;
   filter: brightness(1.2);
 }
+
+/* --- Narrative Pacing & Interactive Elements --- */
+
+/* Reading Progress Bar */
+.readingProgressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background-color: #38bdf8;
+  z-index: 10000;
+  transition: width 0.1s ease-out;
+}
+
+/* Chapter Cards */
+.chapterCard {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #06080d;
+  position: relative;
+  z-index: 20;
+  pointer-events: none;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.chapterCard h2 {
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* Knowledge Check Quiz */
+.knowledgeCheckContainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.knowledgeCheckContainer h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.quizOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quizButton {
+  padding: 0.8rem 1.2rem;
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #e2e8f0;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.quizButton:hover {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: #38bdf8;
+}
+
+.quizButton.isCorrect {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.quizButton.isWrong {
+  background-color: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.quizFeedback {
+  margin-top: 1rem;
+  font-weight: 600;
+  min-height: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.textSuccess {
+  color: #10b981;
+}
+
+/* Shake Animation for incorrect answer */
+@keyframes shakeAnimation {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shakeAnimation 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}

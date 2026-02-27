@@ -18,10 +18,23 @@ const i18n = {
         descCypherpunk2: "During this period, no single entity held enough absolute supply to unilaterally influence market dynamics. It was a true peer-to-peer lattice.",
 
         // Section 2: Institutional
+        chapterCard1: "The Corporate Awakening",
         titleInstitutional: "2. Institutional Accumulation (Live Data)",
         descInstitutional1: "As the asset matured into a recognized absolute store of value, the dynamic shattered. Major financial players and publicly traded corporations entered.",
         metricInstitutional1: "The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.",
         metricInstitutional2: "Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.",
+
+        // Quiz
+        quizQuestion: "Which sovereign nation holds the most known Bitcoin reserves?",
+        quizElSalvador: "El Salvador",
+        quizChina: "China",
+        quizUnitedStates: "United States",
+        quizUnitedKingdom: "United Kingdom",
+        quizFeedbackCorrect: "Correct. The United States holds the largest known reserve, primarily from law enforcement seizures.",
+        quizFeedbackWrong: "Incorrect. Try again.",
+
+        // Chapter Card 2
+        chapterCard2: "The Sovereign Escalation",
 
         // Corporate Descriptions (Treemap Tooltips)
         corp_MicroStrategy: "A pioneer in corporate adoption, aggressively accumulating Bitcoin as a primary treasury reserve asset.",
@@ -92,10 +105,23 @@ const i18n = {
         descCypherpunk2: "Au cours de cette periode, aucune entite unique ne detenait une offre absolue suffisante pour influencer unilateralement les dynamiques du marche. Il s'agissait d'un veritable maillage pair-a-pair.",
 
         // Section 2: Institutional
+        chapterCard1: "L'Eveil Corporatif",
         titleInstitutional: "2. Accumulation Institutionnelle (Donnees en Direct)",
         descInstitutional1: "A mesure que l'actif a muri pour devenir une reserve de valeur absolue reconnue, la dynamique a ete bouleversee. Les acteurs financiers majeurs et les entreprises cotees en bourse y ont fait leur entree.",
         metricInstitutional1: "Les noeuds ci-dessous visualisent des donnees en direct directement importees de l'API CoinGecko Public Treasury.",
         metricInstitutional2: "Survolez les bulles massives pour reveler les reserves institutionnelles exactes d'entites telles que MicroStrategy et Tesla. Observez comment le reseau chaotique de detail (retail) est englouti par d'immenses pools gravitationnels d'entreprises dont la surface symbolise strictement leurs reserves totales.",
+
+        // Quiz
+        quizQuestion: "Quelle nation souveraine detient les plus grandes reserves connues de Bitcoin ?",
+        quizElSalvador: "Le Salvador",
+        quizChina: "La Chine",
+        quizUnitedStates: "Les Etats Unis",
+        quizUnitedKingdom: "Le Royaume Uni",
+        quizFeedbackCorrect: "Correct. Les Etats Unis detiennent la plus grande reserve connue, principalement issue de saisies.",
+        quizFeedbackWrong: "Incorrect. Essayez encore.",
+
+        // Chapter Card 2
+        chapterCard2: "L'Escalade Souveraine",
 
         // Corporate Descriptions (Treemap Tooltips)
         corp_MicroStrategy: "Pionnier de l'adoption corporative, accumulant agressivement du Bitcoin comme actif de reserve de tresorerie principal.",

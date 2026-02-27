@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="pageTitle">Bitcoin: A Structural Analysis of Institutional Centralization</title>
+    <title data-i18n="pageTitle">Visual Don - The Bitcoin Ecosystem</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Reading Progress Bar -->
+    <div id="readingProgressBar" class="readingProgressBar"></div>
 
     <!-- Translation Switcher -->
     <button id="langSwitchBtn" class="langSwitchBtn">FR</button>
@@ -66,6 +69,11 @@
             </div>
         </section>
 
+        <!-- Chapter Card 1 -->
+        <div class="chapterCard">
+            <h2 data-i18n="chapterCard1">The Corporate Awakening</h2>
+        </div>
+
         <!-- Step 2: Institutional Takeover -->
         <section class="stepBlock" data-step="1">
             <div class="stepContent">
@@ -76,8 +84,25 @@
                 <p class="metricHighlight" data-i18n="metricInstitutional1">The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.</p>
                 
                 <p data-i18n="metricInstitutional2">Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.</p>
+                
+                <!-- Knowledge Check Quiz -->
+                <div class="knowledgeCheckContainer">
+                    <h3 data-i18n="quizQuestion">Which sovereign nation holds the most known Bitcoin reserves?</h3>
+                    <div class="quizOptions">
+                        <button class="quizButton" data-answer="elSalvador" data-i18n="quizElSalvador">El Salvador</button>
+                        <button class="quizButton" data-answer="china" data-i18n="quizChina">China</button>
+                        <button class="quizButton" data-answer="unitedStates" data-i18n="quizUnitedStates">United States</button>
+                        <button class="quizButton" data-answer="unitedKingdom" data-i18n="quizUnitedKingdom">United Kingdom</button>
+                    </div>
+                    <div id="quizFeedback" class="quizFeedback"></div>
+                </div>
             </div>
         </section>
+
+        <!-- Chapter Card 2 -->
+        <div class="chapterCard">
+            <h2 data-i18n="chapterCard2">The Sovereign Escalation</h2>
+        </div>
 
         <!-- Step 3: The Map of Power -->
         <section class="stepBlock" data-step="2">

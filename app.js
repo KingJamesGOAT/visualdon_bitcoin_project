@@ -35,6 +35,8 @@ class AppManager {
             this.initializeCharts();
             this.setupScrollObserver();
             this.setupLanguageSwitcher();
+            this.setupProgressBar();
+            this.setupKnowledgeCheck();
             
             // Trigger first step
             this.handleStepActivation(0);
@@ -162,6 +164,60 @@ class AppManager {
                 const targetElement = document.querySelector(`.stepBlock[data-step="${targetStep}"]`);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+    setupProgressBar() {
+        const progressBar = document.getElementById('readingProgressBar');
+        if (!progressBar) return;
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrollPercent + '%';
+        });
+    }
+
+    setupKnowledgeCheck() {
+        const buttons = document.querySelectorAll('.quizButton');
+        const feedback = document.getElementById('quizFeedback');
+        if (buttons.length === 0 || !feedback) return;
+        
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const answer = e.target.getAttribute('data-answer');
+                const lang = this.currentLang;
+                const t = window.i18n[lang];
+                
+                // Clear previous states
+                buttons.forEach(b => {
+                    b.classList.remove('isCorrect', 'isWrong', 'shake');
+                });
+                feedback.className = 'quizFeedback'; // reset specific classes
+                
+                if (answer === 'unitedStates') {
+                    e.target.classList.add('isCorrect');
+                    feedback.textContent = t.quizFeedbackCorrect || "Correct!";
+                    feedback.classList.add('textSuccess');
+                    
+                    // Auto scroll to next step after a short delay
+                    setTimeout(() => {
+                        const targetElement = document.querySelector('.stepBlock[data-step="2"]');
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 1200);
+                    
+                } else {
+                    e.target.classList.add('isWrong', 'shake');
+                    feedback.textContent = t.quizFeedbackWrong || "Incorrect.";
+                    
+                    setTimeout(() => {
+                        e.target.classList.remove('shake');
+                    }, 500);
                 }
             });
         });

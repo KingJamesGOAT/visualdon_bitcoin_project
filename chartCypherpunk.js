@@ -154,6 +154,40 @@ class ChartCypherpunk {
         this.nodeElements.attr('cx', d => d.x).attr('cy', d => d.y);
     }
 
+    cinematicCollapse() {
+        if (!this.simulation || !this.nodeElements) return;
+        
+        // Apply magnetic center force
+        this.simulation
+            .force('x', d3.forceX(this.width / 2).strength(0.3)) // Strong pull to center
+            .force('y', d3.forceY(this.height / 2).strength(0.3))
+            .force('collide', null) // Remove collision so they can collapse perfectly into a point
+            .alpha(1).restart();
+
+        // Animate radius down to 0 over 1000ms
+        this.nodeElements.transition()
+            .duration(1000)
+            .ease(d3.easeCubicInOut)
+            .attr('r', 0);
+    }
+
+    cinematicExplode() {
+        if (!this.simulation || !this.nodeElements) return;
+
+        // Restore normal forces
+        this.simulation
+            .force('x', d3.forceX(this.width / 2).strength(0.06))
+            .force('y', d3.forceY(this.height / 2).strength(0.06))
+            .force('collide', d3.forceCollide().radius(d => d.radius + 10).iterations(4))
+            .alpha(1).restart(); // High alpha causes "explosion" back out
+
+        // Animate radius back to original scale
+        this.nodeElements.transition()
+            .duration(1000)
+            .ease(d3.easeBackOut.overshoot(1.5)) // Adding a slight bounce for explosion effect
+            .attr('r', d => d.type === 'corporate' ? 0 : d.radius);
+    }
+
     renderScattered() {
         if (this.isConsolidated) {
             // Remove corporate nodes

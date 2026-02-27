@@ -1,5 +1,5 @@
 class ChartInstitutional {
-    // Independent physics engine for the Institutional chart layer
+    // Independent D3 Treemap engine for the Institutional chart layer
     constructor(containerSelector, liveApiData, globalTooltip) {
         this.containerSelector = containerSelector;
         this.container = d3.select(containerSelector);
@@ -9,9 +9,6 @@ class ChartInstitutional {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
         this.svg = null;
-        this.simulation = null;
-        this.nodes = [];
-        this.nodeElements = null;
         this.isRendered = false;
 
         window.addEventListener('resize', () => {
@@ -20,10 +17,7 @@ class ChartInstitutional {
             this.height = window.innerHeight;
             if (this.svg) {
                 this.svg.attr('width', this.width).attr('height', this.height);
-                if (this.simulation) {
-                    this.simulation.force('center', d3.forceCenter(this.width / 2, this.height / 2));
-                    this.simulation.alpha(0.3).restart();
-                }
+                this.render(); // Re-compute layout on resize
             }
         });
     }
@@ -34,7 +28,9 @@ class ChartInstitutional {
         
         this.svg = this.container.append('svg')
             .attr('width', this.width)
-            .attr('height', this.height);
+            .attr('height', this.height)
+            .style('opacity', 0) // Hide initially for animation from app.js
+            .style('transform', 'scale(0.8)'); // Initial scale for morph illusion
             
         this.isRendered = true;
     }
@@ -42,104 +38,76 @@ class ChartInstitutional {
     render() {
         if (!this.svg) this.init();
 
-        // V3 Rule: The circle area must strictly map to their holdings (sqrt scale)
-        const maxCorpVal = d3.max(this.corporateData, d => d.total_holdings || d.value);
-        const radiusScale = d3.scaleSqrt()
-            .domain([0, maxCorpVal])
-            .range([0, 150]); // Massive radius
-
         const totalSupply = 21000000;
         
-        // Reset nodes for clean entry
-        this.nodes = [];
-
-        // Introduce corporate nodes from API
-        this.corporateData.forEach((cn, i) => {
-            const holding = cn.total_holdings || cn.value;
-            const pct = ((holding / totalSupply) * 100).toFixed(4);
-            const r = radiusScale(holding) || 10;
-            
-            this.nodes.push({
-                id: cn.name,
+        // Prepare hierarchical data for d3.treemap
+        const treemapData = {
+            name: "root",
+            children: this.corporateData.map(cn => ({
                 name: cn.name,
-                type: 'corporate',
-                value: holding,
-                percentOfTotal: pct,
-                radius: r,
-                // Start them slightly scattered but near center for dramatic entrance
-                x: this.width / 2 + (Math.random() - 0.5) * 400,
-                y: this.height / 2 + (Math.random() - 0.5) * 400
-            });
-        });
+                value: cn.total_holdings || cn.value,
+                percentOfTotal: (((cn.total_holdings || cn.value) / totalSupply) * 100).toFixed(4)
+            }))
+        };
 
-        this.updateNodes();
+        const hierarchy = d3.hierarchy(treemapData)
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value);
 
-        // New Independent Simulation
-        this.simulation = d3.forceSimulation(this.nodes)
-            .force('charge', d3.forceManyBody().strength(-15))
-            .force('collide', d3.forceCollide().radius(d => d.radius + 2).iterations(5))
-            .force('x', d3.forceX(this.width / 2).strength(0.08))
-            .force('y', d3.forceY(this.height / 2).strength(0.08))
-            .on('tick', () => {
-                this.nodeElements
-                    .attr('cx', d => d.x)
-                    .attr('cy', d => d.y);
-                    
-                this.svg.selectAll('.corpLabel')
-                    .attr('x', d => d.x)
-                    .attr('y', d => d.y);
-            });
-            
-        // Labels fade in slightly delayed for dramatic effect
-        this.svg.selectAll('.corpLabel')
-            .transition().delay(800).duration(2000)
-            .style('opacity', 0.85);
-    }
+        // Center the treemap in the screen with some padding
+        const padX = this.width * 0.1;
+        const padY = this.height * 0.1;
 
-    updateNodes() {
-        this.nodeElements = this.svg.selectAll('.nodeCorporate')
-            .data(this.nodes, d => d.id);
-            
-        this.nodeElements.exit()
-            .transition().duration(800)
-            .attr('r', 0).remove();
-        
-        const enterNodes = this.nodeElements.enter().append('circle')
-            .attr('class', 'nodeCorporate')
-            .attr('r', 0) 
-            .attr('cx', d => d.x)
-            .attr('cy', d => d.y)
-            .on('mouseover', (event, d) => this.handleMouseOver(event, d))
+        const treemapLayout = d3.treemap()
+            .size([this.width - 2 * padX, this.height - 2 * padY])
+            .paddingInner(4) // Clean modern spacing
+            .paddingOuter(0)
+            .round(true);
+
+        const root = treemapLayout(hierarchy);
+
+        // Create a central group to hold the blocks
+        let mainGroup = this.svg.select('.treemap-group');
+        if (mainGroup.empty()) {
+            mainGroup = this.svg.append('g')
+                .attr('class', 'treemap-group')
+                .attr('transform', `translate(${padX}, ${padY})`);
+        } else {
+            mainGroup.attr('transform', `translate(${padX}, ${padY})`);
+        }
+
+        // Bind data to tiles
+        const tiles = mainGroup.selectAll('.treemap-tile')
+            .data(root.leaves(), d => d.data.name);
+
+        tiles.exit().remove();
+
+        const enterTiles = tiles.enter()
+            .append('rect')
+            .attr('class', 'treemap-tile')
+            .style('fill', '#f59e0b') // Corporate amber color
+            .style('stroke', '#ffffff')
+            .style('stroke-width', '1px')
+            .style('opacity', 0.85)
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => this.handleMouseOver(event, d.data))
             .on('mousemove', (event) => this.handleMouseMove(event))
-            .on('mouseout', (event, d) => this.handleMouseOut(event, d));
-            
-        // Add text labels bound to the entered nodes
-        const enterLabels = this.svg.selectAll('.corpLabel')
-            .data(this.nodes, d => d.id)
-            .enter().append('text')
-            .attr('class', 'corpLabel')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', '#0f172a')
-            .style('font-weight', '900')
-            .style('font-size', d => Math.max(10, d.radius/4) + 'px')
-            .style('pointer-events', 'none')
-            .style('opacity', 0)
-            .text(d => d.name);
-            
-        // Transition size growth
-        enterNodes
-            .transition().duration(1500).ease(d3.easeCubicOut)
-            .attr('r', d => d.radius);
+            .on('mouseout', (event, d) => this.handleMouseOut(event));
 
-        this.nodeElements = enterNodes.merge(this.nodeElements);
+        // Update positions (both enter and update)
+        enterTiles.merge(tiles)
+            .transition().duration(800).ease(d3.easeCubicOut)
+            .attr('x', d => d.x0)
+            .attr('y', d => d.y0)
+            .attr('width', d => d.x1 - d.x0)
+            .attr('height', d => d.y1 - d.y0);
     }
 
     handleMouseOver(event, d) {
-        d3.select(event.currentTarget).transition().duration(300).style('stroke-width', '4px').style('fill', '#fde68a');
+        d3.select(event.currentTarget).transition().duration(200).style('fill', '#fde68a').style('stroke-width', '2px');
         
         // Dim others
-        this.svg.selectAll('.nodeCorporate').filter(n => n.id !== d.id).style('opacity', 0.2);
+        this.svg.selectAll('.treemap-tile').filter(function() { return this !== event.currentTarget; }).style('opacity', 0.4);
         
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
         const typeStr = lang === 'fr' ? 'Tresorerie Publique' : 'Public Treasury';
@@ -159,9 +127,9 @@ class ChartInstitutional {
         this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY - 20) + 'px');
     }
 
-    handleMouseOut(event, d) {
-        d3.select(event.currentTarget).transition().duration(500).style('stroke-width', '1.5px').style('fill', '#f59e0b');
-        this.svg.selectAll('.nodeCorporate').style('opacity', 0.85);
+    handleMouseOut(event) {
+        d3.select(event.currentTarget).transition().duration(400).style('fill', '#f59e0b').style('stroke-width', '1px');
+        this.svg.selectAll('.treemap-tile').style('opacity', 0.85);
         this.tooltip.style('opacity', 0);
     }
 }

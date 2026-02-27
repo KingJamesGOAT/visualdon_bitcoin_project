@@ -157,6 +157,7 @@ class ChartCypherpunk {
     }
 
     handleMouseOver(event, d) {
+        const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
         if (d.type === 'retail') {
             d3.select(event.currentTarget).transition().duration(300).attr('r', d.radius * 2.5).style('fill', '#ffffff');
             const html = `

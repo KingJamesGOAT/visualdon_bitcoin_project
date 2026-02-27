@@ -142,11 +142,21 @@ class ChartTimeline {
                 .attr('x2', px)
                 .style('opacity', 1);
                 
+            const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+            
+            // Format labels directly since this graphic doesn't have explicit categories in i18n, but we could use generic "Retail" and "Institutional" words if we want.
+            const retailWord = lang === 'fr' ? 'Volume Particuliers' : 'Retail Volume';
+            const instWord = lang === 'fr' ? 'Volume Institutionnel' : 'Institutional Volume';
+            const dataExtractedWord = lang === 'fr' ? 'Point de donnee extrait' : 'Data Point Extracted';
+            
+            // For the date we can format it according to the selected language
+            const locale = lang === 'fr' ? 'fr-FR' : 'en-US';
+
             const html = `
-                <div class="tooltipHeader">${d.date.toLocaleDateString(undefined, {year: 'numeric', month: 'short'})}</div>
-                <div class="tooltipRow"><span class="tooltipLabel" style="color:#38bdf8">Retail Volume:</span> <span>${d.retail}%</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel" style="color:#f59e0b">Institutional Volume:</span> <span>${d.institutional}%</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel" style="font-size:10px; padding-top:4px">Data Point Extracted</span></div>
+                <div class="tooltipHeader">${d.date.toLocaleDateString(locale, {year: 'numeric', month: 'short'})}</div>
+                <div class="tooltipRow"><span class="tooltipLabel" style="color:#38bdf8">${retailWord}:</span> <span>${d.retail}%</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel" style="color:#f59e0b">${instWord}:</span> <span>${d.institutional}%</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel" style="font-size:10px; padding-top:4px">${dataExtractedWord}</span></div>
             `;
                 
             this.tooltip.html(html).style('opacity', 1)

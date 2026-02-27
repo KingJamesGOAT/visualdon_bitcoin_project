@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin: A Structural Analysis of Institutional Centralization</title>
+    <title data-i18n="pageTitle">Bitcoin: A Structural Analysis of Institutional Centralization</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Translation Switcher -->
+    <button id="langSwitchBtn" class="langSwitchBtn">FR</button>
 
     <!-- Fixed Graphic Container for all visual elements -->
     <div id="graphicContainer" class="graphicContainer">
@@ -27,11 +30,11 @@
     <!-- Floating Table of Contents -->
     <nav class="floatingToc">
         <ul class="tocList">
-            <li class="tocItem isActive" data-target="0">1. Cypherpunk</li>
-            <li class="tocItem" data-target="1">2. Institutional</li>
-            <li class="tocItem" data-target="2">3. Map of Power</li>
-            <li class="tocItem" data-target="3">4. Wealth Gap</li>
-            <li class="tocItem" data-target="4">5. Distribution</li>
+            <li class="tocItem isActive" data-target="0" data-i18n="tocCypherpunk">1. Cypherpunk</li>
+            <li class="tocItem" data-target="1" data-i18n="tocInstitutional">2. Institutional</li>
+            <li class="tocItem" data-target="2" data-i18n="tocMap">3. Map of Power</li>
+            <li class="tocItem" data-target="3" data-i18n="tocWealthGap">4. Wealth Gap</li>
+            <li class="tocItem" data-target="4" data-i18n="tocDistribution">5. Distribution</li>
         </ul>
     </nav>
 
@@ -41,76 +44,76 @@
         <!-- Step 1: The Cypherpunk Network -->
         <section class="stepBlock" data-step="0">
             <div class="stepContent">
-                <h2>1. The Cypherpunk Network</h2>
+                <h2 data-i18n="titleCypherpunk">1. The Cypherpunk Network</h2>
                 
                 <blockquote>
-                    <p>"I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party." <br>— Satoshi Nakamoto, 2008</p>
+                    <p data-i18n="quoteCypherpunk">"I've been working on a new electronic cash system that's fully peer-to-peer, with no trusted third party." <br>— Satoshi Nakamoto, 2008</p>
                 </blockquote>
                 
-                <p>The genesis era of the Bitcoin protocol was characterized by extreme decentralization. The network was secured by an anarchic collective of early cryptography enthusiasts, gamers, and libertarians mining from personal computers.</p>
+                <p data-i18n="descCypherpunk1">The genesis era of the Bitcoin protocol was characterized by extreme decentralization. The network was secured by an anarchic collective of early cryptography enthusiasts, gamers, and libertarians mining from personal computers.</p>
                 
-                <p class="metricHighlight">Hover over the nodes to explore simulated early wallet addresses from 2009-2012.</p>
+                <p class="metricHighlight" data-i18n="metricCypherpunk">Hover over the nodes to explore simulated early wallet addresses from 2009-2012.</p>
                 
-                <p>During this period, no single entity held enough absolute supply to unilaterally influence market dynamics. It was a true peer-to-peer lattice.</p>
+                <p data-i18n="descCypherpunk2">During this period, no single entity held enough absolute supply to unilaterally influence market dynamics. It was a true peer-to-peer lattice.</p>
             </div>
         </section>
 
         <!-- Step 2: Institutional Takeover -->
         <section class="stepBlock" data-step="1">
             <div class="stepContent">
-                <h2>2. Institutional Accumulation (Live Data)</h2>
+                <h2 data-i18n="titleInstitutional">2. Institutional Accumulation (Live Data)</h2>
                 
-                <p>As the asset matured into a recognized absolute store of value, the dynamic shattered. Major financial players and publicly traded corporations entered.</p>
+                <p data-i18n="descInstitutional1">As the asset matured into a recognized absolute store of value, the dynamic shattered. Major financial players and publicly traded corporations entered.</p>
                 
-                <p class="metricHighlight">The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.</p>
+                <p class="metricHighlight" data-i18n="metricInstitutional1">The nodes below are visualizing live data directly from the CoinGecko Public Treasury API.</p>
                 
-                <p>Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.</p>
+                <p data-i18n="metricInstitutional2">Hover over the massive bubbles to reveal the exact reserves of entities like MicroStrategy and Tesla. Notice how the chaotic retail web is swallowed by gravitational massive corporate pools whose area maps strictly to their total reserves.</p>
             </div>
         </section>
 
         <!-- Step 3: The Map of Power -->
         <section class="stepBlock" data-step="2">
             <div class="stepContent">
-                <h2>3. The Map of Power</h2>
+                <h2 data-i18n="titleMap">3. The Map of Power</h2>
                 
-                <p>The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.</p>
+                <p data-i18n="descMap1">The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.</p>
                 
                 <blockquote>
-                    <p>Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.</p>
+                    <p data-i18n="quoteMap">Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, often through aggressive seizures or structural national adoption laws.</p>
                 </blockquote>
                 
-                <p class="metricHighlight">Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.</p>
+                <p class="metricHighlight" data-i18n="metricMap">Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.</p>
             </div>
         </section>
 
         <!-- Step 4: The Wealth Timeline -->
         <section class="stepBlock" data-step="3">
             <div class="stepContent">
-                <h2>4. The Wealth Gap Timeline</h2>
+                <h2 data-i18n="titleTimeline">4. The Wealth Gap Timeline</h2>
                 
-                <p>To truly understand the structural shift, we must view the long-term historical trend. This dense dataset tracks the percentage of supply owned by the original "Retail" cohorts versus "Institutional/Whale" entities over time.</p>
+                <p data-i18n="descTimeline1">To truly understand the structural shift, we must view the long-term historical trend. This dense dataset tracks the percentage of supply owned by the original "Retail" cohorts versus "Institutional/Whale" entities over time.</p>
                 
-                <p class="metricHighlight">Move your cursor across the chart. The interactive bisector will follow your movement, extracting precise chronological volume metrics.</p>
+                <p class="metricHighlight" data-i18n="metricTimeline1">Move your cursor across the chart. The interactive bisector will follow your movement, extracting precise chronological volume metrics.</p>
                 
-                <p>The rapid narrowing of the blue retail volume showcases the inescapable trajectory of capital concentration in finite-supply systems.</p>
+                <p data-i18n="descTimeline2">The rapid narrowing of the blue retail volume showcases the inescapable trajectory of capital concentration in finite-supply systems.</p>
             </div>
         </section>
 
         <!-- Step 5: The Modern Distribution -->
         <section class="stepBlock" data-step="4">
             <div class="stepContent">
-                <h2>5. The Modern Distribution</h2>
+                <h2 data-i18n="titleDistribution">5. The Modern Distribution</h2>
                 
-                <p>Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.</p>
+                <p data-i18n="descDistribution1">Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.</p>
                 
-                <p>To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.</p>
+                <p data-i18n="descDistribution2">To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.</p>
                 
                 <div class="interactiveControls">
-                    <button id="btnTransformDonut" class="primaryBtn">Transform to Donut Chart</button>
-                    <button id="btnTransformBar" class="primaryBtn" style="display:none;">Revert to Bar Chart</button>
+                    <button id="btnTransformDonut" class="primaryBtn" data-i18n="btnTransformDonut">Transform to Donut Chart</button>
+                    <button id="btnTransformBar" class="primaryBtn" style="display:none;" data-i18n="btnTransformBar">Revert to Bar Chart</button>
                 </div>
                 
-                <p class="metricHighlight">Interact with the charts directly. Use the button above to observe a smooth structural transformation from bars to arc vectors. All elements maintain hover state interactivity.</p>
+                <p class="metricHighlight" data-i18n="metricDistribution">Interact with the charts directly. Use the button above to observe a smooth structural transformation from bars to arc vectors. All elements maintain hover state interactivity.</p>
             </div>
         </section>
         
@@ -122,6 +125,9 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     
+    <!-- Traductions -->
+    <script src="translations.js"></script>
+
     <!-- Modular Application Logic -->
     <script src="chartCypherpunk.js"></script>
     <script src="chartInstitutional.js"></script>

@@ -3,6 +3,7 @@ class AppManager {
         this.currentStep = -1;
         this.data = null;
         this.liveApiData = null; // Storing CoinGecko Treasury Data
+        this.currentLang = 'en'; // Initialisation de la langue par defaut
         
         // Chart instances
         this.cypherpunkChart = null;
@@ -33,6 +34,7 @@ class AppManager {
             // 3. Setup Vis
             this.initializeCharts();
             this.setupScrollObserver();
+            this.setupLanguageSwitcher();
             
             // Trigger first step
             this.handleStepActivation(0);
@@ -63,6 +65,58 @@ class AppManager {
     
     // La fonction de generation de donnees aleatoires a ete supprimee pour des raisons d ethique
     // Les donnees proviennent d un ensemble json massif et realiste
+
+    setupLanguageSwitcher() {
+        const btn = document.getElementById('langSwitchBtn');
+        if (!btn) return;
+        
+        btn.addEventListener('click', () => {
+            this.switchLanguage();
+        });
+        
+        // Initialisation du texte par defaut au cas ou
+        this.updateDOMTexts();
+    }
+
+    switchLanguage() {
+        // 1. Basculer la propriete
+        this.currentLang = this.currentLang === 'en' ? 'fr' : 'en';
+        
+        // 2. Mettre a jour le bouton (affiche la langue opposee)
+        const btn = document.getElementById('langSwitchBtn');
+        if (btn) {
+            btn.textContent = this.currentLang === 'en' ? 'FR' : 'EN';
+        }
+        
+        // 3. Parcourir et injecter les nouveaux textes via l attribut data-i18n
+        this.updateDOMTexts();
+        
+        // 4. Mettre a jour les graphiques (legendes et labels internes si necessaire)
+        this.updateChartsLanguage();
+    }
+
+    updateDOMTexts() {
+        const dict = i18n[this.currentLang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) {
+                // Pour supporter les balises HTML dans certaines traductions (comme les citations)
+                if (key === 'quoteCypherpunk') {
+                     el.innerHTML = dict[key];
+                } else {
+                     el.textContent = dict[key];
+                }
+            }
+        });
+    }
+
+    updateChartsLanguage() {
+        // Reload graphic distributions to force label updates
+        // The D3 transitions will handle changes smoothly
+        if (this.currentStep === 4 && this.distributionChart) {
+            this.distributionChart.render();
+        }
+    }
 
     initializeCharts() {
         const tooltip = d3.select('#globalTooltip');

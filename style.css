@@ -1,334 +1,380 @@
 html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 /* Base and Typography */
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #06080d; /* Elite financial slate */
-    color: #e2e8f0;
-    font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
-    line-height: 1.7;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #06080d; /* Elite financial slate */
+  color: #e2e8f0;
+  font-family:
+    "Inter",
+    "SF Pro Display",
+    -apple-system,
+    sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    font-weight: 700;
-    color: #ffffff;
-    margin-top: 0;
-    letter-spacing: -0.02em;
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;
+  letter-spacing: -0.02em;
 }
 
 blockquote {
-    border-left: 4px solid #38bdf8;
-    margin: 1.5rem 0;
-    padding-left: 1rem;
-    font-style: italic;
-    color: #94a3b8;
+  border-left: 4px solid #38bdf8;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #94a3b8;
 }
 
 .metricHighlight {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: 1px solid rgba(56, 189, 248, 0.2);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 /* Fixed Background Graphic Container */
 .graphicContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Visualization Layers */
 .vizLayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background-color: #06080d; /* Solid background prevents SVG superposing artifacts */
-    z-index: 0;
-    transition: opacity 0.5s ease-out; /* Slightly faster fade out of inactive */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: #06080d; /* Solid background prevents SVG superposing artifacts */
+  z-index: 0;
+  transition: opacity 0.5s ease-out; /* Slightly faster fade out of inactive */
 }
 
 .vizLayer.isActive {
-    opacity: 1;
-    z-index: 5; /* Active layer asserts top hierarchy */
-    pointer-events: auto;
-    transition: opacity 0.8s ease-in; /* Slower fade in */
+  opacity: 1;
+  z-index: 5; /* Active layer asserts top hierarchy */
+  pointer-events: auto;
+  transition: opacity 0.8s ease-in; /* Slower fade in */
 }
 
 /* Global Glass Tooltip */
 .globalTooltip {
-    position: absolute;
-    background: rgba(15, 23, 42, 0.85); /* Slate 900 */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(56, 189, 248, 0.4);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
-    color: #f8fafc;
-    padding: 16px;
-    border-radius: 8px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.25s ease-out;
-    z-index: 9999;
-    font-size: 14px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    min-width: 250px;
+  position: absolute;
+  background: rgba(15, 23, 42, 0.85); /* Slate 900 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.5),
+    0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  color: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+  z-index: 9999;
+  font-size: 14px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  min-width: 250px;
 }
 .tooltipHeader {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: #38bdf8;
-    margin-bottom: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 4px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #38bdf8;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
 }
 .tooltipRow {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
 }
 .tooltipLabel {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 /* Buttons */
 .interactiveControls {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .primaryBtn {
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid #38bdf8;
-    color: #38bdf8;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-family: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .primaryBtn:hover {
-    background: #38bdf8;
-    color: #0f172a;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  background: #38bdf8;
+  color: #0f172a;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Language Switcher Button */
+.langSwitchBtn {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.langSwitchBtn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Content Element Translations Smoothing */
+[data-i18n] {
+  transition: opacity 0.3s ease;
 }
 
 /* Leaflet Overrides */
 #mapContainer {
-    background: transparent;
+  background: transparent;
 }
 .leaflet-container {
-    background: #06080d !important;
+  background: #06080d !important;
 }
 .leaflet-control-zoom {
-    display: none;
+  display: none;
 }
 
 /* Foreground Narrative Container */
 .scrollContainer {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    /* Use 100% max-width instead of 1400px centralized to push to very left edge */
-    max-width: 100%;
-    margin: 0;
-    pointer-events: none; 
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  /* Use 100% max-width instead of 1400px centralized to push to very left edge */
+  max-width: 100%;
+  margin: 0;
+  pointer-events: none;
 }
 
 /* Floating TOC */
 .floatingToc {
-    position: fixed;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    border-radius: 8px;
-    padding: 1.5rem 1rem;
-    pointer-events: auto;
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  pointer-events: auto;
 }
 
 .tocList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .tocItem {
-    cursor: pointer;
-    font-size: 0.85rem;
-    color: #94a3b8;
-    position: relative;
-    padding-right: 1.5rem;
-    text-align: right;
-    transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  position: relative;
+  padding-right: 1.5rem;
+  text-align: right;
+  transition: all 0.3s ease;
 }
 
 .tocItem::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #334155;
-    transition: all 0.3s ease;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #334155;
+  transition: all 0.3s ease;
 }
 
 .tocItem:hover {
-    color: #38bdf8;
+  color: #38bdf8;
 }
 .tocItem:hover::after {
-    background: #38bdf8;
-    box-shadow: 0 0 10px #38bdf8;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #38bdf8;
 }
 
 .tocItem.isActive {
-    color: #ffffff;
-    font-weight: 600;
+  color: #ffffff;
+  font-weight: 600;
 }
 .tocItem.isActive::after {
-    background: #f59e0b; /* highlight dot */
-    box-shadow: 0 0 10px #f59e0b;
-    width: 12px;
-    height: 12px;
+  background: #f59e0b; /* highlight dot */
+  box-shadow: 0 0 10px #f59e0b;
+  width: 12px;
+  height: 12px;
 }
 
 /* Narrative Text Blocks */
 .stepBlock {
-    height: 100vh; /* Pacing and perfect snap */
-    display: flex;
-    align-items: center;
-    padding: 0 1vw; /* Minimizing padding to stick to left border */
-    pointer-events: none; 
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
+  height: 100vh; /* Pacing and perfect snap */
+  display: flex;
+  align-items: center;
+  padding: 0 1vw; /* Minimizing padding to stick to left border */
+  pointer-events: none;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .stepContent {
-    background-color: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(148, 163, 184, 0.15);
-    border-radius: 12px;
-    padding: 2.5rem; /* Slightly smaller padding */
-    max-width: 380px; /* Reducing width so it takes less horizontal space */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    margin-left: 2vw; /* Anchoring further left */
-    
-    opacity: 0.15;
-    transform: translateY(40px) scale(0.98);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: auto;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  border-radius: 12px;
+  padding: 2.5rem; /* Slightly smaller padding */
+  max-width: 380px; /* Reducing width so it takes less horizontal space */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  margin-left: 2vw; /* Anchoring further left */
+
+  opacity: 0.15;
+  transform: translateY(40px) scale(0.98);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
 }
 
 .stepBlock.isActive .stepContent {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    border-color: rgba(56, 189, 248, 0.4);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  border-color: rgba(56, 189, 248, 0.4);
 }
-
-
 
 /* D3 General Styling */
 .axisText {
-    fill: #94a3b8;
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
+  fill: #94a3b8;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
 }
 .axisLine {
-    stroke: #334155;
-    stroke-width: 1px;
+  stroke: #334155;
+  stroke-width: 1px;
 }
 .domain {
-    stroke: #334155;
+  stroke: #334155;
 }
 
 /* Graphic 1 & 2 Styles */
 .nodeRetail {
-    fill: #38bdf8;
-    opacity: 0.7;
-    transition: opacity 0.3s;
-    cursor: pointer;
+  fill: #38bdf8;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  cursor: pointer;
 }
 .nodeCorporate {
-    fill: #f59e0b;
-    stroke: #ffffff;
-    stroke-width: 1.5px;
-    opacity: 0.85;
-    transition: opacity 0.4s;
-    cursor: pointer;
+  fill: #f59e0b;
+  stroke: #ffffff;
+  stroke-width: 1.5px;
+  opacity: 0.85;
+  transition: opacity 0.4s;
+  cursor: pointer;
 }
 
 /* Graphic 3 Geo Map */
 .geoCircle {
-    fill: #ef4444; 
-    fill-opacity: 0.7;
-    stroke: #ffffff;
-    stroke-width: 1.5px;
-    cursor: pointer;
-    transition: stroke-width 0.2s, fill-opacity 0.2s;
+  fill: #ef4444;
+  fill-opacity: 0.7;
+  stroke: #ffffff;
+  stroke-width: 1.5px;
+  cursor: pointer;
+  transition:
+    stroke-width 0.2s,
+    fill-opacity 0.2s;
 }
 .geoCircle:hover {
-    stroke-width: 3px;
-    fill-opacity: 0.9;
+  stroke-width: 3px;
+  fill-opacity: 0.9;
 }
 
 /* Graphic 4 Area Chart */
 .areaRetail {
-    fill: url(#gradientRetail);
-    opacity: 0.9;
+  fill: url(#gradientRetail);
+  opacity: 0.9;
 }
 .areaInst {
-    fill: url(#gradientInst);
-    opacity: 0.9;
+  fill: url(#gradientInst);
+  opacity: 0.9;
 }
 .timelineLine {
-    fill: none;
-    stroke-width: 2px;
+  fill: none;
+  stroke-width: 2px;
 }
-.strokeRetail { stroke: #38bdf8; }
-.strokeInst { stroke: #f59e0b; }
+.strokeRetail {
+  stroke: #38bdf8;
+}
+.strokeInst {
+  stroke: #f59e0b;
+}
 
 .bisectorLine {
-    stroke: #f8fafc;
-    stroke-width: 1.5px;
-    stroke-dasharray: 4,4;
-    pointer-events: none;
+  stroke: #f8fafc;
+  stroke-width: 1.5px;
+  stroke-dasharray: 4, 4;
+  pointer-events: none;
 }
 
 /* Graphic 5 Distribution */
 .distributionElement {
-    opacity: 0.9;
-    cursor: pointer;
-    transition: opacity 0.3s, filter 0.3s;
+  opacity: 0.9;
+  cursor: pointer;
+  transition:
+    opacity 0.3s,
+    filter 0.3s;
 }
 .distributionElement:hover {
-    opacity: 1 !important;
-    filter: brightness(1.2);
+  opacity: 1 !important;
+  filter: brightness(1.2);
 }

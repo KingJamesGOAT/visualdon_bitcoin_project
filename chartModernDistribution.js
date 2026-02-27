@@ -163,6 +163,9 @@ class ChartModernDistribution {
 
         const pct = ((item.holdings / 21000000) * 100).toFixed(2);
 
+        const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+        const t = i18n[lang];
+
         const html = `
             <div class="tooltipHeader" style="color:${item.color}">${item.category}</div>
             <div class="tooltipRow"><span class="tooltipLabel">Holdings:</span> <span>${item.holdings.toLocaleString()} BTC</span></div>

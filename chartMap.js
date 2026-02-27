@@ -82,9 +82,12 @@ class MapChart {
                 
                 if (countryData && countryData.btc > 0) {
                     const exactVolumeText = countryData.btc.toLocaleString();
+                    const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+                    const t = i18n[lang];
+                    
                     const popupContent = `
-                        <div class="tooltipHeader">Sovereign State: ${countryData.country}</div>
-                        <div class="tooltipRow"><span class="tooltipLabel">Reserves:</span> <span style="color:#ef4444">${exactVolumeText} BTC</span></div>
+                        <div class="tooltipHeader">${t.tooltipSovereignState}: ${countryData.country}</div>
+                        <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipReserves}:</span> <span style="color:#ef4444">${exactVolumeText} BTC</span></div>
                         <div style="color:#cbd5e1; padding: 5px 0 0 0; font-size: 12px;">${countryData.details}</div>
                     `;
                     layer.bindPopup(popupContent, { closeButton: false });

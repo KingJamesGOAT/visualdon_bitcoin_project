@@ -69,6 +69,8 @@ class ChartCypherpunk {
         // Task 3: Setup strict Ctrl-driven zoom
         this.zoom = d3.zoom()
             .scaleExtent([0.5, 5])
+            // Reduce zoom speed multiplier to make zooming much more gradual
+            .wheelDelta((event) => -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.0005))
             .filter((event) => {
                 // Return true if it's not a wheel event, meaning panning is always allowed
                 if (event.type !== 'wheel') return true;
@@ -103,6 +105,13 @@ class ChartCypherpunk {
             });
             
         this.svg.call(this.zoom);
+
+        // Native event listener to block Chrome/browser from zooming the entire page
+        this.svg.node().addEventListener('wheel', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
 
         // Task 1: Inner group holds nodes (replaces direct svg append)
         this.zoomGroup = this.svg.append('g').attr('class', 'cypherpunk-zoom-group');

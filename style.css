@@ -59,8 +59,9 @@ blockquote {
 /* Floating Date UI (Cypherpunk) */
 .floatingDate {
   position: absolute;
-  bottom: 2rem;
-  left: 2rem;
+  top: 30%;
+  right: 2rem;
+  transform: translateY(-100%);
   font-family: "JetBrains Mono", "Fira Code", monospace;
   font-size: 2.5vw;
   font-weight: 700;

@@ -312,6 +312,13 @@ class AppManager {
                 // Pure black background - fade out all visualizations
                 this.toggleLayer('none');
                 
+                // Explicitly clear cypherpunk inline styles set in case 0
+                const cypherLayerInterlude1 = document.getElementById('cypherpunkContainer');
+                if (cypherLayerInterlude1) {
+                    cypherLayerInterlude1.style.opacity = "0";
+                    cypherLayerInterlude1.style.pointerEvents = "none";
+                }
+                
                 // Hide floating date 
                 const dateEl1 = document.getElementById('floatingDate');
                 if (dateEl1) dateEl1.classList.remove('isVisible');

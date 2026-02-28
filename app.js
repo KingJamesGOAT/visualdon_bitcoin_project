@@ -308,7 +308,17 @@ class AppManager {
                 break;
                 
             case 1:
-                // When 1 is active: Immediately hide Cypherpunk layer, show Treemap
+                // Interlude 1: The Death of Innocence
+                // Pure black background - fade out all visualizations
+                this.toggleLayer('none');
+                
+                // Hide floating date 
+                const dateEl1 = document.getElementById('floatingDate');
+                if (dateEl1) dateEl1.classList.remove('isVisible');
+                break;
+
+            case 2:
+                // Institutional Accumulation
                 const cypherLayerHide = document.getElementById('cypherpunkContainer');
                 if (cypherLayerHide) {
                     cypherLayerHide.style.pointerEvents = "none";
@@ -318,11 +328,9 @@ class AppManager {
                     }
                 }
                 
-                // Hide floating date
                 const dateEl2 = document.getElementById('floatingDate');
                 if (dateEl2) dateEl2.classList.remove('isVisible');
                 
-                // Hide Map Leaderboard
                 const lb1 = document.getElementById('countryLeaderboard');
                 if (lb1) lb1.classList.remove('isVisible');
                 
@@ -333,10 +341,14 @@ class AppManager {
                     this.institutionalChart.render();
                 }
                 break;
-            case 2:
-                // Standalone Quiz Step - keeping the map active in background or just leaving Institutional
-                break;
+                
             case 3:
+                // Standalone Quiz Step
+                this.toggleLayer('institutionalContainer'); // Keep background
+                break;
+                
+            case 4:
+                // Map of Power
                 this.toggleLayer('mapContainer');
                 if (this.globalMap) {
                     setTimeout(() => this.globalMap.map.invalidateSize(), 800);
@@ -345,19 +357,31 @@ class AppManager {
                 const lb2 = document.getElementById('countryLeaderboard');
                 if (lb2) lb2.classList.add('isVisible');
                 break;
-            case 4:
+                
+            case 5:
+                // Wealth Gap Timeline
                 this.toggleLayer('timelineContainer');
                 if (this.timelineChart) this.timelineChart.render();
                 
-                // Hide Map Leaderboard
                 const lb3 = document.getElementById('countryLeaderboard');
                 if (lb3) lb3.classList.remove('isVisible');
                 break;
-            case 5:
+                
+            case 6:
+                // Interlude 2: Algorithmic Scarcity
+                // Pure black background - fade out all visualizations
+                this.toggleLayer('none');
+                
+                // Hide Map Leaderboard just in case
+                const lb_interlude2 = document.getElementById('countryLeaderboard');
+                if (lb_interlude2) lb_interlude2.classList.remove('isVisible');
+                break;
+
+            case 7:
+                // Modern Distribution
                 this.toggleLayer('distributionContainer');
                 if (this.distributionChart) this.distributionChart.render();
                 
-                // Hide Map Leaderboard
                 const lb4 = document.getElementById('countryLeaderboard');
                 if (lb4) lb4.classList.remove('isVisible');
                 break;

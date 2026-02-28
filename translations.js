@@ -18,6 +18,11 @@ const i18n = {
         descCypherpunk2: "In this primordial era, no single entity commanded enough absolute supply to unilaterally dictate market dynamics. The distribution represented a true lattice of independent nodes, each driven by a profound conviction in mathematical truth over fiat authority.",
 
         // Section 2: Institutional
+        interlude1Title: "The Death of Innocence",
+        interlude1Callout: "The transition from a decentralized cypherpunk experiment to a corporate treasury asset irrevocably altered the fundamental network telemetry.",
+        interlude1Text: "What began as an anarchic attempt to bypass the traditional banking sector slowly morphed into the very structure it sought to replace. As the market capitalization swelled into the hundreds of billions, the scattered frontier developers were replaced by suits, boardroom risk assessments, and publicly traded balance sheets. The original vision was rooted in the ashes of the 2008 financial crisis, a silent protest against infinite fiat money printing.",
+        interlude1Code: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
+
         chapterCard1: "The Corporate Awakening",
         titleInstitutional: "2. Institutional Accumulation (Live Data)",
         descInstitutional1: "As the protocol matured and proved its resilience, the inescapable gravity of traditional finance began to exert its pull. Multinational corporations and publicly traded entities recognized the asset not merely as an experiment, but as an apex store of value and a robust hedge against systemic macroeconomic instability. The pure peer to peer network fragmented.",
@@ -71,6 +76,11 @@ const i18n = {
         descTimeline2: "This relentless compression demonstrates the inevitable concentration of capital within strictly finite supply systems. The foundational ideology of decentralization now contends with the overwhelming financial firepower of institutional accumulation.",
 
         // Section 5: Distribution
+        interlude2Title: "Absolute Algorithmic Scarcity",
+        interlude2Callout: "The protocol enforces a hard cap of 21,000,000 coins. This absolute scarcity triggers an unprecedented supply shock as global entities compete for a mathematically finite resource.",
+        interlude2Text: "Unlike gold, which can be continuously mined from the earth or even extracted from asteroids, or fiat currencies which can be printed infinitely by central banks, this system is governed by rigid, unalterable mathematics. Every single decimal is accounted for. As early adopters hold onto their massive initial reserves, and institutional treasuries relentlessly acquire the remaining liquid supply, new entrants are forced to fight over an increasingly microscopic fraction of the total pie.",
+        interlude2Code: "if (total_supply >= 21000000.0) {\n    return HALT_ISSUANCE;\n}",
+
         titleDistribution: "5. The Modern Distribution",
         descDistribution1: "Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.",
         descDistribution2: "To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.",
@@ -105,6 +115,11 @@ const i18n = {
         descCypherpunk2: "A cette epoque primordiale, aucune entite ne commandait suffisamment d'offre absolue pour dicter unilateralement la dynamique du marche. La distribution representait un veritable maillage de noeuds independants, chacun guide par une conviction profonde envers la verite mathematique plutot qu'envers l'autorite fiduciaire.",
 
         // Section 2: Institutional
+        interlude1Title: "La Fin de l'Innocence",
+        interlude1Callout: "La transition d'une experience cypherpunk decentralisee vers un actif de tresorerie corporatif a irrevocablement altere la telemetrie fondamentale du reseau.",
+        interlude1Text: "Ce qui avait commence comme une tentative anarchique de contourner le secteur bancaire traditionnel s'est lentement transforme en la structure meme qu'il cherchait a remplacer. Alors que la capitalisation boursiere a atteint des centaines de milliards, les developpeurs pionniers eparpilles ont ete remplaces par des cadres, des evaluations des risques en conseil d'administration et des bilans d'entreprises cotees en bourse. La vision originale etait ancree dans les cendres de la crise financiere de 2008, une protestation silencieuse contre l'impression monetaire scripturale infinie.",
+        interlude1Code: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
+
         chapterCard1: "L'Eveil Corporatif",
         titleInstitutional: "2. Accumulation Institutionnelle (Donnees en Direct)",
         descInstitutional1: "Alors que le protocole a muri et prouve sa resilience, la gravite ineluctable de la finance traditionnelle a commence a exercer son attraction. Les multinationales et les entites cotees en bourse ont reconnu cet actif non plus seulement comme une experience, mais comme une reserve de valeur supreme et une protection robuste contre l'instabilite macroeconomique systemique. Le pur reseau pair a pair s'est fragmente.",
@@ -156,6 +171,11 @@ const i18n = {
         descTimeline2: "Cette compression implacable demontre la concentration inevitable du capital au sein des systemes a offre strictement limitee. L'ideologie fondatrice de la decentralisation doit desormais composer avec la puissance de feu ecrasante de l'accumulation institutionnelle.",
 
         // Section 5: Distribution
+        interlude2Title: "La Rarete Algorithmique Absolue",
+        interlude2Callout: "Le protocole impose une limite absolue de 21 000 000 de pieces. Cette rarete intrinseque provoque un choc d'offre sans precedent alors que les entites mondiales rivalisent pour une ressource mathematiquement finie.",
+        interlude2Text: "Contrairement a l'or, qui peut etre continuellement extrait de la terre ou meme d'asteroides, ou aux monnaies fiduciaires qui peuvent etre imprimees a l'infini par les banques centrales, ce systeme est regi par des mathematiques rigides et inalterables. Chaque infime decimale est comptabilisee. Alors que les premiers adoptants conservent leurs massives reserves initiales et que les tresoreries institutionnelles acquierent implacablement l'offre liquide restante, les nouveaux entrants sont forces de se battre pour une fraction de plus en plus microscopique du total.",
+        interlude2Code: "if (total_supply >= 21000000.0) {\n    return HALT_ISSUANCE;\n}",
+
         titleDistribution: "5. La Distribution Moderne",
         descDistribution1: "Aujourd'hui, le paysage a ete definitivement altere. Le marche s'apparente desormais a une pyramide financiere traditionnelle, subdivisee en multiples niveaux d'immense richesse.",
         descDistribution2: "Conformement a une stricte ethique en matiere de visualisation des donnees, l'axe vertical debute explicitement a zero pour garantir une perception exacte des disproportions de volume.",

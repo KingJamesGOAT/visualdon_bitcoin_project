@@ -30,13 +30,22 @@ class ChartInstitutional {
             .attr('width', this.width)
             .attr('height', this.height)
             .style('opacity', 1)
-            .style('transform', 'scale(1)');
+            .style('transform', 'scale(1)')
+            .style('position', 'absolute')
+            .style('top', '0')
+            .style('left', '0');
             
         this.isRendered = true;
+        this.currentWidth = null;
+        this.currentHeight = null;
     }
 
     render() {
         if (!this.svg) this.init();
+        if (this.isRendered && this.currentWidth === this.width && this.currentHeight === this.height) return;
+        
+        this.currentWidth = this.width;
+        this.currentHeight = this.height;
 
         const totalSupply = 21000000;
         
@@ -96,7 +105,7 @@ class ChartInstitutional {
 
         // Update positions for tiles
         enterTiles.merge(tiles)
-            .transition().duration(800).ease(d3.easeCubicOut)
+            .transition('layout').duration(800).ease(d3.easeCubicOut)
             .attr('x', d => d.x0)
             .attr('y', d => d.y0)
             .attr('width', d => Math.max(0, d.x1 - d.x0))
@@ -182,25 +191,31 @@ class ChartInstitutional {
             });
 
         // Trigger animations
-        allLabels.transition().duration(800).ease(d3.easeCubicOut)
+        
+        // Remove prior transitions completely by separating the chain. 
+        // D3 .transition() blocks overlap if not carefully chained or uniquely named.
+        allLabels.interrupt('layout');
+        allLabels.select('.label-name').interrupt('layout');
+        allLabels.select('.label-value').interrupt('layout');
+
+        allLabels.transition('layout').duration(800).ease(d3.easeCubicOut)
             .attr('transform', d => `translate(${d.x0 + (d.x1 - d.x0) / 2},${d.y0 + (d.y1 - d.y0) / 2})`)
             .style('opacity', 1);
             
         // Adjust font sizes based on rectangle height dynamically
         allLabels.select('.label-name')
-            .transition().duration(800).ease(d3.easeCubicOut)
+            .transition('layout').duration(800).ease(d3.easeCubicOut)
             .style('font-size', d => Math.min(16, (d.y1 - d.y0) / 4) + 'px')
             .attr('dy', d => Math.min(16, (d.y1 - d.y0) / 4) * -0.2); // Shift up slightly
             
         allLabels.select('.label-value')
-            .transition().duration(800).ease(d3.easeCubicOut)
+            .transition('layout').duration(800).ease(d3.easeCubicOut)
             .style('font-size', d => Math.min(12, (d.y1 - d.y0) / 6) + 'px')
             .attr('dy', d => {
                 const height = d.y1 - d.y0;
                 if (height < 35) return 4; // Shift up since name is absent
                 return Math.min(16, height / 4) * 1.2; // Position below name
             });
-
     }
 
     handleMouseOver(event, d) {
@@ -233,7 +248,29 @@ class ChartInstitutional {
     }
 
     handleMouseMove(event) {
-        this.tooltip.style('left', (event.pageX + 20) + 'px').style('top', (event.pageY + 20) + 'px'); // Moved tooltip slightly below cursor to not overlap label
+        // Prevent tooltip from going off the right side
+        const tooltipNode = this.tooltip.node();
+        let tooltipWidth = 250; // approximate default width
+        if (tooltipNode) {
+            tooltipWidth = tooltipNode.getBoundingClientRect().width;
+        }
+        
+        // Default position
+        let leftPos = event.pageX + 20;
+        let topPos = event.pageY + 20;
+        
+        // If it goes off the right edge, flip it to the left side of the cursor
+        if (leftPos + tooltipWidth > window.innerWidth) {
+            leftPos = event.pageX - tooltipWidth - 20;
+        }
+
+        // It is less likely to go off bottom, but just in case, lift it slightly
+        const tooltipHeight = tooltipNode ? tooltipNode.getBoundingClientRect().height : 150;
+        if (topPos + tooltipHeight > window.innerHeight + window.scrollY) {
+            topPos = event.pageY - tooltipHeight - 20;
+        }
+
+        this.tooltip.style('left', leftPos + 'px').style('top', topPos + 'px');
     }
 
     handleMouseOut(event) {

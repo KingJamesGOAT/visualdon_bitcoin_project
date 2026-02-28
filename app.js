@@ -36,7 +36,6 @@ class AppManager {
             this.setupScrollObserver();
             this.setupLanguageSwitcher();
             this.setupProgressBar();
-            this.setupWindingPath();
             this.setupKnowledgeCheck();
             
             // Trigger first step
@@ -182,26 +181,6 @@ class AppManager {
         });
     }
 
-    setupWindingPath() {
-        const path = document.getElementById('windingPathLine');
-        if (!path) return;
-        
-        const pathLength = path.getTotalLength();
-        
-        path.style.strokeDasharray = pathLength + ' ' + pathLength;
-        path.style.strokeDashoffset = pathLength;
-        
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            
-            const scrollPercent = scrollTop / scrollHeight;
-            const drawLength = pathLength * scrollPercent;
-            
-            path.style.strokeDashoffset = pathLength - drawLength;
-        });
-    }
-
     setupKnowledgeCheck() {
         const buttons = document.querySelectorAll('.quizButton');
         const feedback = document.getElementById('quizFeedback');
@@ -226,9 +205,12 @@ class AppManager {
                     
                     // Auto scroll to next step after a short delay
                     setTimeout(() => {
-                        const targetElement = document.querySelector('.stepBlock[data-step="2"]');
+                        const targetElement = document.querySelector('.stepBlock[data-step="3"]');
                         if (targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                            window.scrollTo({
+                                top: targetElement.offsetTop,
+                                behavior: 'smooth'
+                            });
                         }
                     }, 1200);
                     
@@ -247,11 +229,12 @@ class AppManager {
     setupScrollObserver() {
         const stepBlocks = document.querySelectorAll('.stepBlock');
         
-        // V3 Rule
+        // Reduced threshold to 0.4 from 0.6 to prevent needing to scroll "twice" 
+        // to officially trigger the next container as 'active'.
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.6 
+            threshold: 0.4 
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -351,6 +334,9 @@ class AppManager {
                 }
                 break;
             case 2:
+                // Standalone Quiz Step - keeping the map active in background or just leaving Institutional
+                break;
+            case 3:
                 this.toggleLayer('mapContainer');
                 if (this.globalMap) {
                     setTimeout(() => this.globalMap.map.invalidateSize(), 800);
@@ -359,7 +345,7 @@ class AppManager {
                 const lb2 = document.getElementById('countryLeaderboard');
                 if (lb2) lb2.classList.add('isVisible');
                 break;
-            case 3:
+            case 4:
                 this.toggleLayer('timelineContainer');
                 if (this.timelineChart) this.timelineChart.render();
                 
@@ -367,7 +353,7 @@ class AppManager {
                 const lb3 = document.getElementById('countryLeaderboard');
                 if (lb3) lb3.classList.remove('isVisible');
                 break;
-            case 4:
+            case 5:
                 this.toggleLayer('distributionContainer');
                 if (this.distributionChart) this.distributionChart.render();
                 

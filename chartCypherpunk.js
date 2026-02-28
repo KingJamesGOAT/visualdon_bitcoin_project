@@ -202,10 +202,11 @@ class ChartCypherpunk {
             .on('mousemove', (event) => this.handleMouseMove(event))
             .on('mouseout', (event, d) => this.handleMouseOut(event, d))
             .on('click', (event, d) => {
+                // Removed the accumulative size increase on click
                 const el = d3.select(event.currentTarget);
-                const currentRadius = parseFloat(el.attr('r'));
-                el.transition().duration(100).attr('r', currentRadius * 1.3)
-                  .transition().duration(400).attr('r', currentRadius);
+                // Just a tiny pop effect that returns strictly to d.radius
+                el.transition().duration(100).attr('r', d.radius * 1.3)
+                  .transition().duration(400).attr('r', d.radius);
             });
             
         // Transition > 800ms
@@ -219,7 +220,8 @@ class ChartCypherpunk {
     handleMouseOver(event, d) {
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
         if (d.type === 'retail') {
-            d3.select(event.currentTarget).transition().duration(300).attr('r', d.radius * 2.5).style('fill', '#ffffff');
+            // Reduced hover expansion from 2.5x to 1.3x
+            d3.select(event.currentTarget).transition().duration(300).attr('r', d.radius * 1.3).style('fill', '#ffffff');
             const html = `
                 <div class="tooltipHeader">Cypherpunk Node Active</div>
                 <div class="tooltipRow"><span class="tooltipLabel">Wallet:</span> <span>${d.address.substring(0,8)}...</span></div>

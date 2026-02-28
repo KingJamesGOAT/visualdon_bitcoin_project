@@ -19,10 +19,6 @@
     <!-- Translation Switcher -->
     <button id="langSwitchBtn" class="langSwitchBtn">FR</button>
 
-    <!-- Winding Narrative Path -->
-    <svg id="windingPathContainer" class="windingPathContainer" preserveAspectRatio="none" viewBox="0 0 100 100">
-        <path id="windingPathLine" class="windingPathLine" d="M 50 0 C 90 15, 10 30, 50 45 C 90 60, 10 75, 50 90 C 90 100, 50 100, 50 100" vector-effect="non-scaling-stroke"></path>
-    </svg>
 
     <!-- Fixed Graphic Container for all visual elements -->
     <div id="graphicContainer" class="graphicContainer">
@@ -48,9 +44,9 @@
         <ul class="tocList">
             <li class="tocItem isActive" data-target="0" data-i18n="tocCypherpunk">1. Cypherpunk</li>
             <li class="tocItem" data-target="1" data-i18n="tocInstitutional">2. Institutional</li>
-            <li class="tocItem" data-target="2" data-i18n="tocMap">3. Map of Power</li>
-            <li class="tocItem" data-target="3" data-i18n="tocWealthGap">4. Wealth Gap</li>
-            <li class="tocItem" data-target="4" data-i18n="tocDistribution">5. Distribution</li>
+            <li class="tocItem" data-target="3" data-i18n="tocMap">3. Map of Power</li>
+            <li class="tocItem" data-target="4" data-i18n="tocWealthGap">4. Wealth Gap</li>
+            <li class="tocItem" data-target="5" data-i18n="tocDistribution">5. Distribution</li>
         </ul>
     </nav>
 
@@ -74,10 +70,6 @@
             </div>
         </section>
 
-        <!-- Chapter Card 1 -->
-        <div class="chapterCard">
-            <h2 data-i18n="chapterCard1">The Corporate Awakening</h2>
-        </div>
 
         <!-- Step 2: Institutional Takeover -->
         <section class="stepBlock" data-step="1">
@@ -92,15 +84,9 @@
             </div>
         </section>
 
-        <!-- Chapter Card 2 -->
-        <div class="chapterCard">
-            <h2 data-i18n="chapterCard2">The Sovereign Escalation</h2>
-        </div>
-
-        <!-- Interactive Gate -->
-        <section id="interactiveGate" class="interactiveGate">
-            <!-- Knowledge Check Quiz -->
-            <div class="knowledgeCheckContainer">
+        <!-- Step 3: Knowledge Check Quiz -->
+        <section class="stepBlock quizBlock" data-step="2">
+            <div class="stepContent">
                 <h3 data-i18n="quizQuestion">Which sovereign nation holds the most known Bitcoin reserves?</h3>
                 <div class="quizOptions">
                     <button class="quizButton" data-answer="elSalvador" data-i18n="quizElSalvador">El Salvador</button>
@@ -112,10 +98,10 @@
             </div>
         </section>
 
-        <!-- Step 3: The Map of Power -->
-        <section class="stepBlock" data-step="2">
+        <!-- Step 4: The Map of Power -->
+        <section class="stepBlock" data-step="3">
             <div class="stepContent">
-                <h2 data-i18n="titleMap">3. The Map of Power</h2>
+                <h2 data-i18n="titleMap">4. The Map of Power</h2>
                 
                 <p data-i18n="descMap1">The financial arms race inevitably escalated to the sovereign tier. While Bitcoin respects no borders, its accumulation heavily favors specific geopolitical coordinates.</p>
                 
@@ -127,23 +113,23 @@
             </div>
         </section>
 
-        <!-- Step 4: The Wealth Timeline -->
-        <section class="stepBlock" data-step="3">
+        <!-- Step 5: The Wealth Timeline -->
+        <section class="stepBlock" data-step="4">
             <div class="stepContent">
-                <h2 data-i18n="titleTimeline">4. The Wealth Gap Timeline</h2>
+                <h2 data-i18n="titleTimeline">5. The Wealth Gap Timeline</h2>
                 
-                <p data-i18n="descTimeline1">To truly understand the structural shift, we must view the long-term historical trend. This dense dataset tracks the percentage of supply owned by the original "Retail" cohorts versus "Institutional/Whale" entities over time.</p>
+                <p data-i18n="descTimeline1">To fully comprehend this paradigm shift, one must analyze the prolonged historical trajectory. The data reveals a dramatic transition as capital consolidated. The once scattered wealth of the retail pioneers progressively migrated into the treasuries of institutional whales and corporate conglomerates.</p>
                 
                 <p class="metricHighlight" data-i18n="metricTimeline1">Move your cursor across the chart. The interactive bisector will follow your movement, extracting precise chronological volume metrics.</p>
                 
-                <p data-i18n="descTimeline2">The rapid narrowing of the blue retail volume showcases the inescapable trajectory of capital concentration in finite-supply systems.</p>
+                <p data-i18n="descTimeline2">This relentless compression demonstrates the inevitable concentration of capital within strictly finite supply systems. The foundational ideology of decentralization now contends with the overwhelming financial firepower of institutional accumulation.</p>
             </div>
         </section>
 
-        <!-- Step 5: The Modern Distribution -->
-        <section class="stepBlock" data-step="4">
+        <!-- Step 6: The Modern Distribution -->
+        <section class="stepBlock" data-step="5">
             <div class="stepContent">
-                <h2 data-i18n="titleDistribution">5. The Modern Distribution</h2>
+                <h2 data-i18n="titleDistribution">6. The Modern Distribution</h2>
                 
                 <p data-i18n="descDistribution1">Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.</p>
                 

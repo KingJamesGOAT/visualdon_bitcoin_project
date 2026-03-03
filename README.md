@@ -1,31 +1,35 @@
-# Projet VisualDon
+# Visualisation de la Centralisation Institutionnelle du Bitcoin
 
-Une application web narrative et interactive explorant la centralisation institutionnelle du marche Bitcoin, developpee avec D3 et Leaflet pour le cours de VisualDon.
+> Projet realise par Nabil Mohamed Hagos et Steve Benjamin dans le cadre du cours de visualisation de donnees.
 
-## L Equipe
+**Callout : Vision et Thematique**
+Ce projet a pour ambition d explorer l univers des cryptomonnaies, un domaine que nous etudions depuis plusieurs annees. L un de nous gerant deja un site web dedie a l investissement et a la gestion de fortune, cet interet personnel nous oriente naturellement vers l analyse de ces donnees financieres complexes.
 
-- Auteurs : Nabil Mohamed Hagos et steve benjamin.
+Nous allons nous concentrer specifiquement sur le Bitcoin. En tant que premiere monnaie numerique historique, notre objectif sera de devoiler et de visualiser l influence ecrasante des grandes entreprises et des Etats. Ce documentaire web interactif aura pour but de permettre aux personnes non initiees de comprendre tres rapidement la repartition reelle des richesses grace a des elements visuels clairs et accessibles.
 
-## Methodologie et sources des donnees
+## Contexte des donnees
 
-Afin de garantir l ethique et la parfaite transparence de notre visualisation, les donnees historiques decrivant l evolution du reseau proviennent exclusivement de sources fiables et reconnues comme Glassnode et CoinMetrics.
-Ces donnees brutes ont ensuite ete nettoyees et agregees via des scripts de preparation rigoureux. Le but de ces manipulations etait d extraire uniquement les proportions exactes de possession entre les entites particulieres (Retail) et les entites institutionnelles. Cette approche repond a notre souci de transparence et d ethique des donnees en evitant toute generation aleatoire.
-Enfin, les donnees cartographiques exploitent un format ouvert et standardise, puisqu elles utilisent le format ouvert GeoJSON de Natural Earth.
+Les informations qui nourriront cette visualisation proviendront de trois sources principales. Les statistiques macroeconomiques et l historique des portefeuilles seront extraits de Glassnode et CoinMetrics, tandis que les coordonnees cartographiques mondiales seront issues de Natural Earth.
 
-## Objectif Principal
+Ces donnees feront l objet d une etude critique de notre part. Nous mettrons en lumiere un biais majeur inherent a ces sources. Les plateformes analytiques ne pouvant identifier formellement que les portefeuilles publiquement declares, une immense quantite d institutions operant de maniere anonyme sera de facto sous representee. Par ailleurs, les millions d utilisateurs particuliers etant amalgames dans une masse statistique globale, nous veillerons a souligner cette invisibilisation des acteurs individuels au profit des grands volumes financiers.
 
-Developper une application web narrative et interactive utilisant strictement du code HTML pur, du CSS natif et JavaScript. Le theme central est la centralisation institutionnelle du marche des cryptomonnaies. Le design visuel doit imperativement utiliser un fond sombre et une interface epuree inspirant la finance moderne.
+## Description de la structure
 
-## Architecture de l Application
+L integralite des donnees sera compilee, nettoyee et unifiee dans un fichier local unique au format JSON. Ce choix architectural garantira la stabilite de l application et figera les statistiques historiques pour notre analyse.
 
-L application est divisee en deux parties majeures :
+Ce fichier s organisera autour de trois grands axes :
+1. Des valeurs temporelles stockees sous forme de chaines de caracteres puis converties en objets Date Javascript pour generer la chronologie historique.
+2. Des valeurs numeriques quantitatives illustrant les pourcentages exacts de possession repartis entre les portefeuilles particuliers et les acteurs institutionnels.
+3. Des donnees spatiales au format GeoJSON contenant les coordonnees geometriques multipolygonales necessaires au trace precis des frontieres souveraines.
 
-1. Une section narrative basee sur IntersectionObserver.
-2. Un grand tableau de bord interactif presentant plusieurs visualisations de donnees interconnectees (D3 Bubbles, Leaflet Map geoJSON, D3 Area Chart).
+## But et intention narrative
 
-## Exigences Techniques et Librairies
+L approche adoptee sera resolument explicative. Plutot que de proposer une simple exploration libre, l application guidera le lecteur a travers un parcours predefini et structure.
 
-- Utilisation de la version sept de la librairie d analyse de donnees (D3) pour toutes les manipulations vectorielles, les echelles, les axes et les transitions.
-- Utilisation de Leaflet et de la methode L.geoJSON() pour l implementation de la carte choroplethe interactive avec un ficher distant.
-- Organisation du code en differents modules JavaScript distincts pour chaque composant graphique afin de faciliter le versionnage de notre travail.
-- Utilisation de IntersectionObserver pour deceler la position du lecteur et declencher les changements visuels selon la narration globale.
+L histoire que nous allons raconter illustrera un basculement ideologique majeur. Elle demontrera comment une technologie creee par des activistes pour echapper au systeme bancaire traditionnel a ete progressivement absorbee par la haute finance. Le regard porte sur ces statistiques se voudra critique. Les visualisations successives auront pour fonction de mettre en evidence la fracture grandissante de la repartition des richesses numeriques et la disparition graduelle de l utilisateur individuel face a l accumulation corporative.
+
+## References et inspirations
+
+Pour mener a bien ce recit interactif, le ton visuel sombre, le minimalisme et l utilisation de couleurs de contraste s inspireront directement des infographies financieres developpees par Bloomberg et le Financial Times.
+
+La structure narrative de l application reposera sur un defilement vertical pilotant l animation des graphiques et l apparition du texte. Cette methode, profondement inspiree par les essais visuels du studio The Pudding, nous permettra de fragmenter une quantite massive d informations statistiques complexes en une succession d etapes fluides et digestes.

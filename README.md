@@ -2,7 +2,7 @@
 
 > Projet realise par Nabil Mohamed Hagos et Steve Benjamin dans le cadre du cours de visualisation de donnees.
 
-**Callout : Vision et Thematique**
+**Vision et Thematique**
 Ce projet a pour ambition d explorer l univers des cryptomonnaies, un domaine que nous etudions depuis plusieurs annees. L un de nous gerant deja un site web dedie a l investissement et a la gestion de fortune, cet interet personnel nous oriente naturellement vers l analyse de ces donnees financieres complexes.
 
 Nous allons nous concentrer specifiquement sur le Bitcoin. En tant que premiere monnaie numerique historique, notre objectif sera de devoiler et de visualiser l influence ecrasante des grandes entreprises et des Etats. Ce documentaire web interactif aura pour but de permettre aux personnes non initiees de comprendre tres rapidement la repartition reelle des richesses grace a des elements visuels clairs et accessibles.

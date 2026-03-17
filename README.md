@@ -33,3 +33,9 @@ L'histoire que nous allons raconter illustrera un basculement idéologique majeu
 Pour mener à bien ce récit interactif, le ton visuel sombre, le minimalisme et l'utilisation de couleurs de contraste s'inspireront directement des infographies financières développées par Bloomberg et le Financial Times.
 
 La structure narrative de l'application reposera sur un défilement vertical pilotant l'animation des graphiques et l'apparition du texte. Cette méthode, profondément inspirée par les essais visuels du studio The Pudding, nous permettra de fragmenter une quantité massive d'informations statistiques complexes en une succession d'étapes fluides et digestes.
+
+## Maquette du projet
+
+La conception visuelle et l'organisation interactive de ce site ont été planifiées en amont. Vous pouvez consulter la maquette complète du projet, incluant la disposition des éléments et l'interface utilisateur, directement sur Figma via le lien suivant :
+
+[Consulter la maquette sur Figma](https://www.figma.com/design/quZve0u09AxGvKdUfw0NZc/bitcoin_visualDon?node-id=0-1&t=ZrAi1w86VKCj20by-1)

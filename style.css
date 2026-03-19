@@ -780,6 +780,123 @@ blockquote {
   scroll-snap-stop: always;
 }
 
+/* Clean Article Landing Page */
+.articleBlock {
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  position: relative;
+  overflow: hidden; /* Keep floating bubbles contained */
+}
+
+/* Ensure container text is central */
+.introCenterContent {
+  padding: 3rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 12px;
+  z-index: 10;
+  max-width: 600px;
+  text-align: center;
+  pointer-events: auto;
+  position: relative;
+}
+
+.introCenterContent .articleTitle {
+  font-family: inherit;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.introCenterContent .articleText {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+  text-align: justify;
+}
+
+/* Custom Background for Digital Gold */
+.goldBackground {
+  position: relative;
+  /* Removed overflow: hidden so orbiting bubbles are completely visible */
+  background: rgba(15, 23, 42, 0.5) !important; 
+}
+
+.goldBackground::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  clip-path: inset(0 round 12px); /* Clips just the blurred background layer */
+  background: url('gold_bg.jpg') center/cover no-repeat;
+  filter: blur(3px);
+  opacity: 0.45; /* Semi-transparent image behind text */
+  z-index: -1;
+}
+
+/* Floating Chat Pairs */
+.floatingChat {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 250px;
+  z-index: -1;
+  opacity: 0.95;
+  animation: floatBubble 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatBubble {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.chatPos1 { top: -10%; left: -35%; animation-delay: 0s; }
+.chatPos2 { top: 10%; right: -40%; animation-delay: 1.2s; }
+.chatPos3 { bottom: -15%; left: -25%; animation-delay: 2.4s; }
+.chatPos4 { bottom: -5%; right: -30%; animation-delay: 3.6s; }
+.chatPos5 { top: -25%; right: 10%; animation-delay: 4.8s; }
+
+.chatBubble {
+  max-width: 95%;
+  padding: 0.85rem 1.1rem;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 500;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.chatBubble p {
+  margin: 0;
+}
+
+.questionBubble {
+  align-self: flex-start;
+  background-color: #f59e0b; /* Website Gold */
+  color: #06080d; /* Crisp dark text for readability */
+  border-bottom-left-radius: 4px;
+}
+
+.answerBubble {
+  align-self: flex-end;
+  background-color: #38bdf8; /* Website Blue */
+  color: #06080d; 
+  border-bottom-right-radius: 4px;
+}
+
 /* =========================================================================
    Mobile Responsiveness
    ========================================================================= */

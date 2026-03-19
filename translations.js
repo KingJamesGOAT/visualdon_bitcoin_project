@@ -94,7 +94,36 @@ const i18n = {
         catETFs: "Corporate ETFs & Trusts",
         catMiners: "Mining Infrastructure",
         catStates: "Sovereign States",
-        catLost: "Lost / Unmoved (>10yr)"
+        catLost: "Lost / Unmoved (>10yr)",
+
+        // The Trustless Ledger
+        blockchainTitle: "The Trustless Ledger",
+        blockchainText: "Imagine a monumental public record book floating in cyberspace accessible to everyone but controlled by no one. This is the decentralized ledger at the core of the blockchain protocol. Instead of a traditional bank relying on secret internal databases to verify who owns what, the network relies on thousands of independent computers verifying every single transaction simultaneously. When a transfer occurs, the entire network must mathematically agree on its validity before it is permanently sealed into a transparent block of data. This elegant cryptographic consensus completely removes the need for corporate intermediaries, stripping banks of their historical monopoly over financial truth.",
+        blockchainQuestion: "But how does it actually work without a traditional bank?",
+        blockchainCallout: "The blockchain is not merely a database it is an incorruptible mathematical truth engine that operates around the clock without any centralized authority.",
+        q2: "Who actually controls all of this?",
+        a2: "Nobody. The protocol is completely decentralized and resistant to state censorship or any single point of failure.",
+        q3: "Can the financial records be altered?",
+        a3: "Impossible. Once a block is sealed cryptographically, altering it would require an unfathomable amount of computational energy.",
+        q4: "What gives the asset its value?",
+        a4: "Absolute algorithmic scarcity. The supply is mathematically locked, rendering it completely immune to central bank fiat printing.",
+        q5: "Can anyone see my transactions?",
+        a5: "It is a fully transparent yet pseudonymous public ledger. The financial truth is verifiable by anyone with a basic laptop.",
+
+        // The Digital Gold Rush
+        goldTitle: "The Digital Gold Rush",
+        goldText: "The clash of values between physical gold and programmatic money has defined the modern financial era. Both resources share a fundamental premise of extreme scarcity and require immense expenditures of energy to mine. However, physical gold is heavy expensive to transport and practically impossible to audit without melting the bars. In stark contrast, digital gold can be beamed across the planet at the speed of light and its entire global supply can be cryptographically verified by anyone with a basic laptop. As central banks continue to print infinite amounts of fiat currency, the impenetrable mathematics and effortless portability of this new digital standard offer a superior sanctuary for wealth preservation.",
+        goldQuote: "PHYSICAL.AUDIT(FAIL) DIGITAL.VERIFICATION(SUCCESS) NETWORK.SECURE",
+        goldQ1: "Isn't physical gold safer than digital code?",
+        goldA1: "Gold is physically heavy and incredibly expensive to transport or audit securely. Digital gold moves at the speed of light and can be audited by anyone.",
+        goldQ2: "Can't the government just seize it?",
+        goldA2: "Unlike vault bars which can be literally confiscated by executive order, cryptographic networks are secured by mathematics, severely complicating physical seizure.",
+        goldQ3: "What about the massive energy consumption?",
+        goldA3: "The energy burned secures the absolute financial ledger, just as earth-moving equipment and smelting infrastructure secure physical gold extraction.",
+        goldQ4: "But it's not backed by anything physical!",
+        goldA4: "It is backed by the largest and most secure computing network in human history, governed by immutable cryptographic consensus rather than political promises.",
+        goldQ5: "Will it eventually replace gold entirely?",
+        goldA5: "It fundamentally serves as 'Gold 2.0'—a superior sanctuary for wealth preservation optimized for the instant telemetry of the digital age."
     },
     fr: {
         // App Title & TOC
@@ -195,7 +224,36 @@ const i18n = {
         catETFs: "ETFs & Fonds d'Entreprises",
         catMiners: "Infrastructure de Minage",
         catStates: "Etats Souverains",
-        catLost: "Perdus / Inactifs (>10ans)"
+        catLost: "Perdus / Inactifs (>10ans)",
+
+        // The Trustless Ledger
+        blockchainTitle: "Le Registre Sans Confiance",
+        blockchainText: "Imaginez un monumental registre public flottant dans le cyberespace accessible a tous mais controle par personne. C'est le registre decentralise au coeur du protocole blockchain. Au lieu qu'une banque traditionnelle ne s'appuie sur des bases de donnees internes secretes pour verifier qui possede quoi, le reseau s'appuie sur des milliers d'ordinateurs independants qui verifient chaque transaction simultanement. Lorsqu'un transfert a lieu, l'ensemble du reseau doit s'accorder mathematiquement sur sa validite avant qu'elle ne soit scellee de facon permanente dans un bloc de donnees transparent. Cet elegant consensus cryptographique elimine completement le besoin d'intermediaires corporatifs, depouillant les banques de leur monopole historique sur la verite financiere.",
+        blockchainQuestion: "Mais comment cela fonctionne-t-il reellement sans banque traditionnelle ?",
+        blockchainCallout: "La blockchain n'est pas simplement une base de donnees c'est un moteur de verite mathematique incorruptible qui fonctionne sans interruption et sans aucune autorite centralisee.",
+        q2: "Qui controle reellement tout cela ?",
+        a2: "Personne. Le protocole est completement decentralise et resistant a la censure d'Etat ou a tout point de defaillance unique.",
+        q3: "Les registres financiers peuvent-ils etre alteres ?",
+        a3: "Impossible. Une fois qu'un bloc est scelle cryptographiquement, le modifier requerrait une quantite d'energie computationnelle incommensurable.",
+        q4: "Qu'est-ce qui donne sa valeur a l'actif ?",
+        a4: "La rarete algorithmique absolue. L'offre est mathematiquement verrouillee, la rendant totalement immune a l'impression fiduciaire des banques centrales.",
+        q5: "Tout le monde peut-il voir mes transactions ?",
+        a5: "C'est un registre public totalement transparent mais pseudonyme. La verite financiere est verifiable par quiconque possede un simple ordinateur.",
+
+        // The Digital Gold Rush
+        goldTitle: "La Ruee vers l'Or Numerique",
+        goldText: "Le choc des valeurs entre l'or physique et la monnaie programmatique definit l'ere financiere moderne. Ces deux ressources partagent le principe fondamental d'une rarete extreme et necessitent d'immenses depenses d'energie pour etre minees. Cependant, l'or physique est lourd couteux a transporter et pratiquement impossible a auditer sans fondre les lingots. En contraste frappant, l'or numerique peut etre projete a travers la planete a la vitesse de la lumiere et son offre globale totale peut etre verifiee cryptographiquement par quiconque possede un simple ordinateur portable. Alors que les banques centrales continuent d'imprimer des quantites infinies de monnaie fiduciaire, les mathematiques impenetrables et la portabilite sans effort de ce nouveau standard numerique offrent un sanctuaire superieur pour la preservation de la richesse.",
+        goldQuote: "AUDIT.PHYSIQUE(ECHEC) VERIFICATION.NUMERIQUE(SUCCES) RESEAU.SECURISE",
+        goldQ1: "L'or physique n'est-il pas plus sur qu'un code numerique ?",
+        goldA1: "L'or est lourd et incroyablement couteux a transporter ou a auditer. L'or numerique circule a la vitesse de la lumiere et peut etre audite par tous.",
+        goldQ2: "Le gouvernement ne peut-il pas simplement le saisir ?",
+        goldA2: "Contrairement aux lingots qui peuvent etre confisques, les reseaux cryptographiques sont securises par des mathematiques, compliquant severement la saisie physique.",
+        goldQ3: "Qu'en est-il de sa consommation massive d'energie ?",
+        goldA3: "L'energie consommee securise le registre financier, tout comme les equipements d'excavation et les fonderies securisent l'extraction de l'or physique.",
+        goldQ4: "Mais ce n'est adosse a rien de physique !",
+        goldA4: "C'est adosse au reseau informatique le plus sur de l'histoire, regi par un consensus cryptographique immuable plutot que par des promesses politiques.",
+        goldQ5: "Va-t-il finir par remplacer completement l'or ?",
+        goldA5: "Il agit fondamentalement comme un 'Or 2.0', un sanctuaire superieur pour la preservation de la richesse optimise pour la telemetrie de l'ere numerique."
     }
 };
 

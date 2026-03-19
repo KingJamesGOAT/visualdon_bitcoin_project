@@ -37,9 +37,8 @@ class AppManager {
             this.setupLanguageSwitcher();
             this.setupProgressBar();
             this.setupKnowledgeCheck();
-            
-            // Trigger first step
-            this.handleStepActivation(0);
+            // Trigger first step as -1 (Intro article without graphics)
+            this.handleStepActivation(-1);
         } catch (error) {
             console.error("Initialization error:", error);
         }
@@ -277,6 +276,23 @@ class AppManager {
         d3.select('#globalTooltip').style('opacity', 0);
 
         switch (stepIndex) {
+            case -1:
+                this.toggleLayer('none');
+                
+                // Explicitly clear cypherpunk inline styles set in case 0
+                const cypherLayerHideIntro = document.getElementById('cypherpunkContainer');
+                if (cypherLayerHideIntro) {
+                    cypherLayerHideIntro.style.opacity = "0";
+                    cypherLayerHideIntro.style.pointerEvents = "none";
+                    if (this.cypherpunkChart && this.cypherpunkChart.simulation) {
+                         this.cypherpunkChart.simulation.stop();
+                    }
+                }
+                
+                const dateElIntro = document.getElementById('floatingDate');
+                if (dateElIntro) dateElIntro.classList.remove('isVisible');
+                break;
+                
             case 0:
                 // When 0 is active: Instantly clear Treemap, show Cypherpunk
                 if (this.institutionalChart) {
@@ -391,6 +407,13 @@ class AppManager {
                 
                 const lb4 = document.getElementById('countryLeaderboard');
                 if (lb4) lb4.classList.remove('isVisible');
+                break;
+                
+            case 8:
+                // End Article (Digital Gold Rush)
+                this.toggleLayer('none');
+                const lb5 = document.getElementById('countryLeaderboard');
+                if (lb5) lb5.classList.remove('isVisible');
                 break;
         }
     }

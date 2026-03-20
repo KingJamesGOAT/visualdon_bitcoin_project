@@ -91,6 +91,9 @@ class ChartCypherpunk {
             // Reduce zoom speed multiplier to make zooming much more gradual
             .wheelDelta((event) => -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.0005))
             .filter((event) => {
+                // Only allow zoom interaction on step 0
+                if (window.app && window.app.currentStep !== 0) return false;
+                
                 // Return true if it's not a wheel event, meaning panning is always allowed
                 if (event.type !== 'wheel') return true;
                 // If it IS a wheel event, strictly require Ctrl or Cmd key
@@ -109,7 +112,8 @@ class ChartCypherpunk {
             .style('fill', 'none')
             .style('pointer-events', 'all')
             .on('mouseover', () => {
-                // Show hint on hover
+                // Show hint on hover only for step 0
+                if (window.app && window.app.currentStep !== 0) return;
                 const hint = document.getElementById('zoomHint');
                 if (hint) {
                     const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
@@ -119,6 +123,7 @@ class ChartCypherpunk {
             })
             .on('mouseout', () => {
                 // Hide hint
+                if (window.app && window.app.currentStep !== 0) return;
                 const hint = document.getElementById('zoomHint');
                 if(hint) hint.style.opacity = '0';
             });
@@ -127,6 +132,8 @@ class ChartCypherpunk {
 
         // Native event listener to block Chrome/browser from zooming the entire page
         this.svg.node().addEventListener('wheel', (e) => {
+            // Unblock page zooming if not on cypherpunk network step
+            if (window.app && window.app.currentStep !== 0) return;
             if (e.ctrlKey || e.metaKey) {
                 e.preventDefault();
             }

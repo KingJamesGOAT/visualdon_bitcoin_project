@@ -270,6 +270,12 @@ class AppManager {
         if (activeLayer && !activeLayer.classList.contains('isActive')) {
             activeLayer.classList.add('isActive');
         }
+        
+        // Hide zoom hint globally when not on cypherpunk layer
+        if (layerId !== 'cypherpunkContainer') {
+            const hint = document.getElementById('zoomHint');
+            if (hint) hint.style.opacity = '0';
+        }
     }
 
     handleStepActivation(stepIndex) {

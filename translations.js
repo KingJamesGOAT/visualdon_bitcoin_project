@@ -57,7 +57,7 @@ const i18n = {
         quoteMap: "\"Sovereign treasuries now utilize sophisticated strategies to acquire massive reserves, transforming digital assets into state instruments.\"",
         metricMap: "Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.",
 
-        // Tooltips (Dynamic)
+        // Leaderboard & Global Tooltips (Dynamic)
         tooltipClickMarker: "Click marker to zoom location.",
         tooltipSovereignState: "Sovereign State",
         tooltipReserves: "Total Confirmed Reserves",
@@ -66,6 +66,23 @@ const i18n = {
         leaderboardRank: "Rank",
         leaderboardCountry: "Country",
         leaderboardHoldings: "Holdings (BTC)",
+        
+        // Dynamic Chart Tooltips
+        tooltipCypherpunkActive: "Cypherpunk Node Active",
+        tooltipWallet: "Wallet:",
+        tooltipFirstSeen: "First Seen:",
+        tooltipEstHolding: "Est. Holding:",
+        tooltipType: "Type:",
+        tooltipPublicTreasury: "Public Treasury",
+        tooltipTotalHoldings: "Total Holdings:",
+        tooltipSupplyShare: "Supply Share:",
+        tooltipRetailWord: "Retail Volume",
+        tooltipInstWord: "Institutional Volume",
+        tooltipDataExtractedWord: "Data Point Extracted",
+        tooltipLiveVerification: "Live Snapshot Verification",
+        tooltipHoldings: "Holdings:",
+        tooltipMaxSupply: "Max Supply %:",
+        
         // Distributions Categories
         catRetail: "Retail (< 10 BTC)",
 
@@ -84,6 +101,7 @@ const i18n = {
         titleDistribution: "5. The Modern Distribution",
         descDistribution1: "Today, the landscape is permanently altered. The market resembles a traditional financial pyramid categorized by varying brackets of immense wealth.",
         descDistribution2: "To adhere to strict data visualization ethics, the vertical axis begins explicitly at zero, ensuring accurate perception of volume disparities.",
+        
         // Controls
         btnTransformStacked: "View as Stacked Distribution",
         btnTransformBar: "Revert to Bar Chart",
@@ -137,123 +155,135 @@ const i18n = {
         // Section 1: Cypherpunk
         floatingDate: "2009 - 2012",
         zoomHint: "Maintenez Ctrl & Molette pour Zoomer",
-        titleCypherpunk: "1. La Genese Cypherpunk",
-        quoteCypherpunk: "\"J'ai travaille sur un nouveau systeme de paiement electronique entierement pair a pair, sans tiers de confiance.\" <br> Satoshi Nakamoto, 2008",
-        descCypherpunk1: "La genese de la revolution decentralisee a debute dans l'ombre de l'effondrement financier de 2008. Les premiers cryptographes et cypherpunks ont cherche a forger un systeme d'argent electronique pair a pair, fondamentalement resistant a la censure d'Etat et a la corruption des banques centrales. Ce reseau initial etait soutenu par un collectif anarchique de puristes ideologiques et de codeurs visionnaires.",
-        metricCypherpunk: "Survolez les noeuds pour explorer des adresses de portefeuilles simulees de la periode 2009 a 2012.",
-        descCypherpunk2: "A cette epoque primordiale, aucune entite ne commandait suffisamment d'offre absolue pour dicter unilateralement la dynamique du marche. La distribution representait un veritable maillage de noeuds independants, chacun guide par une conviction profonde envers la verite mathematique plutot qu'envers l'autorite fiduciaire.",
+        titleCypherpunk: "1. La Genèse Cypherpunk",
+        quoteCypherpunk: "\"J'ai travaillé sur un nouveau système de paiement électronique entièrement pair à pair, sans tiers de confiance.\" <br> Satoshi Nakamoto, 2008",
+        descCypherpunk1: "La genèse de la révolution décentralisée a débuté dans l'ombre de l'effondrement financier de 2008. Les premiers cryptographes et cypherpunks ont cherché à forger un système d'argent électronique pair à pair, fondamentalement résistant à la censure d'État et à la corruption des banques centrales. Ce réseau initial était soutenu par un collectif anarchique de puristes idéologiques et de codeurs visionnaires.",
+        metricCypherpunk: "Survolez les noeuds pour explorer des adresses de portefeuilles simulées de la période 2009 à 2012.",
+        descCypherpunk2: "À cette époque primordiale, aucune entité ne commandait suffisamment d'offre absolue pour dicter unilatéralement la dynamique du marché. La distribution représentait un véritable maillage de noeuds indépendants, chacun guidé par une conviction profonde envers la vérité mathématique plutôt qu'envers l'autorité fiduciaire.",
 
         // Section 2: Institutional
         interlude1Title: "La Fin de l'Innocence",
-        interlude1Callout: "La transition d'une experience cypherpunk decentralisee vers un actif de tresorerie corporatif a irrevocablement altere la telemetrie fondamentale du reseau.",
-        interlude1Text: "Ce qui avait commence comme une tentative anarchique de contourner le secteur bancaire traditionnel s'est lentement transforme en la structure meme qu'il cherchait a remplacer. Alors que la capitalisation boursiere a atteint des centaines de milliards, les developpeurs pionniers eparpilles ont ete remplaces par des cadres, des evaluations des risques en conseil d'administration et des bilans d'entreprises cotees en bourse. La vision originale etait ancree dans les cendres de la crise financiere de 2008, une protestation silencieuse contre l'impression monetaire scripturale infinie.",
+        interlude1Callout: "La transition d'une expérience cypherpunk décentralisée vers un actif de trésorerie corporatif a irrévocablement altéré la télémétrie fondamentale du réseau.",
+        interlude1Text: "Ce qui avait commencé comme une tentative anarchique de contourner le secteur bancaire traditionnel s'est lentement transformé en la structure même qu'il cherchait à remplacer. Alors que la capitalisation boursière a atteint des centaines de milliards, les développeurs pionniers éparpillés ont été remplacés par des cadres, des évaluations des risques en conseil d'administration et des bilans d'entreprises cotées en bourse. La vision originale était ancrée dans les cendres de la crise financière de 2008, une protestation silencieuse contre l'impression monétaire scripturale infinie.",
         interlude1Code: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
 
-        chapterCard1: "L'Eveil Corporatif",
-        titleInstitutional: "2. Accumulation Institutionnelle (Donnees en Direct)",
-        descInstitutional1: "Alors que le protocole a muri et prouve sa resilience, la gravite ineluctable de la finance traditionnelle a commence a exercer son attraction. Les multinationales et les entites cotees en bourse ont reconnu cet actif non plus seulement comme une experience, mais comme une reserve de valeur supreme et une protection robuste contre l'instabilite macroeconomique systemique. Le pur reseau pair a pair s'est fragmente.",
-        metricInstitutional1: "Les noeuds ci-dessous visualisent des donnees en direct directement importees de l'API CoinGecko Public Treasury.",
-        metricInstitutional2: "Survolez les bulles massives pour reveler les reserves institutionnelles exactes d'entites telles que MicroStrategy et Tesla. Observez comment le reseau chaotique de detail (retail) est englouti par d'immenses pools gravitationnels d'entreprises dont la surface symbolise strictement leurs reserves totales.",
+        chapterCard1: "L'Éveil Corporatif",
+        titleInstitutional: "2. Accumulation Institutionnelle (Données en Direct)",
+        descInstitutional1: "Alors que le protocole a mûri et prouvé sa résilience, la gravité inéluctable de la finance traditionnelle a commencé à exercer son attraction. Les multinationales et les entités cotées en bourse ont reconnu cet actif non plus seulement comme une expérience, mais comme une réserve de valeur suprême et une protection robuste contre l'instabilité macroéconomique systémique. Le pur réseau pair à pair s'est fragmenté.",
+        metricInstitutional1: "Les noeuds ci-dessous visualisent des données en direct directement importées de l'API CoinGecko Public Treasury.",
+        metricInstitutional2: "Survolez les bulles massives pour révéler les réserves institutionnelles exactes d'entités telles que MicroStrategy et Tesla. Observez comment le réseau chaotique de détail (retail) est englouti par d'immenses pools gravitationnels d'entreprises dont la surface symbolise strictement leurs réserves totales.",
 
         // Quiz
-        quizQuestion: "Quelle nation souveraine detient les plus grandes reserves connues de Bitcoin ?",
+        quizQuestion: "Quelle nation souveraine détient les plus grandes réserves connues de Bitcoin ?",
         quizElSalvador: "Le Salvador",
         quizChina: "La Chine",
-        quizUnitedStates: "Les Etats Unis",
-        quizUnitedKingdom: "Le Royaume Uni",
-        quizFeedbackCorrect: "Correct. Les Etats Unis detiennent la plus grande reserve connue, principalement issue de saisies.",
+        quizUnitedStates: "Les États-Unis",
+        quizUnitedKingdom: "Le Royaume-Uni",
+        quizFeedbackCorrect: "Correct. Les États-Unis détiennent la plus grande réserve connue, principalement issue de saisies.",
         quizFeedbackWrong: "Incorrect. Essayez encore.",
 
         // Chapter Card 2
         chapterCard2: "L'Escalade Souveraine",
 
         // Corporate Descriptions (Treemap Tooltips)
-        corp_MicroStrategy: "Pionnier de l'adoption corporative, accumulant agressivement du Bitcoin comme actif de reserve de tresorerie principal.",
-        corp_Tesla: "Fabricant majeur de vehicules electriques ayant alloue une part de ses liquidites au Bitcoin en 2021.",
-        corp_Coinbase: "L'une des plus grandes plateformes d'echange, detenant d'importantes reserves a des fins operationnelles et d'investissement.",
-        corp_Marathon: "Leader du minage de Bitcoin conservant ses actifs mines plutot que de les vendre immediatement.",
-        corp_Block: "Societe de services financiers et paiements mobiles (ex-Square) focalisee sur la democratisation de l'acces au Bitcoin.",
-        corp_Hut8: "Pionnier nord-americain du minage d'actifs numeriques avec une strategie long terme de conservation ('HODL').",
-        corp_Riot: "Entreprise d'infrastructure de minage a grande echelle conservant des parts significatives de sa production.",
-        corp_Generic: "Entreprise cotee en bourse allouant une part de sa tresorerie au Bitcoin pour se couvrir contre l'inflation.",
+        corp_MicroStrategy: "Pionnier de l'adoption corporative, accumulant agressivement du Bitcoin comme actif de réserve de trésorerie principal.",
+        corp_Tesla: "Fabricant majeur de véhicules électriques ayant alloué une part de ses liquidités au Bitcoin en 2021.",
+        corp_Coinbase: "L'une des plus grandes plateformes d'échange, détenant d'importantes réserves à des fins opérationnelles et d'investissement.",
+        corp_Marathon: "Leader du minage de Bitcoin conservant ses actifs minés plutôt que de les vendre immédiatement.",
+        corp_Block: "Société de services financiers et paiements mobiles (ex-Square) focalisée sur la démocratisation de l'accès au Bitcoin.",
+        corp_Hut8: "Pionnier nord-américain du minage d'actifs numériques avec une stratégie long terme de conservation ('HODL').",
+        corp_Riot: "Entreprise d'infrastructure de minage à grande échelle conservant des parts significatives de sa production.",
+        corp_Generic: "Entreprise cotée en bourse allouant une part de sa trésorerie au Bitcoin pour se couvrir contre l'inflation.",
 
         // Section 3: Map of Power
         titleMap: "3. La Carte du Pouvoir",
-        descMap1: "La course aux armements financiers a desormais atteint le theatre geopolitique. Les Etats souverains, reconnaissant l'imperatif strategique absolu de la rarete numerique, ont discretement commence a accumuler des reserves massives. Cette accumulation souveraine se produit a la fois via des saisies agressives ordonnees par la justice et des mandats d'adoption nationale structurelle, creant ainsi un nouveau systeme de coordonnees de la puissance economique.",
-        quoteMap: "\"Les tresoreries souveraines utilisent desormais des strategies sophistiquees pour acquerir des reserves massives, transformant cet actif en instrument d'Etat.\"",
-        metricMap: "Survolez les marqueurs pour voir les avoirs gouvernementaux estimes. Cliquez sur un marqueur pour zoomer sur ce territoire souverain.",
+        descMap1: "La course aux armements financiers a désormais atteint le théâtre géopolitique. Les États souverains, reconnaissant l'impératif stratégique absolu de la rareté numérique, ont discrètement commencé à accumuler des réserves massives. Cette accumulation souveraine se produit à la fois via des saisies agressives ordonnées par la justice et des mandats d'adoption nationale structurelle, créant ainsi un nouveau système de coordonnées de la puissance économique.",
+        quoteMap: "\"Les trésoreries souveraines utilisent désormais des stratégies sophistiquées pour acquérir des réserves massives, transformant cet actif en instrument d'État.\"",
+        metricMap: "Survolez les marqueurs pour voir les avoirs gouvernementaux estimés. Cliquez sur un marqueur pour zoomer sur ce territoire souverain.",
 
-        // Tooltips (Dynamic)
+        // Leaderboard & Global Tooltips (Dynamic)
         tooltipClickMarker: "Cliquez sur le marqueur pour zoomer.",
-        tooltipSovereignState: "Etat Souverain",
-        tooltipReserves: "Reserves Totales Confirmees",
-        tooltipEstReserves: "Reserves est.",
-        leaderboardTitle: "Reserves Souveraines",
+        tooltipSovereignState: "État Souverain",
+        tooltipReserves: "Réserves Totales Confirmées",
+        tooltipEstReserves: "Réserves est.",
+        leaderboardTitle: "Réserves Souveraines",
         leaderboardRank: "Rang",
         leaderboardCountry: "Pays",
         leaderboardHoldings: "Fonds (BTC)",
+        
+        // Dynamic Chart Tooltips
+        tooltipCypherpunkActive: "Nœud Cypherpunk Actif",
+        tooltipWallet: "Portefeuille :",
+        tooltipFirstSeen: "Première Apparition :",
+        tooltipEstHolding: "Fonds Est. :",
+        tooltipType: "Type :",
+        tooltipPublicTreasury: "Trésorerie Publique",
+        tooltipTotalHoldings: "Réserves Totales :",
+        tooltipSupplyShare: "Part de l'Offre :",
+        tooltipRetailWord: "Volume Particuliers",
+        tooltipInstWord: "Volume Institutionnel",
+        tooltipDataExtractedWord: "Point de donnée extrait",
+        tooltipLiveVerification: "Vérification en Direct",
+        tooltipHoldings: "Avoirs :",
+        tooltipMaxSupply: "% de l'Offre Max :",
 
         // Section 4: Wealth Timeline
-        titleTimeline: "4. L'Evolution de l'Ecart de Richesse",
-        descTimeline1: "Pour reellement comprendre ce changement paradigmatique, il faut analyser la trajectoire historique prolongee. Les donnees revelent une transition dramatique au fur et a mesure que le capital s'est consolide. La richesse autrefois eparpillee des pionniers s'est progressivement deplacee vers les tresoreries des baleines institutionnelles et des conglomerats d'entreprises.",
-        metricTimeline1: "Deplacez votre curseur a travers le graphique. La ligne intersecante interactive suivra votre mouvement, extrayant avec precision les metriques chronologiques de volume.",
-        descTimeline2: "Cette compression implacable demontre la concentration inevitable du capital au sein des systemes a offre strictement limitee. L'ideologie fondatrice de la decentralisation doit desormais composer avec la puissance de feu ecrasante de l'accumulation institutionnelle.",
+        titleTimeline: "4. L'Évolution de l'Écart de Richesse",
+        descTimeline1: "Pour réellement comprendre ce changement paradigmatique, il faut analyser la trajectoire historique prolongée. Les données révèlent une transition dramatique au fur et à mesure que le capital s'est consolidé. La richesse autrefois éparpillée des pionniers s'est progressivement déplacée vers les trésoreries des baleines institutionnelles et des conglomérats d'entreprises.",
+        metricTimeline1: "Déplacez votre curseur à travers le graphique. La ligne intersécante interactive suivra votre mouvement, extrayant avec précision les métriques chronologiques de volume.",
+        descTimeline2: "Cette compression implacable démontre la concentration inévitable du capital au sein des systèmes à offre strictement limitée. L'idéologie fondatrice de la décentralisation doit désormais composer avec la puissance de feu écrasante de l'accumulation institutionnelle.",
 
         // Section 5: Distribution
-        interlude2Title: "La Rarete Algorithmique Absolue",
-        interlude2Callout: "Le protocole impose une limite absolue de 21 000 000 de pieces. Cette rarete intrinseque provoque un choc d'offre sans precedent alors que les entites mondiales rivalisent pour une ressource mathematiquement finie.",
-        interlude2Text: "Contrairement a l'or, qui peut etre continuellement extrait de la terre ou meme d'asteroides, ou aux monnaies fiduciaires qui peuvent etre imprimees a l'infini par les banques centrales, ce systeme est regi par des mathematiques rigides et inalterables. Chaque infime decimale est comptabilisee. Alors que les premiers adoptants conservent leurs massives reserves initiales et que les tresoreries institutionnelles acquierent implacablement l'offre liquide restante, les nouveaux entrants sont forces de se battre pour une fraction de plus en plus microscopique du total.",
+        interlude2Title: "La Rareté Algorithmique Absolue",
+        interlude2Callout: "Le protocole impose une limite absolue de 21 000 000 de pièces. Cette rareté intrinsèque provoque un choc d'offre sans précédent alors que les entités mondiales rivalisent pour une ressource mathématiquement finie.",
+        interlude2Text: "Contrairement à l'or, qui peut être continuellement extrait de la terre ou même d'astéroïdes, ou aux monnaies fiduciaires qui peuvent être imprimées à l'infini par les banques centrales, ce système est régi par des mathématiques rigides et inaltérables. Chaque infime décimale est comptabilisée. Alors que les premiers adoptants conservent leurs massives réserves initiales et que les trésoreries institutionnelles acquièrent implacablement l'offre liquide restante, les nouveaux entrants sont forcés de se battre pour une fraction de plus en plus microscopique du total.",
         interlude2Code: "if (total_supply >= 21000000.0) {\n    return HALT_ISSUANCE;\n}",
 
         titleDistribution: "5. La Distribution Moderne",
-        descDistribution1: "Aujourd'hui, le paysage a ete definitivement altere. Le marche s'apparente desormais a une pyramide financiere traditionnelle, subdivisee en multiples niveaux d'immense richesse.",
-        descDistribution2: "Conformement a une stricte ethique en matiere de visualisation des donnees, l'axe vertical debute explicitement a zero pour garantir une perception exacte des disproportions de volume.",
+        descDistribution1: "Aujourd'hui, le paysage a été définitivement altéré. Le marché s'apparente désormais à une pyramide financière traditionnelle, subdivisée en multiples niveaux d'immense richesse.",
+        descDistribution2: "Conformément à une stricte éthique en matière de visualisation des données, l'axe vertical débute explicitement à zéro pour garantir une perception exacte des disproportions de volume.",
+        
         // Controls
-        btnTransformStacked: "Voir en Distribution Cumulee",
-        btnTransformBar: "Revenir au Diagramme a Barres",
-        metricDistribution: "Interagissez directement avec les graphiques. Utilisez le bouton ci-dessus pour observer une transformation structurelle fluide des barres verticales vers un vecteur horizontal unique et cumule. Tous les elements conservent leur interactivite au survol.",
+        btnTransformStacked: "Voir en Distribution Cumulée",
+        btnTransformBar: "Revenir au Diagramme à Barres",
+        metricDistribution: "Interagissez directement avec les graphiques. Utilisez le bouton ci-dessus pour observer une transformation structurelle fluide des barres verticales vers un vecteur horizontal unique et cumulé. Tous les éléments conservent leur interactivité au survol.",
 
-        // Tooltips (Dynamic)
-        tooltipClickMarker: "Cliquez sur le marqueur pour zoomer.",
-        tooltipSovereignState: "Etat Souverain",
-        tooltipReserves: "Reserves",
-        tooltipEstReserves: "Reserves est.",
         // Distributions Categories
         catRetail: "Particuliers (< 10 BTC)",
-        catExchanges: "Echanges Centralises",
+        catExchanges: "Échanges Centralisés",
         catETFs: "ETFs & Fonds d'Entreprises",
         catMiners: "Infrastructure de Minage",
-        catStates: "Etats Souverains",
+        catStates: "États Souverains",
         catLost: "Perdus / Inactifs (>10ans)",
 
         // The Trustless Ledger
         blockchainTitle: "Le Registre Sans Confiance",
-        blockchainText: "Imaginez un monumental registre public flottant dans le cyberespace accessible a tous mais controle par personne. C'est le registre decentralise au coeur du protocole blockchain. Au lieu qu'une banque traditionnelle ne s'appuie sur des bases de donnees internes secretes pour verifier qui possede quoi, le reseau s'appuie sur des milliers d'ordinateurs independants qui verifient chaque transaction simultanement. Lorsqu'un transfert a lieu, l'ensemble du reseau doit s'accorder mathematiquement sur sa validite avant qu'elle ne soit scellee de facon permanente dans un bloc de donnees transparent. Cet elegant consensus cryptographique elimine completement le besoin d'intermediaires corporatifs, depouillant les banques de leur monopole historique sur la verite financiere.",
-        blockchainQuestion: "Mais comment cela fonctionne-t-il reellement sans banque traditionnelle ?",
-        blockchainCallout: "La blockchain n'est pas simplement une base de donnees c'est un moteur de verite mathematique incorruptible qui fonctionne sans interruption et sans aucune autorite centralisee.",
-        q2: "Qui controle reellement tout cela ?",
-        a2: "Personne. Le protocole est completement decentralise et resistant a la censure d'Etat ou a tout point de defaillance unique.",
-        q3: "Les registres financiers peuvent-ils etre alteres ?",
-        a3: "Impossible. Une fois qu'un bloc est scelle cryptographiquement, le modifier requerrait une quantite d'energie computationnelle incommensurable.",
-        q4: "Qu'est-ce qui donne sa valeur a l'actif ?",
-        a4: "La rarete algorithmique absolue. L'offre est mathematiquement verrouillee, la rendant totalement immune a l'impression fiduciaire des banques centrales.",
+        blockchainText: "Imaginez un monumental registre public flottant dans le cyberespace accessible à tous mais contrôlé par personne. C'est le registre décentralisé au coeur du protocole blockchain. Au lieu qu'une banque traditionnelle ne s'appuie sur des bases de données internes secrètes pour vérifier qui possède quoi, le réseau s'appuie sur des milliers d'ordinateurs indépendants qui vérifient chaque transaction simultanément. Lorsqu'un transfert a lieu, l'ensemble du réseau doit s'accorder mathématiquement sur sa validité avant qu'elle ne soit scellée de façon permanente dans un bloc de données transparent. Cet élégant consensus cryptographique élimine complètement le besoin d'intermédiaires corporatifs, dépouillant les banques de leur monopole historique sur la vérité financière.",
+        blockchainQuestion: "Mais comment cela fonctionne-t-il réellement sans banque traditionnelle ?",
+        blockchainCallout: "La blockchain n'est pas simplement une base de données c'est un moteur de vérité mathématique incorruptible qui fonctionne sans interruption et sans aucune autorité centralisée.",
+        q2: "Qui contrôle réellement tout cela ?",
+        a2: "Personne. Le protocole est complètement décentralisé et résistant à la censure d'État ou à tout point de défaillance unique.",
+        q3: "Les registres financiers peuvent-ils être altérés ?",
+        a3: "Impossible. Une fois qu'un bloc est scellé cryptographiquement, le modifier requerrait une quantité d'énergie computationnelle incommensurable.",
+        q4: "Qu'est-ce qui donne sa valeur à l'actif ?",
+        a4: "La rareté algorithmique absolue. L'offre est mathématiquement verrouillée, la rendant totalement immune à l'impression fiduciaire des banques centrales.",
         q5: "Tout le monde peut-il voir mes transactions ?",
-        a5: "C'est un registre public totalement transparent mais pseudonyme. La verite financiere est verifiable par quiconque possede un simple ordinateur.",
+        a5: "C'est un registre public totalement transparent mais pseudonyme. La vérité financière est vérifiable par quiconque possède un simple ordinateur.",
 
         // The Digital Gold Rush
-        goldTitle: "La Ruee vers l'Or Numerique",
-        goldText: "Le choc des valeurs entre l'or physique et la monnaie programmatique definit l'ere financiere moderne. Ces deux ressources partagent le principe fondamental d'une rarete extreme et necessitent d'immenses depenses d'energie pour etre minees. Cependant, l'or physique est lourd couteux a transporter et pratiquement impossible a auditer sans fondre les lingots. En contraste frappant, l'or numerique peut etre projete a travers la planete a la vitesse de la lumiere et son offre globale totale peut etre verifiee cryptographiquement par quiconque possede un simple ordinateur portable. Alors que les banques centrales continuent d'imprimer des quantites infinies de monnaie fiduciaire, les mathematiques impenetrables et la portabilite sans effort de ce nouveau standard numerique offrent un sanctuaire superieur pour la preservation de la richesse.",
+        goldTitle: "La Ruée vers l'Or Numérique",
+        goldText: "Le choc des valeurs entre l'or physique et la monnaie programmatique définit l'ère financière moderne. Ces deux ressources partagent le principe fondamental d'une rareté extrême et nécessitent d'immenses dépenses d'énergie pour être minées. Cependant, l'or physique est lourd coûteux à transporter et pratiquement impossible à auditer sans fondre les lingots. En contraste frappant, l'or numérique peut être projeté à travers la planète à la vitesse de la lumière et son offre globale totale peut être vérifiée cryptographiquement par quiconque possède un simple ordinateur portable. Alors que les banques centrales continuent d'imprimer des quantités infinies de monnaie fiduciaire, les mathématiques impénétrables et la portabilité sans effort de ce nouveau standard numérique offrent un sanctuaire supérieur pour la préservation de la richesse.",
         goldQuote: "AUDIT.PHYSIQUE(ECHEC) VERIFICATION.NUMERIQUE(SUCCES) RESEAU.SECURISE",
-        goldQ1: "L'or physique n'est-il pas plus sur qu'un code numerique ?",
-        goldA1: "L'or est lourd et incroyablement couteux a transporter ou a auditer. L'or numerique circule a la vitesse de la lumiere et peut etre audite par tous.",
+        goldQ1: "L'or physique n'est-il pas plus sûr qu'un code numérique ?",
+        goldA1: "L'or est lourd et incroyablement coûteux à transporter ou à auditer. L'or numérique circule à la vitesse de la lumière et peut être audité par tous.",
         goldQ2: "Le gouvernement ne peut-il pas simplement le saisir ?",
-        goldA2: "Contrairement aux lingots qui peuvent etre confisques, les reseaux cryptographiques sont securises par des mathematiques, compliquant severement la saisie physique.",
-        goldQ3: "Qu'en est-il de sa consommation massive d'energie ?",
-        goldA3: "L'energie consommee securise le registre financier, tout comme les equipements d'excavation et les fonderies securisent l'extraction de l'or physique.",
-        goldQ4: "Mais ce n'est adosse a rien de physique !",
-        goldA4: "C'est adosse au reseau informatique le plus sur de l'histoire, regi par un consensus cryptographique immuable plutot que par des promesses politiques.",
-        goldQ5: "Va-t-il finir par remplacer completement l'or ?",
-        goldA5: "Il agit fondamentalement comme un 'Or 2.0', un sanctuaire superieur pour la preservation de la richesse optimise pour la telemetrie de l'ere numerique."
+        goldA2: "Contrairement aux lingots qui peuvent être confisqués, les réseaux cryptographiques sont sécurisés par des mathématiques, compliquant sévèrement la saisie physique.",
+        goldQ3: "Qu'en est-il de sa consommation massive d'énergie ?",
+        goldA3: "L'énergie consommée sécurise le registre financier, tout comme les équipements d'excavation et les fonderies sécurisent l'extraction de l'or physique.",
+        goldQ4: "Mais ce n'est adossé à rien de physique !",
+        goldA4: "C'est adossé au réseau informatique le plus sûr de l'histoire, régi par un consensus cryptographique immuable plutôt que par des promesses politiques.",
+        goldQ5: "Va-t-il finir par remplacer complètement l'or ?",
+        goldA5: "Il agit fondamentalement comme un 'Or 2.0', un sanctuaire supérieur pour la préservation de la richesse optimisé pour la télémétrie de l'ère numérique."
     }
 };
 

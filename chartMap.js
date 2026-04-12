@@ -21,7 +21,7 @@ class MapChart {
             worldCopyJump: false,
             zoomControl: false,
             scrollWheelZoom: false,
-            dragging: false,
+            dragging: true,
             doubleClickZoom: false
         });
 
@@ -137,15 +137,15 @@ class MapChart {
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
         const t = window.i18n[lang];
         
-        // Header
+        // Header updated to pull dictionary keys dynamically
         const headerHtml = `
             <div class="leaderboardHeader">
-                <span class="leaderboardTitle" data-i18n="leaderboardTitle">${t.leaderboardTitle || "Sovereign Holdings"}</span>
+                <span class="leaderboardTitle">${t.leaderboardTitle || "Sovereign Holdings"}</span>
             </div>
             <div class="leaderboardColumns">
-                <span data-i18n="leaderboardRank">Rank</span>
-                <span data-i18n="leaderboardCountry">Country</span>
-                <span data-i18n="leaderboardHoldings">Holdings (BTC)</span>
+                <span>${t.leaderboardRank || "Rank"}</span>
+                <span>${t.leaderboardCountry || "Country"}</span>
+                <span>${t.leaderboardHoldings || "Holdings (BTC)"}</span>
             </div>
         `;
         container.insertAdjacentHTML('beforeend', headerHtml);

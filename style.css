@@ -259,6 +259,46 @@ blockquote {
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
 }
 
+/* Zen Mode Button */
+.zenModeBtn {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 10000;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.zenModeBtn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* Zen Mode Active State */
+body.zen-mode .stepBlock:not(.quizBlock) .stepContent {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(40px) translateX(-50vw) scale(0.98) !important;
+}
+
+body.zen-mode .floatingToc {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-50%) translateX(100px) !important;
+}
+
 /* Content Element Translations Smoothing */
 [data-i18n] {
   transition: opacity 0.3s ease;
@@ -288,7 +328,7 @@ blockquote {
   border-radius: 10px;
   padding: 1rem;
   width: 250px; /* Thinner */
-  max-height: 20vh; /* Extremely strict max-height, only a fifth of the screen */
+  max-height: 50vh; /* Increased to allow seeing more items */
   overflow-y: auto;
   opacity: 0;
   pointer-events: none;
@@ -397,6 +437,13 @@ blockquote {
   border-radius: 8px;
   padding: 1.5rem 1rem;
   pointer-events: auto;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.is-map-page .floatingToc {
+  top: auto;
+  bottom: 2rem;
+  transform: translateY(0);
 }
 
 .tocList {

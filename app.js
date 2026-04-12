@@ -122,6 +122,13 @@ class AppManager {
         if (this.globalMap && this.globalMap.isRendered) {
              this.globalMap.generateLeaderboard();
         }
+        
+        // Update cypherpunk legend text
+        if (this.cypherpunkChart && this.cypherpunkChart.svg) {
+            const currentLang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+            const legendTitle = currentLang === 'fr' ? 'Fonds Est. (BTC)' : 'Est. Holding (BTC)';
+            this.cypherpunkChart.svg.select('.bubble-legend text').text(legendTitle);
+        }
     }
 
     initializeCharts() {
@@ -281,6 +288,12 @@ class AppManager {
     handleStepActivation(stepIndex) {
         d3.select('#globalTooltip').style('opacity', 0);
 
+        if (stepIndex === 4) {
+            document.body.classList.add('is-map-page');
+        } else {
+            document.body.classList.remove('is-map-page');
+        }
+
         switch (stepIndex) {
             case -1:
                 this.toggleLayer('none');
@@ -427,4 +440,22 @@ class AppManager {
 
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new AppManager();
+    
+    // Zen Mode Toggle Logic
+    const zenBtn = document.getElementById('zenModeToggle');
+    const zenArrowLeft = document.getElementById('zenArrowLeft');
+    const zenArrowRight = document.getElementById('zenArrowRight');
+    
+    if (zenBtn) {
+        zenBtn.addEventListener('click', () => {
+            const isZen = document.body.classList.toggle('zen-mode');
+            if (isZen) {
+                zenArrowLeft.style.display = 'none';
+                zenArrowRight.style.display = 'block';
+            } else {
+                zenArrowLeft.style.display = 'block';
+                zenArrowRight.style.display = 'none';
+            }
+        });
+    }
 });

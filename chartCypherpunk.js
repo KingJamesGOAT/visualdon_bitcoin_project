@@ -20,6 +20,8 @@ class ChartCypherpunk {
                 this.svg.attr('width', this.width).attr('height', this.height);
                 // Also update the zoom rect
                 this.svg.select('.zoom-overlay').attr('width', this.width).attr('height', this.height);
+                // Move legend on resize
+                this.svg.select('.bubble-legend').attr('transform', `translate(${this.width - Math.min(this.width * 0.2, 250)}, ${this.height - 100})`);
                 if (this.simulation && !this.isConsolidated) {
                     this.simulation.force('center', d3.forceCenter(this.width / 2, this.height / 2));
                     this.simulation.alpha(0.3).restart();
@@ -68,13 +70,13 @@ class ChartCypherpunk {
         // Find max to create a dynamic square root scale
         const maxVal = d3.max(generated, d => d.value);
         // Map [0, maxVal] to a visual radius range [3px, 50px]
-        const radiusScale = d3.scaleSqrt()
+        this.radiusScale = d3.scaleSqrt()
             .domain([0, maxVal])
             .range([3, 50]);
             
         // Apply the scale
         generated.forEach(d => {
-            d.radius = radiusScale(d.value);
+            d.radius = this.radiusScale(d.value);
         });
         
         return generated;
@@ -144,6 +146,58 @@ class ChartCypherpunk {
 
         // Dense network: At least 300
         this.nodes = this.generateRetailNodes();
+        
+        // Task 4: Add Bubble Size Legend
+        const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+        const legendTitle = lang === 'fr' ? 'Fonds Est. (BTC)' : 'Est. Holding (BTC)';
+        const legendValues = [10, 100, 1000];
+        
+        const legend = this.svg.append('g')
+            .attr('class', 'bubble-legend')
+            .attr('transform', `translate(${this.width - Math.min(this.width * 0.2, 250)}, ${this.height - 100})`);
+            
+        legend.append('text')
+            .attr('x', -20)
+            .attr('y', -this.radiusScale(1000) * 2 - 20)
+            .text(legendTitle)
+            .style('fill', '#94a3b8')
+            .style('font-family', 'var(--font-mono, monospace)')
+            .style('font-size', '12px');
+
+        legend.selectAll('circle')
+            .data(legendValues)
+            .enter()
+            .append('circle')
+            .attr('cx', 40)
+            .attr('cy', d => -this.radiusScale(d))
+            .attr('r', d => this.radiusScale(d))
+            .style('fill', 'none')
+            .style('stroke', '#38bdf8')
+            .style('stroke-width', '1.5px');
+            
+        legend.selectAll('line')
+            .data(legendValues)
+            .enter()
+            .append('line')
+            .attr('x1', 40)
+            .attr('y1', d => -this.radiusScale(d) * 2)
+            .attr('x2', 90)
+            .attr('y2', d => -this.radiusScale(d) * 2)
+            .style('stroke', '#334155')
+            .style('stroke-dasharray', '2,2');
+
+        legend.selectAll('text.legend-value')
+            .data(legendValues)
+            .enter()
+            .append('text')
+            .attr('class', 'legend-value')
+            .attr('x', 95)
+            .attr('y', d => -this.radiusScale(d) * 2)
+            .attr('dy', '0.3em')
+            .text(d => d)
+            .style('fill', '#e2e8f0')
+            .style('font-size', '11px')
+            .style('font-family', 'monospace');
         
         // Task 2: Adjust forces to spread nodes apart significantly
         this.simulation = d3.forceSimulation(this.nodes)
@@ -226,14 +280,16 @@ class ChartCypherpunk {
 
     handleMouseOver(event, d) {
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
+        const t = window.i18n[lang];
+
         if (d.type === 'retail') {
             // Reduced hover expansion from 2.5x to 1.3x
             d3.select(event.currentTarget).transition().duration(300).attr('r', d.radius * 1.3).style('fill', '#ffffff');
             const html = `
-                <div class="tooltipHeader">Cypherpunk Node Active</div>
-                <div class="tooltipRow"><span class="tooltipLabel">Wallet:</span> <span>${d.address.substring(0,8)}...</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel">First Seen:</span> <span>${d.firstSeen}</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel">Est. Holding:</span> <span>${d.value.toFixed(2)} BTC</span></div>
+                <div class="tooltipHeader">${t.tooltipCypherpunkActive}</div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipWallet}</span> <span>${d.address.substring(0,8)}...</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipFirstSeen}</span> <span>${d.firstSeen}</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipEstHolding}</span> <span>${d.value.toFixed(2)} BTC</span></div>
             `;
             this.tooltip.html(html).style('opacity', 1);
         } else {
@@ -245,9 +301,9 @@ class ChartCypherpunk {
             
             const html = `
                 <div class="tooltipHeader">${d.name}</div>
-                <div class="tooltipRow"><span class="tooltipLabel">Type:</span> <span>Public Treasury</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel">Total Holdings:</span> <span>${d.value.toLocaleString()} BTC</span></div>
-                <div class="tooltipRow"><span class="tooltipLabel">Supply Share:</span> <span>${d.percentOfTotal}%</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipType}</span> <span>${t.tooltipPublicTreasury}</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipTotalHoldings}</span> <span>${d.value.toLocaleString()} BTC</span></div>
+                <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipSupplyShare}</span> <span>${d.percentOfTotal}%</span></div>
             `;
             this.tooltip.html(html).style('opacity', 1);
         }

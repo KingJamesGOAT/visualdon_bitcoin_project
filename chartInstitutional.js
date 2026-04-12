@@ -227,10 +227,6 @@ class ChartInstitutional {
         const lang = window.app && window.app.currentLang ? window.app.currentLang : 'en';
         const t = window.i18n[lang];
         
-        const typeStr = lang === 'fr' ? 'Tresorerie Publique' : 'Public Treasury';
-        const holdingsStr = lang === 'fr' ? 'Reserves Totales:' : 'Total Holdings:';
-        const shareStr = lang === 'fr' ? 'Part de l\'Offre:' : 'Supply Share:';
-
         // Try to find a specific description, fallback to generic
         // Replacing spaces with nothing to match keys like corp_MicroStrategy or corp_Hut8
         const cleanName = d.name.replace(/\s+/g, '');
@@ -240,9 +236,9 @@ class ChartInstitutional {
         const html = `
             <div class="tooltipHeader">${d.name}</div>
             <p style="font-size: 0.85rem; margin: 8px 0; color: #94a3b8; line-height: 1.3;">${description}</p>
-            <div class="tooltipRow" style="margin-top: 10px;"><span class="tooltipLabel">Type:</span> <span>${typeStr}</span></div>
-            <div class="tooltipRow"><span class="tooltipLabel">${holdingsStr}</span> <span style="font-weight:700; color:#f59e0b;">${d.value.toLocaleString()} BTC</span></div>
-            <div class="tooltipRow"><span class="tooltipLabel">${shareStr}</span> <span>${d.percentOfTotal}%</span></div>
+            <div class="tooltipRow" style="margin-top: 10px;"><span class="tooltipLabel">${t.tooltipType}</span> <span>${t.tooltipPublicTreasury}</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipTotalHoldings}</span> <span style="font-weight:700; color:#f59e0b;">${d.value.toLocaleString()} BTC</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipSupplyShare}</span> <span>${d.percentOfTotal}%</span></div>
         `;
         this.tooltip.html(html).style('opacity', 1);
     }

@@ -1,7 +1,8 @@
 class ChartModernDistribution {
     constructor(containerSelector, snapshotData, globalTooltip) {
         this.containerSelector = containerSelector;
-        this.snapshotData = snapshotData;
+        // Sort from smallest to largest
+        this.snapshotData = snapshotData.slice().sort((a, b) => a.holdings - b.holdings);
         this.container = d3.select(containerSelector);
         this.tooltip = globalTooltip;
         
@@ -155,7 +156,6 @@ class ChartModernDistribution {
     }
 
     handleHover(event, item) {
-        // Task 5: Tooltip Persistence using exact data objects regardless of current mode
         this.chartGroup.selectAll('.distributionElement').style('opacity', 0.2);
         d3.select(event.currentTarget).style('opacity', 1);
 
@@ -166,9 +166,9 @@ class ChartModernDistribution {
 
         const html = `
             <div class="tooltipHeader" style="color:${item.color}">${item.category}</div>
-            <div class="tooltipRow"><span class="tooltipLabel">Holdings:</span> <span style="font-weight:700">${item.holdings.toLocaleString()} BTC</span></div>
-            <div class="tooltipRow"><span class="tooltipLabel">Max Supply %:</span> <span style="font-weight:700">${pct}%</span></div>
-            <div style="margin-top:8px; font-size:11px; color:#cbd5e1; font-style:italic">Live Snapshot Verification</div>
+            <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipHoldings}</span> <span style="font-weight:700">${item.holdings.toLocaleString()} BTC</span></div>
+            <div class="tooltipRow"><span class="tooltipLabel">${t.tooltipMaxSupply}</span> <span style="font-weight:700">${pct}%</span></div>
+            <div style="margin-top:8px; font-size:11px; color:#cbd5e1; font-style:italic">${t.tooltipLiveVerification}</div>
         `;
         this.tooltip.html(html).style('opacity', 1);
     }

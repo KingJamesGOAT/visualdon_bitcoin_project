@@ -126,9 +126,9 @@ class ChartModernDistribution {
         const duration = instant ? 0 : 1200;
         
         // Hide Bar axes
-        this.xAxisGroup.transition().duration(800).style('opacity', 0);
-        this.yAxisGroup.transition().duration(800).style('opacity', 0);
-        this.yAxisLabel.transition().duration(800).style('opacity', 0);
+        // this.xAxisGroup.transition().duration(800).style('opacity', 0);
+        // this.yAxisGroup.transition().duration(800).style('opacity', 0);
+        // this.yAxisLabel.transition().duration(800).style('opacity', 0);
             
         const rects = this.chartGroup.selectAll('.distributionElement').data(this.snapshotData, d => d.id);
         

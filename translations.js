@@ -58,6 +58,7 @@ const i18n = {
         metricMap: "Hover markers for estimated government holdings. Click a marker to zoom deep into that sovereign territory.",
 
         // Leaderboard & Global Tooltips (Dynamic)
+        revealMapBtn: "Reveal Sovereign Reserves",
         tooltipClickMarker: "Click marker to zoom location.",
         tooltipSovereignState: "Sovereign State",
         tooltipReserves: "Total Confirmed Reserves",
@@ -202,6 +203,7 @@ const i18n = {
         metricMap: "Survolez les marqueurs pour voir les avoirs gouvernementaux estimés. Cliquez sur un marqueur pour zoomer sur ce territoire souverain.",
 
         // Leaderboard & Global Tooltips (Dynamic)
+        revealMapBtn: "Révéler les Réserves Souveraines",
         tooltipClickMarker: "Cliquez sur le marqueur pour zoomer.",
         tooltipSovereignState: "État Souverain",
         tooltipReserves: "Réserves Totales Confirmées",

@@ -1,6 +1,19 @@
 html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  font-size: 14px; /* PC default */
+}
+
+@media screen and (max-width: 1600px) {
+  html {
+    font-size: 11.5px; /* Laptops or 125% scaled screens */
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 9.5px; /* Tablets */
+  }
 }
 
 /* Base and Typography */
@@ -63,7 +76,7 @@ blockquote {
   right: 2rem;
   transform: translateY(-100%);
   font-family: "JetBrains Mono", "Fira Code", monospace;
-  font-size: 2.5vw;
+  font-size: clamp(1.5rem, 2.5vw, 3rem);
   font-weight: 700;
   color: #e2e8f0;
   opacity: 0;
@@ -288,9 +301,17 @@ blockquote {
 
 /* Zen Mode Active State */
 body.zen-mode .stepBlock:not(.quizBlock) .stepContent {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.zen-mode .stepBlock:not(.quizBlock) .stepContent > *:not(h2) {
   opacity: 0 !important;
   pointer-events: none !important;
-  transform: translateY(40px) translateX(-50vw) scale(0.98) !important;
+  transform: translateY(20px) !important;
 }
 
 body.zen-mode .floatingToc {
@@ -304,21 +325,92 @@ body.zen-mode .floatingToc {
   transition: opacity 0.3s ease;
 }
 
-/* Leaflet Overrides */
+/* MapLibre Overrides & UI */
 #mapContainer {
   background: transparent;
 }
-.leaflet-container {
+.maplibregl-canvas {
   background: #06080d !important;
 }
-.leaflet-control-zoom {
+.maplibregl-ctrl-bottom-right {
+  display: none !important; /* Hide attribution for absolute immersion */
+}
+
+@keyframes pulseRed {
+  0% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.7); }
+  100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+}
+
+.mapToggleBtn {
+  position: absolute;
+  top: 4.5rem; /* Mirrors glassLeaderboard */
+  right: 2rem;
+  z-index: 100;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.mapToggleBtn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.sovereignBtn {
+  position: absolute;
+  top: 5.5rem;
+  right: 2rem;
+  z-index: 99999;
+  padding: 1.1rem 2.2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(10, 20, 40, 0.92);
+  border: 1.5px solid rgba(56, 189, 248, 0.7);
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
   display: none;
+  animation: glowBlue 2s infinite alternate;
+  transition: all 0.3s ease;
+}
+
+.sovereignBtn.revealedState {
+  animation: none;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+  border-color: rgba(239, 68, 68, 0.8);
+  color: #ef4444;
+  cursor: default;
+  background: rgba(20, 10, 10, 0.92);
+  transform: none;
+}
+
+.sovereignBtn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  transform: scale(1.05);
+}
+
+@keyframes glowBlue {
+  0% { box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 10px rgba(56, 189, 248, 0.2); }
+  100% { box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.8); }
 }
 
 /* Map of Power Leaderboard (Glassmorphism) */
 .glassLeaderboard {
   position: fixed; /* Keep it fixed so it stays relative to the viewport like TOC */
-  top: 4.5rem; /* Exactly below the FR/EN language button */
+  top: 10rem; /* Exactly below the Sovereign Holdings button */
   right: 2rem; /* Align to the right side */
   z-index: 50;
   background: rgba(15, 23, 42, 0.75);
@@ -514,8 +606,8 @@ body.is-map-page .floatingToc {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 12px;
-  padding: 2.5rem; /* Slightly smaller padding */
-  max-width: 380px; /* Reducing width so it takes less horizontal space */
+  padding: 2.2rem; /* Slightly smaller padding */
+  max-width: 350px; /* Restoring fixed width that scales properly down */
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
   margin-left: 2vw; /* Anchoring further left */
 
@@ -932,15 +1024,17 @@ body.is-map-page .floatingToc {
 
 .questionBubble {
   align-self: flex-start;
-  background-color: #f59e0b; /* Website Gold */
-  color: #06080d; /* Crisp dark text for readability */
+  background-color: #334155; /* Neutral Dark Slate */
+  color: #ffffff; /* White text for readability */
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom-left-radius: 4px;
 }
 
 .answerBubble {
   align-self: flex-end;
-  background-color: #38bdf8; /* Website Blue */
-  color: #06080d; 
+  background-color: #1e293b; /* Deeper Neutral Slate */
+  color: #ffffff; 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom-right-radius: 4px;
 }
 
@@ -1076,5 +1170,12 @@ body.is-map-page .floatingToc {
     padding: 0.6rem 1rem;
     font-size: 0.9rem;
     width: 100%;
+  }
+
+  .sovereignBtn {
+    top: auto;
+    bottom: 140px;
+    right: 50%;
+    transform: translateX(50%);
   }
 }

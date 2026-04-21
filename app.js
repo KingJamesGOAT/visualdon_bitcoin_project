@@ -393,11 +393,15 @@ class AppManager {
                 // Map of Power
                 this.toggleLayer('mapContainer');
                 if (this.globalMap) {
-                    setTimeout(() => this.globalMap.map.invalidateSize(), 800);
+                    setTimeout(() => { if (this.globalMap.map) this.globalMap.map.resize(); }, 800);
                     this.globalMap.render();
                 }
                 const lb2 = document.getElementById('countryLeaderboard');
-                if (lb2) lb2.classList.add('isVisible');
+                if (lb2 && this.globalMap && this.globalMap.revealed) {
+                    lb2.classList.add('isVisible');
+                } else if (lb2) {
+                    lb2.classList.remove('isVisible');
+                }
                 break;
                 
             case 5:

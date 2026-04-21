@@ -17,7 +17,9 @@ class MapChart {
 
         // Build the toggle button
         this.btn = document.createElement('button');
-        this.btn.textContent = 'Sovereign Holdings';
+        const lang = window.app?.currentLang || 'en';
+        const t = window.i18n ? window.i18n[lang] : { leaderboardTitle: 'Sovereign Holdings' };
+        this.btn.textContent = t.leaderboardTitle || 'Sovereign Holdings';
         this.btn.className = 'sovereignBtn';
         this.btn.addEventListener('click', () => this._onButtonClick());
     }
@@ -105,15 +107,20 @@ class MapChart {
                     const entry    = this.geoData.find(d => d.country === ourName);
                     if (!entry) return;
 
+                    const lang = window.app?.currentLang || 'en';
+                    const t    = window.i18n[lang];
+                    const translatedCountry = t['country_' + entry.country.replace(/\s+/g, '')] || entry.country;
+                    const translatedDetails = t['mapDetails_' + entry.country.replace(/\s+/g, '')] || entry.details;
+
                     this.map.getCanvas().style.cursor = 'pointer';
                     this.tooltip
                         .html(`
-                            <div class="tooltipHeader">🏛 ${entry.country}</div>
+                            <div class="tooltipHeader">🏛 ${translatedCountry}</div>
                             <div class="tooltipRow">
-                                <span class="tooltipLabel">Reserves:</span>
+                                <span class="tooltipLabel">${t.tooltipReservesMap || 'Reserves:'}</span>
                                 <span style="font-weight:700;color:#ef4444">${entry.btc.toLocaleString()} BTC</span>
                             </div>
-                            <div style="margin-top:6px;color:#94a3b8;font-size:12px;line-height:1.5">${entry.details}</div>
+                            <div style="margin-top:6px;color:#94a3b8;font-size:12px;line-height:1.5">${translatedDetails}</div>
                         `)
                         .style('opacity', 1)
                         .style('left',  (e.originalEvent.pageX + 15) + 'px')
@@ -211,6 +218,15 @@ class MapChart {
         if (lb) lb.classList.add('isVisible');
     }
 
+    updateLanguage() {
+        const lang = window.app?.currentLang || 'en';
+        const t    = window.i18n ? window.i18n[lang] : { leaderboardTitle: 'Sovereign Holdings' };
+        if (this.btn) {
+            this.btn.textContent = t.leaderboardTitle || 'Sovereign Holdings';
+        }
+        this.generateLeaderboard();
+    }
+
     generateLeaderboard() {
         const container = document.getElementById('countryLeaderboard');
         if (!container) return;
@@ -231,11 +247,12 @@ class MapChart {
             .sort((a, b) => b.btc - a.btc)
             .filter(d => d.btc > 0)
             .forEach((d, i) => {
+                const translatedCountry = t['country_' + d.country.replace(/\s+/g, '')] || d.country;
                 const row = document.createElement('div');
                 row.className = 'leaderboardRow';
                 row.innerHTML = `
                     <span class="leaderboardRank">#${i + 1}</span>
-                    <span class="leaderboardName">${d.country}</span>
+                    <span class="leaderboardName">${translatedCountry}</span>
                     <span class="leaderboardBtc">${d.btc.toLocaleString()}</span>
                 `;
                 row.addEventListener('click', () => {

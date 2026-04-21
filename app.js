@@ -118,9 +118,9 @@ class AppManager {
             this.distributionChart.render();
         }
         
-        // Re-render map leaderboard text
-        if (this.globalMap && this.globalMap.isRendered) {
-             this.globalMap.generateLeaderboard();
+        // Re-render map leaderboard text and button
+        if (this.globalMap) {
+             this.globalMap.updateLanguage();
         }
         
         // Update cypherpunk legend text

@@ -68,12 +68,28 @@ const i18n = {
         leaderboardCountry: "Country",
         leaderboardHoldings: "Holdings (BTC)",
         
+        // Countries & Details
+        country_UnitedStates: "United States",
+        country_China: "China",
+        country_UnitedKingdom: "United Kingdom",
+        country_Ukraine: "Ukraine",
+        country_Bhutan: "Bhutan",
+        country_ElSalvador: "El Salvador",
+        
+        mapDetails_UnitedStates: "Sovereign reserves and significant corporate accumulations",
+        mapDetails_China: "Vast reserves accumulated from illicit operations seizures",
+        mapDetails_UnitedKingdom: "Seized from international networks",
+        mapDetails_ElSalvador: "First nation to adopt BTC actively purchasing daily",
+        mapDetails_Ukraine: "Accumulated through international donations",
+        mapDetails_Bhutan: "Mining heavily via hydro electric power",
+        
         // Dynamic Chart Tooltips
         tooltipCypherpunkActive: "Cypherpunk Node Active",
         tooltipWallet: "Wallet:",
         tooltipFirstSeen: "First Seen:",
         tooltipEstHolding: "Est. Holding:",
         tooltipType: "Type:",
+        tooltipReservesMap: "Reserves:",
         tooltipPublicTreasury: "Public Treasury",
         tooltipTotalHoldings: "Total Holdings:",
         tooltipSupplyShare: "Supply Share:",
@@ -213,12 +229,28 @@ const i18n = {
         leaderboardCountry: "Pays",
         leaderboardHoldings: "Fonds (BTC)",
         
+        // Countries & Details
+        country_UnitedStates: "États-Unis",
+        country_China: "Chine",
+        country_UnitedKingdom: "Royaume-Uni",
+        country_Ukraine: "Ukraine",
+        country_Bhutan: "Bhoutan",
+        country_ElSalvador: "Salvador",
+        
+        mapDetails_UnitedStates: "Réserves souveraines et accumulations corporatives significatives",
+        mapDetails_China: "Vastes réserves accumulées via des saisies d'opérations illicites",
+        mapDetails_UnitedKingdom: "Saisis auprès de réseaux internationaux",
+        mapDetails_ElSalvador: "Première nation à adopter le BTC, achats quotidiens actifs",
+        mapDetails_Ukraine: "Accumulés grâce à des dons internationaux",
+        mapDetails_Bhutan: "Minage intensif via l'énergie hydroélectrique",
+        
         // Dynamic Chart Tooltips
         tooltipCypherpunkActive: "Nœud Cypherpunk Actif",
         tooltipWallet: "Portefeuille :",
         tooltipFirstSeen: "Première Apparition :",
         tooltipEstHolding: "Fonds Est. :",
         tooltipType: "Type :",
+        tooltipReservesMap: "Réserves :",
         tooltipPublicTreasury: "Trésorerie Publique",
         tooltipTotalHoldings: "Réserves Totales :",
         tooltipSupplyShare: "Part de l'Offre :",

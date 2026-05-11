@@ -2,6 +2,8 @@
 
 > Projet réalisé par Nabil Mohamed Hagos et Steve Benjamin dans le cadre du cours de visualisation de données.
 
+**Site web en direct :** [Consulter le documentaire interactif publié](https://kingjamesgoat.github.io/visualdon_bitcoin_project/)
+
 **Vision et Thématique**
 Ce projet a pour ambition d'explorer l'univers des cryptomonnaies, un domaine que nous étudions depuis plusieurs années. L'un de nous gérant déjà un site web dédié à l'investissement et à la gestion de fortune, cet intérêt personnel nous oriente naturellement vers l'analyse de ces données financières complexes.
 

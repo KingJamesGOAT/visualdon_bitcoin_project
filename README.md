@@ -39,3 +39,9 @@ La structure narrative de l'application reposera sur un défilement vertical pil
 La conception visuelle et l'organisation interactive de ce site ont été planifiées en amont. Vous pouvez consulter la maquette complète du projet, incluant la disposition des éléments et l'interface utilisateur, directement sur Figma via le lien suivant :
 
 [Consulter la maquette sur Figma](https://www.figma.com/design/quZve0u09AxGvKdUfw0NZc/bitcoin_visualDon?node-id=0-1&t=ZrAi1w86VKCj20by-1)
+
+## Presentation du projet
+
+Le support visuel de notre soutenance orale resume nos choix techniques et narratifs. Vous pouvez consulter les diapositives de notre presentation directement sur Canva via le lien suivant :
+
+[Consulter la presentation sur Canva](https://canva.link/9dulyelv97vpk43)
